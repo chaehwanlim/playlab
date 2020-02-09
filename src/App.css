@@ -1,8 +1,17 @@
-.bg-image {
-    background-image: url(./img/background-1920x1200.jpg);
+.App{
+    margin: 0 auto;
+    padding: 0 auto;
+}
+.Main{
+    
+    background-image: url('./img/background.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     
     max-height: 1200px;
+    width: 100%;
+}
+.paper1 {
+    width: 10%;
 }

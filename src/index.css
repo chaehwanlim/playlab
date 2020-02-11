@@ -1,26 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900|Roboto:100,300,400,500,700,900&display=swap&subset=korean');
 
-/* @font-face {
-    font-family: "Noto Sans KR";
-    src: url("https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean");
-    font-style: normal;
-    color: yellow;
-}
-  
-@font-face {
-    font-family: "Noto Sans KR";
-    src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap");
-    unicode-range: U+0020-007E;
-    font-style: normal;
-    color: yellow;
-} */
-
 body {
+
     font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Noto Sans KR", "Helvetica Neue", sans-serif;
     font-size: 20px;
     font-weight: 700;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
     margin: 0;
-    align-items: center;
+
+    color: white;
+    background-color: whitesmoke;
 }
+

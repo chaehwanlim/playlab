@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(10),
         fontSize: '100px',
         fontFamily: 'Product Sans',
+        draggable: 'false',
     }, 
     subTitle: {
         textAlign: 'left', 

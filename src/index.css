@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900|Roboto:100,300,400,500,700,900&display=swap&subset=korean');
 
 body {
-
     font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Noto Sans KR", "Helvetica Neue", sans-serif;
     font-size: 20px;
     font-weight: 700;
@@ -11,6 +10,6 @@ body {
     margin: 0;
 
     color: white;
-    background-color: whitesmoke;
+    background-color: black;
 }
 

@@ -8,18 +8,7 @@ import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu'; */
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    marginLeft: theme.spacing(1),
-    flexGrow: 1,
-    fontWeight: 700,
-    letterSpacing: '2px',
-  },
+  
 }));
 
 export default function ButtonAppBar() {

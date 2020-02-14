@@ -1,25 +1,16 @@
-.Background {
-    background-image: url('./img/background.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    box-shadow: 0 0 50px 50px black inset;
-    max-height: 1000px;
-}
-
 @font-face {
     font-family: Product Sans;
     src: url('./fonts/samsungsharpsans-bold.otf');
 }
 
-.Developer {
-    position: relative;
-    top: 30px;
-    color: white;
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 15px;
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900|Roboto:100,300,400,500,700,900&display=swap&subset=korean');
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Noto Sans KR", "Helvetica Neue", sans-serif;
+    font-size: 20px;
     font-weight: 700;
-    letter-spacing: 3px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    margin: 0;
 }

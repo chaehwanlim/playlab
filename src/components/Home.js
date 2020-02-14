@@ -1,29 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import AppBar from './AppBar';
 import { makeStyles } from '@material-ui/core/styles'; 
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/AddRounded';
 import StarIcon from '@material-ui/icons/StarRounded';
 import SearchIcon from '@material-ui/icons/SearchRounded';
+import './Home.css';
+import { Link, Route, BrowserRouter as Router} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
-    //for AppBar
-    root: {
-        flexGrow: 1,
-    },
-    appBarTitle: {
-        marginLeft: theme.spacing(1),
-        flexGrow: 1,
-        fontWeight: 700,
-        letterSpacing: '2px',
-    },
 
     //for MainTitle
     title: {
@@ -47,13 +35,12 @@ const useStyles = makeStyles(theme => ({
         marginTop: '10%',
         textAlign: 'center',
         '& > *': {
-            margin: theme.spacing(8), 
+            margin: theme.spacing(4), 
         },
     },
     btn: {
         background: 'white',
         color: 'black',
-        /* size: 'large', */
         fontFamily: 'Noto Sans KR',
         fontSize: '20px',
         fontWeight: '900',  
@@ -67,47 +54,41 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const btnTheme = createMuiTheme({
-    palette: {
-        primary: {
-            main: '#ffffff',
-        },
-    }
-})
-
 export default function Home() {
     const style = useStyles();
+    var [searchClicked, setSearchClicked] = useState(false);
+
+    useEffect(() => {
+        if(searchClicked === true)
+            document.title = searchClicked;
+    });
 
     return (
+        <div className="Background">
         <Container maxWidth="lg" >
-            <div className= {style.root} >
-                <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
-                    <Toolbar justifyContent="center">
-                    <Typography variant="h6" className= {style.appBarTitle} justifyContent="center">
-                        PLAYLAB
-                    </Typography>
-                    <Button color="inherit">Login</Button>
-                    </Toolbar>
-                </AppBar>
-            </div>
+            <AppBar />
+            
             <Box height={700}>
                 <div className= {style.title}>
                     PlayLab
                 </div>
                 <div className= {style.subTitle}>
-                    당신만의 재생목록을 모두와 공유해 보세요.
+                    나만의 재생목록을 모두와 공유해 보세요.
                 </div>
                 <div className={style.btn_root}>
-                    <ThemeProvider theme={btnTheme}>
-                    <Fab className={style.btn} variant="outlined">
-                        <StarIcon />인기</Fab>
-                    <Fab className={style.btn} variant="outlined">
-                        <SearchIcon />검색</Fab>
-                    <Fab className={style.btn} variant="outlined">
-                        <AddIcon />추가</Fab>
-                    </ThemeProvider>
+                    {/* <Router>
+                            <Fab className={style.btn} variant="outlined">
+                            <StarIcon />인기</Fab>
+                        <Link to="/search">
+                            <Fab className={style.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
+                            <SearchIcon />검색</Fab>
+                        </Link>
+                            <Fab className={style.btn} variant="outlined">
+                            <AddIcon />추가</Fab>
+                    </Router> */}
                 </div>
             </Box>
         </Container>
+        </div>
     )
 }

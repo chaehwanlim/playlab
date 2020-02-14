@@ -1,0 +1,27 @@
+body {
+    background-color: black;
+}
+
+.Background {
+    background-image: url('../img/background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    box-shadow: 0 0 50px 50px black inset;
+    max-height: 1000px;
+
+    color: white;
+}
+
+.Developer {
+    position: relative;
+    top: 30px;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+

@@ -1,8 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import './Search.css';
 
 const useStyles = makeStyles(theme => ({
+    background: {
+        backgroundColor: 'white',
+        color: 'black',
+    },
     root: {
         flexGrow: 1,
     },
@@ -16,10 +21,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
+
 export default function Search() {
+    const _style = useStyles();
+
     return (
-        <Container maxWidth="sm">
+        <div className={_style.background}>
+        <Container maxWidth="lg">
             <div>adfasdfjlakssdafjd;flk;asjdfljsdal;fjdsal;fjdl;sajsa</div>
         </Container>
+        </div>
     )
 }

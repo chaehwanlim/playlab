@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
-import AppBar from './AppBar';
-import { makeStyles } from '@material-ui/core/styles'; 
-import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import backgroundImage from "../img/background.jpg";
 import Box from '@material-ui/core/Box';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/AddRounded';
-import StarIcon from '@material-ui/icons/StarRounded';
-import SearchIcon from '@material-ui/icons/SearchRounded';
 import './Home.css';
-import { Link, Route, BrowserRouter as Router} from "react-router-dom";
+import Fab from '@material-ui/core/Fab';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
-
     //for MainTitle
     title: {
+        color: 'white',
         textAlign: 'center', 
-        position: 'relative',
-        marginTop: '20%',
+        position: 'inherit',
+        paddingTop: '25%',
         fontSize: '100px',
         fontFamily: 'Product Sans',
     }, 
     subTitle: {
+        color: 'white',
         textAlign: 'center', 
         position: 'relative',
-        marginTop: '15px',
+        paddingTop: '15px',
         fontSize: '25px',
         fontWeight: '700',
     },
@@ -55,7 +52,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Home() {
-    const style = useStyles();
+    const _style = useStyles();
     var [searchClicked, setSearchClicked] = useState(false);
 
     useEffect(() => {
@@ -66,26 +63,27 @@ export default function Home() {
     return (
         <div className="Background">
         <Container maxWidth="lg" >
-            <AppBar />
-            
-            <Box height={700}>
-                <div className= {style.title}>
+            <Box height={900}>
+                <div className= {_style.title}>
                     PlayLab
                 </div>
-                <div className= {style.subTitle}>
+                <div className= {_style.subTitle}>
                     나만의 재생목록을 모두와 공유해 보세요.
                 </div>
-                <div className={style.btn_root}>
-                    {/* <Router>
-                            <Fab className={style.btn} variant="outlined">
-                            <StarIcon />인기</Fab>
-                        <Link to="/search">
-                            <Fab className={style.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
-                            <SearchIcon />검색</Fab>
-                        </Link>
-                            <Fab className={style.btn} variant="outlined">
-                            <AddIcon />추가</Fab>
-                    </Router> */}
+                <div className={_style.btn_root}>
+                    <Link to="/Popular" style={{textDecoration:'none'}}>
+                        <Fab className={_style.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
+                        인기</Fab>
+                    </Link>
+                    <Link to="/Search" style={{textDecoration:'none'}}>
+                        <Fab className={_style.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
+                        검색</Fab>
+                    </Link>
+                    <Link to="/PlaylistAdd" style={{textDecoration:'none'}}>
+                        <Fab className={_style.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
+                        추가</Fab>
+                    </Link>
+                    
                 </div>
             </Box>
         </Container>

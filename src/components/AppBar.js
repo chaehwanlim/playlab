@@ -16,8 +16,10 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
+  appBar: {
+    background: 'white',
+  },
   appBarTitle: {
-    marginLeft: theme.spacing(1),
     flexGrow: 1,
     fontSize: '1em',
     fontWeight: '700',
@@ -26,28 +28,15 @@ const useStyles = makeStyles(theme => ({
   btn_desc: {
     fontFamily: 'Noto Sans KR',
     fontSize: '1em',
-    fontWeight: '700',
+    fontWeight: '900',
     letterSpacing: '2px',
   },
   link: {
     textDecoration: 'none',
+    background: 'transparent',
     color: 'black',
-    '&:visited': {
-      color: 'black',
-    }
   },
-  /* '&:hover': {
-    color: 'black',
-  } */
 }));
-
-/* function _Color() {
-  return ({
-    backgroundColor: homeClicked ? 'black' : 'white',
-    color: homeClicked ? 'white' : 'black',
-    boxShadow: 'none'
-  })
-} */
 
 function LinkStyle() {
   return ({
@@ -65,32 +54,31 @@ export default function _AppBar() {
 
   console.log('AppBar rendered');
   return (
-    
       <div className={_style.root}>
-        <AppBar position="static" style={{ backgroundColor: 'white',}}>
+        <AppBar position="static" className={_style.appBar}>
         <Container maxWidth="lg">
           <Toolbar>
-              <Typography variant="h6" className={_style.appBarTitle}>
-              <Link to="/" className={_style.link} onClick={() => (setHomeClicked(true))} >
-                PLAYLAB
-              </Link>
-              </Typography>
-            
-              {/* <IconButton className={_style.btn} color="inherit">검색</Button>
-              <IconButton className={_style.btn} color="inherit">인기목록</Button>
-              <IconButton className={_style.btn} color="inherit">만들기</Button> */}
-              <Link to="/Search" className={_style.link}>
-                <IconButton color="inherit" onClick={() => (setHomeClicked(false))}><SearchIcon /></IconButton>
-              </Link>
-              <Link to="/Popular" className={_style.link}>
-                <IconButton color="inherit" onClick={() => (setHomeClicked(false))}><StarIcon /></IconButton>
-              </Link>
-              <Link to="/PlaylistAdd" className={_style.link}>
-                <IconButton color="inherit" onClick={() => (setHomeClicked(false))}><AddIcon /></IconButton>
-              </Link>
-              <Link to="/Login" className={_style.link}>
-                <IconButton color="inherit" onClick={() => (setHomeClicked(false))}><AccountCircle /></IconButton>
-              </Link>
+            <Typography variant="h6" className={_style.appBarTitle}>
+            <Link to="/" className={_style.link} onClick={() => (setHomeClicked(true))} >
+              PLAYLAB
+            </Link>
+            </Typography>
+          
+            {/* <IconButton className={_style.btn} color="inherit">검색</Button>
+            <IconButton className={_style.btn} color="inherit">인기목록</Button>
+            <IconButton className={_style.btn} color="inherit">만들기</Button> */}
+            <Link to="/Search" className={_style.link}>
+              <IconButton color="inherit" onClick={() => (setHomeClicked(false))}><SearchIcon /></IconButton>
+            </Link>
+            <Link to="/Popular" className={_style.link}>
+              <IconButton color="inherit" onClick={() => (setHomeClicked(false))}><StarIcon /></IconButton>
+            </Link>
+            <Link to="/PlaylistAdd" className={_style.link}>
+              <IconButton color="inherit" onClick={() => (setHomeClicked(false))}><AddIcon /></IconButton>
+            </Link>
+            <Link to="/Login" className={_style.link}>
+              <IconButton color="inherit" onClick={() => (setHomeClicked(false))}><AccountCircle /></IconButton>
+            </Link>
           </Toolbar>
           </Container>
         </AppBar>

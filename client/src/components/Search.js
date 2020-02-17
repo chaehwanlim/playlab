@@ -5,15 +5,25 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
-
 import SearchIcon from '@material-ui/icons/SearchRounded';
+import Divider from '@material-ui/core/Divider';
+import Card from '@material-ui/core/Card';
+import TableContainer from '@material-ui/core/TableContainer';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 import './Search.css';
+import data from './musicSample.json';
+import ReactVirtualizedTable from './ReactVirtualizedTable';
+import MusicTable from './MusicTable';
 
 const useStyles = makeStyles(theme => ({
     background: {
         color: 'black',
         paddingTop: '20px',
-        paddingBottom: '20px',
+        paddingBottom: '30px',
         paddingLeft: theme.spacing(1),
         paddingRight: theme.spacing(1),
     },
@@ -22,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         paddingBottom: '20px',
-        textAlign: 'center',
+        textAlign: 'left',
         fontSize: '3em',
         fontWeight: '900',
         letterSpacing: '1px',
@@ -40,12 +50,25 @@ const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(1),
         flex: 1,
         fontFamily: 'Noto Sans KR',
-        fontSize: '1.5rem',
+        fontSize: '1.3rem',
         fontWeight: '500',
     },
     iconButton: {
         padding: 10,
     },
+
+    _divider:{
+        marginTop: '30px',
+        marginBottom: '30px',
+    },
+
+    //for music tables
+    card: {
+        root: {
+            minHeight: 300,
+        },
+
+    }
 }));
 
 export default function Search() {
@@ -53,19 +76,22 @@ export default function Search() {
 
     return (
         <div className={classes.background}>
-            <Container maxWidth="lg" className={classes.header}>
-                <header className={classes.title}>검색하기</header>
-                <Paper component="form" className={classes.search}>
-                    <InputBase
-                        className={classes.input}
-                        placeholder="검색할 내용을 입력하세요"
-                        inputProps={{ 'aria-label': 'search' }}
-                    />
-                    <IconButton type="submit" className={classes.iconButton} aria-label="search">
-                        <SearchIcon />
-                    </IconButton>
-                </Paper>
-            </Container>
+        <Container maxWidth="lg" className={classes.header}>
+            <header className={classes.title}>검색하기</header>
+            <Paper component="form" className={classes.search}>
+                <InputBase
+                    className={classes.input}
+                    placeholder="검색할 내용을 입력하세요"
+                    inputProps={{ 'aria-label': 'search' }}
+                />
+                <IconButton type="submit" className={classes.iconButton} aria-label="search">
+                    <SearchIcon />
+                </IconButton>
+            </Paper>
+            <Divider className={classes._divider}/>
+            <MusicTable />
+            
+        </Container>
             
         </div>
     )

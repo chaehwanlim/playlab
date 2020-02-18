@@ -1,5 +1,5 @@
 import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -7,17 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/SearchRounded';
 import Divider from '@material-ui/core/Divider';
-import Card from '@material-ui/core/Card';
-import TableContainer from '@material-ui/core/TableContainer';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import './Search.css';
-import data from './musicSample.json';
-import ReactVirtualizedTable from './ReactVirtualizedTable';
 import MusicTable from './MusicTable';
+import './Search.css';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -51,7 +42,7 @@ const useStyles = makeStyles(theme => ({
         flex: 1,
         fontFamily: 'Noto Sans KR',
         fontSize: '1.3rem',
-        fontWeight: '500',
+        fontWeight: '700',
     },
     iconButton: {
         padding: 10,
@@ -59,7 +50,6 @@ const useStyles = makeStyles(theme => ({
 
     _divider:{
         marginTop: '30px',
-        marginBottom: '30px',
     },
 
     //for music tables
@@ -91,6 +81,7 @@ export default function Search() {
             <Divider className={classes._divider}/>
             <MusicTable />
             
+            <MusicTable />
         </Container>
             
         </div>

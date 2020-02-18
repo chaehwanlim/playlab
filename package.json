@@ -9,6 +9,7 @@
     "dependencies": {
         "body-parser": "^1.19.0",
         "express": "^4.17.1",
+        "react-sticky-table": "^4.1.0",
         "react-virtualized": "^9.21.2"
     },
     "devDependencies": {

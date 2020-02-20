@@ -40,7 +40,6 @@ const useStyles = makeStyles(theme => ({
     input: {
         marginLeft: theme.spacing(1),
         flex: 1,
-        fontFamily: 'Noto Sans KR',
         fontSize: '1.3rem',
         fontWeight: '700',
     },

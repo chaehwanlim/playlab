@@ -20,13 +20,13 @@ const useStyles = makeStyles(theme => ({
     background: 'white',
   },
   appBarTitle: {
+    fontFamily: 'Roboto',
     flexGrow: 1,
     fontSize: '1em',
     fontWeight: '700',
     letterSpacing: '2px',
   },
   btn_desc: {
-    fontFamily: 'Noto Sans KR',
     fontSize: '1em',
     fontWeight: '900',
     letterSpacing: '2px',

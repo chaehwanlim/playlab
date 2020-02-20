@@ -9,8 +9,8 @@
     "dependencies": {
         "body-parser": "^1.19.0",
         "express": "^4.17.1",
-        "react-sticky-table": "^4.1.0",
-        "react-virtualized": "^9.21.2"
+        "http-proxy-middleware": "^1.0.0",
+        "mysql": "^2.18.1"
     },
     "devDependencies": {
         "concurrently": "^5.1.0"

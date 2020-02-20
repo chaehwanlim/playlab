@@ -45,7 +45,6 @@ const useStyles = makeStyles(theme => ({
     btn: {
         background: 'white',
         color: 'black',
-        fontFamily: 'Noto Sans KR',
         fontSize: '20px',
         fontWeight: '900',  
         letterSpacing: '5px',

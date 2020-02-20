@@ -39,7 +39,6 @@ const useStyles = makeStyles(theme => ({
     input: {
         marginLeft: theme.spacing(1),
         flex: 1,
-        fontFamily: 'Noto Sans KR',
         fontSize: '1.3rem',
         fontWeight: '700',
     },
@@ -54,18 +53,16 @@ const useStyles = makeStyles(theme => ({
 
     //for media buttons
     gridAlign: {
+        display: 'flex',
         flexDirection: 'column',
-/*         flexWrap: 'wrap',
-        justifyContent: 'space-around', */
         alignItems: 'flex-end',
     },
     mediaBtn: {
         textAlign:'right',
-        fontFamily: 'Noto Sans KR',
         fontSize: '1.2rem',
         fontWeight: '700',
         padding: '5px',
-        marginTop: '10px',
+        margin: '5px',
         color: 'white',
     },
 }));
@@ -91,16 +88,16 @@ export default function PlaylistAdd() {
                     </Paper>
                 </Grid>
                 <Grid item xs={3} sm={3}>
-                    <div  className={classes.gridAlign}>
+                    <div className={classes.gridAlign}>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#018DFF'}}>
                         음악
-                    </Fab><br></br>
+                    </Fab>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#FF4444'}}>
                         영화
-                    </Fab><br></br>
+                    </Fab>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#1ABF80'}}>
                         도서
-                    </Fab><br></br>
+                    </Fab>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#DD22FF'}}>
                         연관
                     </Fab>

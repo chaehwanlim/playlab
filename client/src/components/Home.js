@@ -4,6 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import './Home.css';
 import Fab from '@material-ui/core/Fab';
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/AddRounded';
+import StarIcon from '@material-ui/icons/StarRounded';
+import SearchIcon from '@material-ui/icons/SearchRounded';
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
@@ -30,7 +34,6 @@ const useStyles = makeStyles(theme => ({
         background: 'whitesmoke',
         color: 'black',
         padding: '50px',
-        
     },
 
     // for Buttons
@@ -55,11 +58,14 @@ const useStyles = makeStyles(theme => ({
             transition: '0.5s',
         } 
     },
+    _icon: {
+        marginRight: '6px',
+    }
 
 }));
 
 export default function Home() {
-    const _style = useStyles();
+    const classes = useStyles();
     var [searchClicked, setSearchClicked] = useState(false);
 
     useEffect(() => {
@@ -68,41 +74,31 @@ export default function Home() {
     });
 
     return (
-        <div>
-            <div className="Background">
+        <div className="Background">
             <Container maxWidth="lg" >
                 <Box height={900}>
-                    <div className= {_style.title}>
+                    <div className= {classes.title}>
                         PlayLab
                     </div>
-                    <div className= {_style.subTitle}>
+                    <div className= {classes.subTitle}>
                         나만의 재생목록을 모두와 공유해 보세요.
                     </div>
-                    {/* <div className={_style.btn_root}>
-                        <Link to="/Popular" style={{textDecoration:'none'}}>
-                            <Fab className={_style.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
-                            인기</Fab>
-                        </Link>
+                    <div className={classes.btn_root}>
                         <Link to="/Search" style={{textDecoration:'none'}}>
-                            <Fab className={_style.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
-                            검색</Fab>
+                            <Fab className={classes.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
+                            <SearchIcon className={classes._icon}/>검색</Fab>
+                        </Link>
+                        <Link to="/Popular" style={{textDecoration:'none'}}>
+                            <Fab className={classes.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
+                            <StarIcon className={classes._icon}/>인기</Fab>
                         </Link>
                         <Link to="/PlaylistAdd" style={{textDecoration:'none'}}>
-                            <Fab className={_style.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
-                            추가</Fab>
+                            <Fab className={classes.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
+                            <AddIcon className={classes._icon}/>추가</Fab>
                         </Link>
-                    </div> */}
+                    </div>
                 </Box>
             </Container>
-            </div>
-            <div className={_style.description}>
-            <Container maxWidth="lg">
-                <div></div>
-                <header>headMaterial</header>
-                <p>body</p>
-            </Container>
-            </div>
         </div>
-
     )
 }

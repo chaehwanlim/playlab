@@ -11,18 +11,19 @@ import musicData from './musicSample.json';
 
 const useStyles = makeStyles({
     searchTitle: {
+        animationDuration: '0.8s',
         marginTop: '20px',
-        fontSize: '2em',
+        fontSize: '2.5em',
         fontWeight: '900',
         color: '#018DFF',
     },
     tableAttribute: {
-        fontSize: '1em',
+        fontSize: '1.2em',
         textTransform: 'uppercase',
         fontWeight: '900',
     },
     tableData: {
-        fontSize: '0.8em',
+        fontSize: '1em',
         fontWeight: '400',
     },
     table: {
@@ -30,33 +31,31 @@ const useStyles = makeStyles({
         width: '100%',
     },
     tableContainer: {
-        maxHeight: 600,
+        maxHeight: 800,
     },
     musicTitle: {
-        fontSize: '1em',
         fontWeight: '700',
     }
 });
 
 const attributes = [
-    { id: 'title&artist', label: '제목 및 아티스트', minWidth: 300 },
+    { id: 'title&artist', label: '제목 및 아티스트', minWidth: 100 },
     /* { id: 'artist', label: '아티스트', minWidth: 200 }, */
+    { id: 'category', label: '기분', minWidth: 65 },
+    { id: 'transmedia', label: '연관', minWidth: 50 },
     { id: 'genre', label: '장르', minWidth: 50 },
-    { id: 'category', label: '기분', minWidth: 50 },
-    { id: 'transmedia', label: '연관', minWidth: 80 },
-    { id: 'adder', label: '등록', minWidth: 80 },
+    { id: 'adder', label: '등록', minWidth: 50 },
 ];
 
 export default function MusicTable() {
     var [musicDB, setMusicDB] = useState([]);
 
-    useEffect(() =>
+    useEffect(() => {
         fetch('/api/music')
             .then(res => res.json())
             .then(res => setMusicDB(res))
-            .then(console.log(musicDB))
             .catch(err => console.log(err))
-    );
+    }, []);
 
     /* _callApi = async () => {
         const response = await fetch('/api/music');
@@ -66,11 +65,8 @@ export default function MusicTable() {
  */
     const classes = useStyles();
 
-    
-
     return (
         <div>
-            
             <div className={classes.searchTitle}>음악</div>
             <Paper className={classes.table}>
             <TableContainer className={classes.tableContainer}>
@@ -90,17 +86,17 @@ export default function MusicTable() {
                     <TableBody>
                     {musicDB ? musicDB.map(user => {
                         return (
-                        <TableRow key={user.title}>
-                        <TableCell className={classes.tableData} component="th" scope="row">
-                            <span className={classes.musicTitle}>{user.title}</span><br></br>{row.artist}
-                        </TableCell>
-                        {/* <TableCell className={classes.tableData}>{row.artist}</TableCell> */}
-                        <TableCell className={classes.tableData}>{user.genre}</TableCell>
-                        <TableCell className={classes.tableData}>{user.categoryID}</TableCell>
-                        <TableCell className={classes.tableData}>{user.transmediaID}</TableCell>
-                        <TableCell className={classes.tableData}>{user.adderID}</TableCell>
+                        <TableRow>
+                            <TableCell className={classes.tableData} component="th" scope="row">
+                                <span className={classes.musicTitle}>{user.title}</span><br></br>{user.artist}
+                            </TableCell>
+                            {/* <TableCell className={classes.tableData}>{row.artist}</TableCell> */}
+                            <TableCell className={classes.tableData}>{user.categoryName}</TableCell>
+                            <TableCell className={classes.tableData}>{user.transmediaName}</TableCell>
+                            <TableCell className={classes.tableData}>{user.genre}</TableCell>
+                            <TableCell className={classes.tableData}>{user.userName}</TableCell>
                         </TableRow>
-                        )}) : []}
+                        )}) : <TableRow>error ocurred</TableRow>}
                         
                     </TableBody>
                 </Table>

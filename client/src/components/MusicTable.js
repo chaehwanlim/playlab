@@ -7,23 +7,23 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import musicData from './musicSample.json';
+import { useMediaQuery } from '@material-ui/core';
 
 const useStyles = makeStyles({
     searchTitle: {
         animationDuration: '0.8s',
         marginTop: '20px',
-        fontSize: '2.5em',
+        fontSize: '2.5rem',
         fontWeight: '900',
         color: '#018DFF',
     },
     tableAttribute: {
-        fontSize: '1.2em',
+        fontSize: '1.9rem',
         textTransform: 'uppercase',
         fontWeight: '900',
     },
     tableData: {
-        fontSize: '1em',
+        fontSize: '1.7em',
         fontWeight: '400',
     },
     table: {
@@ -31,10 +31,16 @@ const useStyles = makeStyles({
         width: '100%',
     },
     tableContainer: {
-        maxHeight: 800,
+        maxHeight: 700,
     },
     musicTitle: {
         fontWeight: '700',
+    },
+    rowEffect: {
+        '&:hover': {
+            transition: '0.7s',
+            backgroundColor: 'aliceblue',
+        } 
     }
 });
 
@@ -51,7 +57,7 @@ export default function MusicTable() {
     var [musicDB, setMusicDB] = useState([]);
 
     useEffect(() => {
-        fetch('/api/music')
+        fetch('/api/musicDB')
             .then(res => res.json())
             .then(res => setMusicDB(res))
             .catch(err => console.log(err))
@@ -64,6 +70,7 @@ export default function MusicTable() {
     }
  */
     const classes = useStyles();
+    const mediaQuery = useMediaQuery('(min-width:')
 
     return (
         <div>
@@ -86,7 +93,7 @@ export default function MusicTable() {
                     <TableBody>
                     {musicDB ? musicDB.map(user => {
                         return (
-                        <TableRow>
+                        <TableRow className={classes.rowEffect}>
                             <TableCell className={classes.tableData} component="th" scope="row">
                                 <span className={classes.musicTitle}>{user.title}</span><br></br>{user.artist}
                             </TableCell>
@@ -97,7 +104,6 @@ export default function MusicTable() {
                             <TableCell className={classes.tableData}>{user.userName}</TableCell>
                         </TableRow>
                         )}) : <TableRow>error ocurred</TableRow>}
-                        
                     </TableBody>
                 </Table>
             </TableContainer>

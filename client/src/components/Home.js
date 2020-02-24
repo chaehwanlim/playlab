@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import './Home.css';
+import '../styles/Home.css';
 import Fab from '@material-ui/core/Fab';
-import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/AddRounded';
 import StarIcon from '@material-ui/icons/StarRounded';
 import SearchIcon from '@material-ui/icons/SearchRounded';
@@ -16,30 +15,30 @@ const useStyles = makeStyles(theme => ({
         color: 'white',
         textAlign: 'center', 
         position: 'inherit',
-        paddingTop: '25%',
-        fontSize: '100px',
+        paddingTop: '25rem',
+        fontSize: '8rem',
         fontFamily: 'Product Sans',
     }, 
     subTitle: {
         color: 'white',
         textAlign: 'center', 
         position: 'relative',
-        paddingTop: '15px',
-        fontSize: '25px',
-        fontWeight: '700',
+        paddingTop: '3rem',
+        fontSize: '1.8rem',
+        fontWeight: '500',
     },
 
     //for Description
     description: {
         background: 'whitesmoke',
         color: 'black',
-        padding: '50px',
+        padding: '5rem',
     },
 
     // for Buttons
     btn_root: {
         position: 'relative',
-        marginTop: '10%',
+        marginTop: '15%',
         textAlign: 'center',
         '& > *': {
             margin: theme.spacing(4), 
@@ -48,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     btn: {
         background: 'white',
         color: 'black',
-        fontSize: '20px',
+        fontSize: '2rem',
         fontWeight: '900',  
         letterSpacing: '5px',
         transition: '0.5s',
@@ -83,7 +82,7 @@ export default function Home() {
                     <div className= {classes.subTitle}>
                         나만의 재생목록을 모두와 공유해 보세요.
                     </div>
-                    <div className={classes.btn_root}>
+                    {/* <div className={classes.btn_root}>
                         <Link to="/Search" style={{textDecoration:'none'}}>
                             <Fab className={classes.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
                             <SearchIcon className={classes._icon}/>검색</Fab>
@@ -96,7 +95,7 @@ export default function Home() {
                             <Fab className={classes.btn} variant="outlined" onClick={() => setSearchClicked(true)}>
                             <AddIcon className={classes._icon}/>추가</Fab>
                         </Link>
-                    </div>
+                    </div> */}
                 </Box>
             </Container>
         </div>

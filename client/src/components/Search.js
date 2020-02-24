@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
@@ -11,16 +10,14 @@ import MusicTable from './MusicTable';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import Movie from './Movie';
+import Book from './Book';
 import { TransitionGroup } from 'react-transition-group';
-import './PageTransition.css';
 
 const useStyles = makeStyles(theme => ({
     background: {
         transitionDuration : '0.8s',
         paddingTop: '70px',
         paddingBottom: '30px',
-        paddingLeft: theme.spacing(1),
-        paddingRight: theme.spacing(1),
     },
     header: {
         align: 'center',
@@ -28,23 +25,29 @@ const useStyles = makeStyles(theme => ({
     title: {
         paddingBottom: '20px',
         textAlign: 'left',
-        fontSize: '3em',
+        fontSize: '2.5rem',
         fontWeight: '900',
         letterSpacing: '1px',
     },
 
     //for search bar
     search: {
+        marginTop: '1.5rem',
         position: 'center',
-        padding: '2px 4px',
         display: 'flex',
         alignItems: 'center',
-        width: 400,
+        width: 'auto',
+        transition: '0.5s',
+        '&:hover': {
+            transform: 'scale(1.05)',
+            transition: '0.7s',
+        } 
     },
     input: {
         marginLeft: theme.spacing(1),
+        padding: '0.5rem',
         flex: 1,
-        fontSize: '1.3rem',
+        fontSize: '1.8rem',
         fontWeight: '700',
     },
     iconButton: {
@@ -52,20 +55,11 @@ const useStyles = makeStyles(theme => ({
     },
 
     _divider:{
-        marginTop: '30px',
-    },
-
-    //for music tables
-    card: {
-        root: {
-            minHeight: 300,
-        },
-
+        marginTop: '3rem',
     },
 
     //for media buttons
-    gridAlign: {
-        
+    gridAlign: {       
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
@@ -73,17 +67,21 @@ const useStyles = makeStyles(theme => ({
     mediaBtn: {
         transitionDuration : '0.8s',
         textAlign: 'right',
-        fontSize: '1.2rem',
+        fontSize: '1.7rem',
         fontWeight: '700',
-        padding: '5px',
-        margin: '5px',
+        marginBottom: '1rem',
         color: 'white',
+        transition: '0.5s',
+        '&:hover': {
+            transform: 'scale(1.1)',
+            transition: '0.7s',
+        } 
     },
 }));
 
 export default function Search() {
     //1: 음악, 2: 영화, 3: 책
-    var [media, setMedia] = useState(1);
+    var [media, setMedia] = useState(3);
 
     function colorByMedia (state) {
         switch(state) {
@@ -105,15 +103,12 @@ export default function Search() {
             content = <Movie />;
             break;
         case 3:
-            content = <div />;
+            content = <Book />;
             break;
     }
 
 
     const classes = useStyles();
-
-    console.log(media + 'and rerendered');
-    console.log(window.location.pathname);
 
     return (
         <TransitionGroup timeout={500}>
@@ -121,7 +116,7 @@ export default function Search() {
         <Container maxWidth="lg" className={classes.header}>
             <Grid container spacing={1}>
                 <Grid item xs={9}>
-                    <header className={classes.title}>검색하기</header>
+                    <span className={classes.title}>검색하기</span>
                     <Paper component="form" className={classes.search}>
                         <InputBase
                             className={classes.input}
@@ -133,14 +128,14 @@ export default function Search() {
                         </IconButton>
                     </Paper>
                 </Grid>
-                <Grid item xs={3} sm={3}>
+                <Grid item xs={3}>
                     <div className={classes.gridAlign}>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#018DFF'}}
                     onClick = {() => {setMedia(1)}}>
                         음악
                     </Fab>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#FF4444'}}
-                    onClick = {() => {setMedia(2); }}>
+                    onClick = {() => {setMedia(2)}}>
                         영화
                     </Fab>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#1ABF80'}}

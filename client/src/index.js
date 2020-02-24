@@ -13,10 +13,10 @@ const theme = createMuiTheme({
 
 function footer() {
     return (
-        <footer style={{backgroundColor: 'whitesmoke', color: 'grey', fontWeight: '500', textAlign: 'center'}}>
+        <footer style={{backgroundColor: 'whitesmoke', color: 'grey', fontSize: '1.4rem', fontWeight: '500', textAlign: 'center'}}>
             <p>Copyright © 2020 PlayLab.co.,Ltd. All rights reserved.</p>
             <p>Contact webmaster for more information. <a href="mailto: chlim428@gmail.com" color="black">chlim428@gmail.com</a></p>
-            <p>Open Source | <a href="https://github.com/chaehwanlim/playlab" color="black">GitHub</a></p>
+            <p><a href="https://github.com/chaehwanlim/playlab" color="black">GitHub</a></p>
         </footer>
     )
 }

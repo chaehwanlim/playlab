@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 //request.body에 대한 url encoding을 확장할 수 있도록 true option 설정
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/api/music', (req, res) => {
+app.get('/api/musicDB', (req, res) => {
     dbConnection.query(
         "SELECT title, artist, genre, c.categoryName, u.userName, t.transmediaName \
         FROM music AS m \
@@ -37,9 +37,9 @@ app.get('/api/music', (req, res) => {
     )
 });
 
-app.get('/api/movie', (req, res) => {
+app.get('/api/movieDB', (req, res) => {
     dbConnection.query(
-        "SELECT title, director, genre, c.categoryName, u.userName, t.transmediaName, m.imageURL, m.actor\
+        "SELECT title, director, genre, c.categoryName, u.userName, t.transmediaName, m.imageURL, m.actor, m.year, m.userRating\
         FROM movie AS m \
         LEFT OUTER JOIN category AS c ON (c.categoryID = m.categoryID) \
         LEFT OUTER JOIN users AS u ON (u.userID = m.adderID) \
@@ -52,7 +52,7 @@ app.get('/api/movie', (req, res) => {
 
 var movieTitlesAndDirectors = [];
 
-app.get('/api/book', (req, res) => {
+app.get('/api/bookDB', (req, res) => {
     dbConnection.query(
         "SELECT title, author, genre, c.categoryName, u.userName, t.transmediaName, b.imageURL, b.description \
         FROM book AS b \

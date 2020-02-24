@@ -1,57 +1,80 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Card from '@material-ui/core/Card'; 
-import LinesEllipsis from 'react-lines-ellipsis';
 import Grid from '@material-ui/core/Grid';
 
-
 const useStyles = makeStyles({
-    searchTitle: {
+    title: {
         transitionDuration: '0.8s',
-        marginTop: '20px',
-        fontSize: '2.5em',
+        fontSize: '2.5rem',
         fontWeight: '900',
+        marginTop: '2rem',
+        marginBottom: '4rem',
         color: '#FF4444',
     },
     movie: {
+        background: 'white',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         flexWrap: 'wrap',
-        marginTop: '25px',
-        marginBottom: '25px',
-        padding: '25px',
-        textOverflow: 'ellipsis',
         boxShadow: '0 8px 38px rgba(133, 133, 133, 0.3), 0 5px 12px rgba(133, 133, 133,0.22)',
-
-        fontSize: '1.2rem',
+        fontSize: '1.7rem',
+        transition: '0.8s',
+        '&:hover': {
+            transform: 'scale(1.06)',
+            transition: '0.7s',
+        }
     },
+    
     moviePoster: {
-        width: 'auto',
+        width: '80%',
         height: 'auto',
-        maxWidth: '200px',
-        minWidth: '100px',
-        maxHeight: '200px',
-        minHeight: '100px',
+        maxWidth: '15rem',
+        boxShadow: '0 8px 38px rgba(133, 133, 133, 0.3), 0 5px 12px rgba(133, 133, 133,0.22)',
+        marginTop: '-1.5rem',       
     },
-    movieDesc: {
+    moviePosterAlign: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    movieTitle: {
+        fontSize: '2.2rem',
+        fontWeight: '700',
+        marginTop: '1rem',
+    },
+    movieSubtitle: {
+        fontSize: '1.6rem',
+        fontWeight: '500',
+        color: 'slategray',
+        marginTop: '0.7rem',
+    },
+    movieInfo: {
+        fontSize: '1.7rem',
+        fontWeight: '400',
+        marginTop: '0.7rem',
+        marginBottom: '0.7rem',
+    },
+    movieYear: {
+        marginLeft: '0.5rem',
+        fontSize: '1.7rem',
+        fontWeight: '500',
+        color: 'grey',
+    },
+    movieRating: {
+        marginLeft: '8px',
+        fontSize: '1.7rem',
+        fontWeight: '500',
+        color: 'orange',
+    }
 
-    },
 })
-
-function moviePoster(props) {
-    return (
-        <img src={props.poster} alt={props.alt} title={props.alt} className="moviePoster" />
-    )
-}
 
 export default function Movie() {
     var [movieDB, setMovieDB] = useState([]);
 
     useEffect(() => {
-        fetch('/api/movie')
+        fetch('/api/movieDB')
             .then(res => res.json())
             .then(res => setMovieDB(res))
             .catch(err => console.log(err))
@@ -61,15 +84,35 @@ export default function Movie() {
 
     return (
         <div>
-            <div className={classes.searchTitle}>영화</div>
-            <Grid container spacing={3}>
+            <div className={classes.title}>영화</div>
+            <Grid container spacing={4}>
             {movieDB ? movieDB.map(movie => {
                 return (
                     <Grid item xs={12} md={6}>
-                    <div className={classes.movie}>
-                        <img className={classes.moviePoster} src={movie.imageURL} />
-                        {movie.title}
-                    </div>
+                        <div className={classes.movie}>
+                            <Grid item xs={4}>
+                            <div className={classes.moviePosterAlign}>
+                                <img className={classes.moviePoster} src={movie.imageURL} title={movie.title}/>
+                            </div>
+                            </Grid>
+                            <Grid item xs={8}>
+                                <div className={classes.movieTitle}>
+                                    {movie.title}
+                                    <span className={classes.movieYear}>{movie.year}</span>
+                                    
+                                    </div>
+                                <div className={classes.movieSubtitle}>
+                                    감독 | {movie.director}<br />
+                                    출연 | {movie.actor}<br />
+                                    장르 | {movie.genre}<br />
+                                    트랜스미디어 | {movie.transmediaName}<br />
+                                    평점 | {movie.userRating}.0</div>
+                                <div className={classes.movieInfo}>
+                                    <b>{movie.userName}</b> 님이 이 영화를<br />
+                                    <b>{movie.categoryName}</b> 영화로 선택했습니다.<br />
+                                </div>
+                            </Grid>
+                        </div>
                     </Grid>
             )}) : <span>error occured</span>}
             </Grid>

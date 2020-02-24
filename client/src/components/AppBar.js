@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/MenuRounded';
 import AddIcon from '@material-ui/icons/AddRounded';
 import StarIcon from '@material-ui/icons/StarRounded';
 import SearchIcon from '@material-ui/icons/SearchRounded';
@@ -14,14 +15,8 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   //for AppBar
-  
-  blur: {
-    background: 'transparent',
-    backgroundSize: 'cover',
-    filter: 'blur(8px)',
-    position: 'fixed',
-    height: '1000px',
-    width: '1000px',
+  root: {
+    flexGrow: 1,
   },
   appBar: {
     background: 'transparent',
@@ -29,63 +24,63 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'none',
   },
   appBarTitle: {
+    position: 'flex',
+    textAlign: 'flex-start',
     fontFamily: 'Roboto',
     flexGrow: 1,
-    fontSize: '1.2em',
+    fontSize: '1.8rem',
     fontWeight: '700',
-    letterSpacing: '2px',
+    letterSpacing: '0.2rem',
   },
   btn_desc: {
-    fontSize: '2em',
     fontWeight: '900',
     letterSpacing: '2px',
   },
   link: {
+    fontFamily: 'Roboto',
     textDecoration: 'none',
+    fontWeight: '900',
   },
 }));
 
 export default function _AppBar() {
-  const _style = useStyles();
-  var [homeClicked, setHomeClicked] = useState(true);
+  const classes = useStyles();
+  var [color, setColor] = useState((window.location.pathname === "/") ? 'white' : 'black');
 
-  var adaptColor = (window.location.pathname == "/") ? 'white' : 'black';
+  var adaptColor = (window.location.pathname === "/") ? 'white' : 'black';
 
+  console.log('rendered');
   return (
-      
-        <div className={_style.root}>
-        <AppBar position="static" className={_style.appBar} >
-        <Container maxWidth="lg">
-          <Toolbar>
-            
-            <Typography variant="h6" className={_style.appBarTitle}>
-            <Link to="/" className={_style.link} onClick={() => (setHomeClicked(true))} 
-              style={{color: adaptColor}}>
-              PLAYLAB
-            </Link>
-            </Typography>
-          
-            {/* <IconButton className={_style.btn} color="inherit">검색</Button>
-            <IconButton className={_style.btn} color="inherit">인기목록</Button>
-            <IconButton className={_style.btn} color="inherit">만들기</Button> */}
+    <div className={classes.root}>
+    <AppBar position="static" className={classes.appBar} >
+    <Container maxWidth="lg">
+      <Toolbar style={{padding: '0rem',}}>
+        {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <MenuIcon />
+        </IconButton> */}
+        <Typography variant="h6" className={classes.appBarTitle}>
+          <Link to="/" className={classes.link} onClick={() => {setColor('white')}}
+            style={{color: (window.location.pathname === "/") ? 'white' : 'black'}}>
+            PLAYLAB
+          </Link>
+        </Typography>
 
-            <Link to="/Search" className={_style.link}>
-              <IconButton style={{color: adaptColor}} onClick={() => (setHomeClicked(false))}><SearchIcon /></IconButton>
-            </Link>
-            <Link to="/Popular" className={_style.link}>
-              <IconButton style={{color: adaptColor}} onClick={() => (setHomeClicked(false))}><StarIcon /></IconButton>
-            </Link>
-            <Link to="/PlaylistAdd" className={_style.link}>
-              <IconButton style={{color: adaptColor}} onClick={() => (setHomeClicked(false))}><AddIcon /></IconButton>
-            </Link>
-            <Link to="/Login" className={_style.link}>
-              <IconButton style={{color: adaptColor}} onClick={() => (setHomeClicked(false))}><AccountCircle /></IconButton>
-            </Link>
+        <Link to="/Search" onClick={() => {setColor('black')}}>
+          <IconButton style={{color: adaptColor}}><SearchIcon style={{fontSize: '2.2rem'}}/></IconButton>
+        </Link>
+        <Link to="/Popular" onClick={() => {setColor('black')}}>
+          <IconButton style={{color: adaptColor}}><StarIcon style={{fontSize: '2.2rem'}}/></IconButton>
+        </Link>
+        <Link to="/PlaylistAdd" onClick={() => {setColor('black')}}>
+          <IconButton style={{color: adaptColor}}><AddIcon style={{fontSize: '2.2rem'}}/></IconButton>
+        </Link>
+        <Link to="/Login" onClick={() => {setColor('black')}}>
+          <IconButton style={{color: adaptColor, paddingRight:'0rem'}}><AccountCircle style={{fontSize: '2.2rem'}}/></IconButton>
+        </Link>
 
-          </Toolbar>
-          </Container>
-        </AppBar>
-        </div>
-    
+      </Toolbar>
+      </Container>
+    </AppBar>
+    </div>
   );
 }

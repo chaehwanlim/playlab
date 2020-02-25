@@ -13,64 +13,51 @@ import { post } from 'axios';
 
 const useStyles = makeStyles(theme => ({
     background: {
-        color: 'black',
-        paddingTop: '20px',
-        paddingBottom: '30px',
-        paddingLeft: theme.spacing(1),
-        paddingRight: theme.spacing(1),
+        transitionDuration : '0.8s',
+        paddingTop: '7rem',
+        paddingBottom: '3rem',
     },
     header: {
-        align: 'center',
+        textAlign: 'center',
     },
     title: {
-        paddingBottom: '20px',
+/*         paddingBottom: '2rem', */
         textAlign: 'left',
-        fontSize: '3em',
+        fontSize: '2.5rem',
         fontWeight: '900',
-        letterSpacing: '1px',
-    },
-
-    //for search bar
-    search: {
-        position: 'center',
-        padding: '2px 4px',
-        display: 'flex',
-        alignItems: 'center',
-        width: 400,
-    },
-    input: {
-        marginLeft: theme.spacing(1),
-        flex: 1,
-        fontSize: '1.3rem',
-        fontWeight: '700',
-    },
-    iconButton: {
-        padding: 10,
+        letterSpacing: '0.1rem',
     },
 
     _divider:{
         
-        marginTop: '30px',
+        marginTop: '2rem',
     },
 
     //for media buttons
-    gridAlign: {
+    gridAlign: {       
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         alignItems: 'flex-end',
     },
     mediaBtn: {
-        textAlign:'right',
-        fontSize: '1.2rem',
+        transitionDuration : '0.8s',
+        textAlign: 'right',
+        fontSize: '1.7rem',
         fontWeight: '700',
-        padding: '5px',
-        margin: '5px',
+/*         marginBottom: '1rem', */
         color: 'white',
+        transition: '0.5s',
+        '&:hover': {
+            transform: 'scale(1.1)',
+            transition: '0.7s',
+        } 
     },
 }));
 
 export default function PlaylistAdd() {
-    var [media, setMedia] = useState(0);
+    var [media, setMedia] = useState("영화");
+    var [title, setTitle] = useState("내가 본 영화 추가하기");
+    var
 
     const classes = useStyles();
 
@@ -79,39 +66,29 @@ export default function PlaylistAdd() {
         <Container maxWidth="lg" className={classes.header}>
             <Grid container spacing={1}>
                 <Grid item xs={9}>
-                    <header className={classes.title}>재생목록 만들기</header>
-                    <Paper component="form" className={classes.search}>
-                        <InputBase
-                            className={classes.input}
-                            placeholder="추가하고 싶은 미디어를 입력하세요"
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                        <IconButton type="submit" className={classes.iconButton} aria-label="search">
-                            <SearchIcon />
-                        </IconButton>
-                    </Paper>
+                    <header className={classes.title}>{title}</header>
                 </Grid>
-                <Grid item xs={3} sm={3}>
+                <Grid item xs={3}>
                     <div className={classes.gridAlign}>
-                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#018DFF'}}>
+                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#018DFF'}}
+                    onClick = {() => {setTitle("내가 들은 음악 추가하기")}}>
                         음악
                     </Fab>
-                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#FF4444'}}>
+                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#FF4444'}}
+                    onClick = {() => {setTitle("내가 본 영화 추가하기")}}>
                         영화
                     </Fab>
-                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#1ABF80'}}>
+                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#1ABF80'}}
+                    onClick = {() => {setTitle("내가 읽은 책 추가하기")}}>
                         도서
-                    </Fab>
-                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#DD22FF'}}>
-                        연관
                     </Fab>
                     </div>
                 </Grid>
             </Grid>
-            
-            <Divider className={classes._divider}/>
-            
-
+        </Container>
+        <Divider className={classes._divider}/>
+        <Container maxWidth="lg">
+            {mediaInput}
         </Container>
             
         </div>

@@ -16,18 +16,17 @@ import { TransitionGroup } from 'react-transition-group';
 const useStyles = makeStyles(theme => ({
     background: {
         transitionDuration : '0.8s',
-        paddingTop: '70px',
-        paddingBottom: '30px',
+        paddingTop: '7rem',
+        paddingBottom: '3rem',
     },
     header: {
-        align: 'center',
     },
     title: {
-        paddingBottom: '20px',
+        paddingBottom: '2rem',
         textAlign: 'left',
         fontSize: '2.5rem',
         fontWeight: '900',
-        letterSpacing: '1px',
+        letterSpacing: '0.1rem',
     },
 
     //for search bar
@@ -39,7 +38,7 @@ const useStyles = makeStyles(theme => ({
         width: 'auto',
         transition: '0.5s',
         '&:hover': {
-            transform: 'scale(1.05)',
+            transform: 'scale(1.01)',
             transition: '0.7s',
         } 
     },
@@ -81,9 +80,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function Search() {
     //1: 음악, 2: 영화, 3: 책
-    var [media, setMedia] = useState(3);
+    var [content, setContent] = useState(<Movie />);
 
-    function colorByMedia (state) {
+    /* function colorByMedia (state) {
         switch(state) {
             case 1:
                 return '#018DFF';
@@ -92,27 +91,12 @@ export default function Search() {
             case 3:
                 return '#1ABF80';
         }
-    }
-
-    var content;
-    switch(media) {
-        case 1:
-            content = <MusicTable />;
-            break;
-        case 2:
-            content = <Movie />;
-            break;
-        case 3:
-            content = <Book />;
-            break;
-    }
-
+    }*/
 
     const classes = useStyles();
 
     return (
-        <TransitionGroup timeout={500}>
-        <div className={classes.background} /* style={(media === 2) ? {backgroundColor: 'black', color: 'white'} : {backgroundColor : 'whitesmoke', color: 'black'}} */>
+        <div className={classes.background}>
         <Container maxWidth="lg" className={classes.header}>
             <Grid container spacing={1}>
                 <Grid item xs={9}>
@@ -131,24 +115,26 @@ export default function Search() {
                 <Grid item xs={3}>
                     <div className={classes.gridAlign}>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#018DFF'}}
-                    onClick = {() => {setMedia(1)}}>
+                    onClick = {() => {setContent(<MusicTable />)}}>
                         음악
                     </Fab>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#FF4444'}}
-                    onClick = {() => {setMedia(2)}}>
+                    onClick = {() => {setContent(<Movie />)}}>
                         영화
                     </Fab>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#1ABF80'}}
-                    onClick = {() => {setMedia(3)}}>
+                    onClick = {() => {setContent(<Book />)}}>
                         도서
                     </Fab>
                     </div>
                 </Grid>
             </Grid>
-            <Divider className={classes._divider}/>
+        </Container>
+        <Divider className={classes._divider}/>
+        <Container maxWidth="lg">
             {content}
         </Container>
         </div>
-        </TransitionGroup>
+
     )
 }

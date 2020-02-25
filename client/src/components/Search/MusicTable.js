@@ -41,6 +41,9 @@ const useStyles = makeStyles({
             transition: '0.7s',
             backgroundColor: 'aliceblue',
         } 
+    },
+    musicInfo: {
+        display: 'none',
     }
 });
 
@@ -72,6 +75,10 @@ export default function MusicTable() {
     const classes = useStyles();
     const mediaQuery = useMediaQuery('(min-width:')
 
+    const handleClick = event => {
+        event.preventDefault();
+    }
+
     return (
         <div>
             <div className={classes.searchTitle}>음악</div>
@@ -91,17 +98,20 @@ export default function MusicTable() {
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    {musicDB ? musicDB.map(user => {
+                    {musicDB ? musicDB.map(music => {
                         return (
-                        <TableRow className={classes.rowEffect}>
+                        <TableRow className={classes.rowEffect} onClick={handleClick}>
                             <TableCell className={classes.tableData} component="th" scope="row">
-                                <span className={classes.musicTitle}>{user.title}</span><br></br>{user.artist}
+                                <span className={classes.musicTitle}>{music.title}</span><br></br>{music.artist}
+                            <div className={classes.musicInfo} id="musicInfo">
+                                {music.userName} 님이 이 음악을 {music.categoryName} 음악으로 평가했습니다.
+                            </div>
                             </TableCell>
                             {/* <TableCell className={classes.tableData}>{row.artist}</TableCell> */}
-                            <TableCell className={classes.tableData}>{user.categoryName}</TableCell>
-                            <TableCell className={classes.tableData}>{user.transmediaName}</TableCell>
-                            <TableCell className={classes.tableData}>{user.genre}</TableCell>
-                            <TableCell className={classes.tableData}>{user.userName}</TableCell>
+                            <TableCell className={classes.tableData}>{music.categoryName}</TableCell>
+                            <TableCell className={classes.tableData}>{music.transmediaName}</TableCell>
+                            <TableCell className={classes.tableData}>{music.genre}</TableCell>
+                            <TableCell className={classes.tableData}>{music.userName}</TableCell>
                         </TableRow>
                         )}) : <TableRow>error ocurred</TableRow>}
                     </TableBody>

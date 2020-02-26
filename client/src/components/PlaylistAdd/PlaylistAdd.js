@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 
 import { post } from 'axios';
+import MusicAdd from './MusicAdd';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -18,14 +19,19 @@ const useStyles = makeStyles(theme => ({
         paddingBottom: '3rem',
     },
     header: {
-        textAlign: 'center',
+        textAlign: 'left',
     },
     title: {
 /*         paddingBottom: '2rem', */
         textAlign: 'left',
         fontSize: '2.5rem',
         fontWeight: '900',
-        letterSpacing: '0.1rem',
+    },
+    subtitle: {
+        textAlign: 'left',
+        fontSize: '1.7rem',
+        fontWeight: '700',
+        color: 'slategray',
     },
 
     _divider:{
@@ -36,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     //for media buttons
     gridAlign: {       
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'flex-end',
     },
     mediaBtn: {
@@ -44,7 +50,7 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'right',
         fontSize: '1.7rem',
         fontWeight: '700',
-/*         marginBottom: '1rem', */
+        marginBottom: '1rem',
         color: 'white',
         transition: '0.5s',
         '&:hover': {
@@ -56,8 +62,27 @@ const useStyles = makeStyles(theme => ({
 
 export default function PlaylistAdd() {
     var [media, setMedia] = useState("영화");
-    var [title, setTitle] = useState("내가 본 영화 추가하기");
-    var
+    var [titles, setTitles] = useState({
+        title: "내가 감상한 영화 추가하기",
+        subtitle: "네이버 영화에서 검색하여 추가하세요."
+    });
+    var [mediaAdd, setMediaAdd] = useState(<div />);
+
+    const handleMusic = (e) => {
+        e.preventDefault();
+        setTitles({title: "내가 들은 음악 추가하기", subtitle: "직접 음악 정보를 입력하세요."});
+        setMediaAdd(<MusicAdd />);
+    }
+    const handleMovie = (e) => {
+        e.preventDefault();
+        setTitles({title: "내가 감상한 영화 추가하기", subtitle: "네이버 영화에서 검색하여 추가하세요."});
+        setMediaAdd(<div />)
+    }
+    const handleBook = (e) => {
+        e.preventDefault();
+        setTitles({title: "내가 읽은 책 추가하기", subtitle: "네이버 책에서 검색하여 추가하세요."})
+        setMediaAdd(<div />)
+    }
 
     const classes = useStyles();
 
@@ -66,20 +91,21 @@ export default function PlaylistAdd() {
         <Container maxWidth="lg" className={classes.header}>
             <Grid container spacing={1}>
                 <Grid item xs={9}>
-                    <header className={classes.title}>{title}</header>
+                    <header className={classes.title}>{titles.title}</header>
+                    <p className={classes.subtitle}>{titles.subtitle}</p>
                 </Grid>
                 <Grid item xs={3}>
                     <div className={classes.gridAlign}>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#018DFF'}}
-                    onClick = {() => {setTitle("내가 들은 음악 추가하기")}}>
+                    onClick = {handleMusic}>
                         음악
                     </Fab>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#FF4444'}}
-                    onClick = {() => {setTitle("내가 본 영화 추가하기")}}>
+                    onClick = {handleMovie}>
                         영화
                     </Fab>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#1ABF80'}}
-                    onClick = {() => {setTitle("내가 읽은 책 추가하기")}}>
+                    onClick = {handleBook}>
                         도서
                     </Fab>
                     </div>
@@ -88,7 +114,7 @@ export default function PlaylistAdd() {
         </Container>
         <Divider className={classes._divider}/>
         <Container maxWidth="lg">
-            {mediaInput}
+            {mediaAdd}
         </Container>
             
         </div>

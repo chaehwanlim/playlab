@@ -75,7 +75,7 @@ export default function _AppBar() {
           <IconButton style={{color: adaptColor}}><AddIcon style={{fontSize: '2.2rem'}}/></IconButton>
         </Link>
         <Link to="/Login" onClick={() => {setColor('black')}}>
-          <IconButton style={{color: adaptColor, paddingRight:'0rem'}}><AccountCircle style={{fontSize: '2.2rem'}}/></IconButton>
+          <IconButton style={{color: adaptColor, marginRight:'0rem'}}><AccountCircle style={{fontSize: '2.2rem'}}/></IconButton>
         </Link>
 
       </Toolbar>

@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 //request.body에 대한 url encoding을 확장할 수 있도록 true option 설정
 app.use(bodyParser.urlencoded({extended: true}));
 
+//routing 1 : query의 결과를 musicDB path에 전송
 app.get('/api/musicDB', (req, res) => {
     dbConnection.query(
         "SELECT title, artist, genre, c.categoryName, u.userName, t.transmediaName \
@@ -49,8 +50,6 @@ app.get('/api/movieDB', (req, res) => {
         }
     )
 });
-
-var movieTitlesAndDirectors = [];
 
 app.get('/api/bookDB', (req, res) => {
     dbConnection.query(
@@ -122,5 +121,5 @@ app.get('/api/bookSearch', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log('listening on port \${port}');
+    console.log('listening on port 3000');
 });

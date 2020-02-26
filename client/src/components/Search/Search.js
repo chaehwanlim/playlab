@@ -6,9 +6,9 @@ import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/SearchRounded';
 import Divider from '@material-ui/core/Divider';
-import MusicTable from './MusicTable';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
+import Music from './Music';
 import Movie from './Movie';
 import Book from './Book';
 import { TransitionGroup } from 'react-transition-group';
@@ -81,6 +81,9 @@ const useStyles = makeStyles(theme => ({
 export default function Search() {
     //1: 음악, 2: 영화, 3: 책
     var [content, setContent] = useState(<Movie />);
+    var [searchKeyword, setSearchKeyword] = useState("");
+    var [info, setInfo] = useState([]);
+
 
     /* function colorByMedia (state) {
         switch(state) {
@@ -92,6 +95,18 @@ export default function Search() {
                 return '#1ABF80';
         }
     }*/
+
+    const handleValueChange = (e) => {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        setSearchKeyword(nextState);
+    }
+
+    const filteredComponents = (data) => {
+        data = data.filter((u) => {
+            return u.name.indexOf()
+        })
+    }
 
     const classes = useStyles();
 
@@ -106,6 +121,8 @@ export default function Search() {
                             className={classes.input}
                             placeholder="검색할 내용을 입력하세요"
                             inputProps={{ 'aria-label': 'search' }}
+                            value={searchKeyword}
+                            onChange={handleValueChange}
                         />
                         <IconButton type="submit" className={classes.iconButton} aria-label="search">
                             <SearchIcon />
@@ -115,7 +132,7 @@ export default function Search() {
                 <Grid item xs={3}>
                     <div className={classes.gridAlign}>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#018DFF'}}
-                    onClick = {() => {setContent(<MusicTable />)}}>
+                    onClick = {() => {setContent(<Music />)}}>
                         음악
                     </Fab>
                     <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#FF4444'}}

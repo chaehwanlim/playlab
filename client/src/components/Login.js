@@ -66,10 +66,22 @@ const useStyles = makeStyles(theme => ({
 
 export default function Login() {
     const InputProps = { style: {fontSize: '2rem'}};
-    const InputLabelProps = { style: {fontSize: '1.7rem', color: 'black'} }
+    const InputLabelProps = { style: {fontSize: '1.7rem', color: 'primary'} }
+    const InputLabelProps2 = { style: {fontSize: '1.7rem', color: 'secondary'} }
 
     const classes = useStyles();
     const primary = "#2196F3"
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault()
+        addUser()
+            .then((res) => {console.log(res.data)})
+    }
+
+    const addUser = () => {
+        const url = '/api/users';
+        const formData = new FormData();
+    }
 
     return (
         <div className={classes.background}>
@@ -87,17 +99,17 @@ export default function Login() {
                         <Divider className={classes.loginDivider}/>
                         <form noValidate autoComplete="off" className={classes.login}>
                             <TextField id="outlined-basic" label="이름"
-                            inputProps={InputProps}
-                            InputLabelProps={{ classes: {focused: classes.inputFocused}}}/><br />
+                            InputProps={InputProps}
+                            InputLabelProps={InputLabelProps}/><br />
                             <TextField
                                 id="standard-password-input"
                                 label="패스워드"
                                 type="password"
                                 autoComplete="current-password"
                                 inputProps={InputProps}
-                                InputLabelProps={{ classes: {focused: classes.inputFocused}}}
+                                InputLabelProps={InputLabelProps}
                             />
-                            <Fab variant="extended" className={classes.btn} 
+                            <Fab variant="extended" className={classes.btn} type="submit"
                             style={{background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
                                     boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',}}>
                             로그인</Fab>
@@ -113,19 +125,20 @@ export default function Login() {
                         </div>
                         <Divider className={classes.loginDivider}/>
                         
-                        <form noValidate autoComplete="off" className={classes.login}>
+                        <form noValidate autoComplete="off" className={classes.login}
+                        onSubmit={handleFormSubmit}>
                             <TextField id="outlined-basic" label="이름"
                             inputProps={InputProps}
-                            InputLabelProps={{ classes: {focused: classes.inputFocused}}}/><br />
+                            InputLabelProps={InputLabelProps2}/><br />
                             <TextField
                                 id="standard-password-input"
                                 label="패스워드"
                                 type="password"
                                 autoComplete="current-password"
                                 inputProps={InputProps}
-                                InputLabelProps={{ classes: {focused: classes.inputFocused}}}
+                                InputLabelProps={InputLabelProps2}
                             />
-                            <Fab variant="extended" className={classes.btn}
+                            <Fab variant="extended" className={classes.btn} type="submit"
                             style={{background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
                                     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',}}>
                             회원가입</Fab>

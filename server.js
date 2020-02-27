@@ -20,9 +20,10 @@ const dbConnection = mysql.createConnection({
 dbConnection.connect();
 
 //request.body에 오는 데이터를 json 형식으로 변환
-app.use(bodyParser.json()); 
+app.use(bodyParser.json())
 //request.body에 대한 url encoding을 확장할 수 있도록 true option 설정
 app.use(bodyParser.urlencoded({extended: true}));
+
 
 //routing 1 : query의 결과를 musicDB path에 전송
 app.get('/api/musicDB', (req, res) => {
@@ -64,6 +65,24 @@ app.get('/api/bookDB', (req, res) => {
     )
 });
 
+app.get('/api/categoryDB', (req, res) => {
+    dbConnection.query(
+        "SELECT * FROM category;",
+        (err, rows, fields) => {
+            res.send(rows);
+        }
+    )
+});
+
+app.get('/api/transmediaDB', (req, res) => {
+    dbConnection.query(
+        "SELECT * FROM transmedia;",
+        (err, rows, fields) => {
+            res.send(rows);
+        }
+    )
+});
+
 var optionForMovie = {
     query: "frozen 1",
     start: 1,
@@ -72,15 +91,21 @@ var optionForMovie = {
     yearto: 2020,
 }
 
-var optionForBook = {
-    query: "martian"
-}
+//프론트단에서 보낸 영화 검색 키워드를 받아 변수에 담는다.
+var movieKeyword = {
+    query: ""
+};
+
+app.post('/api/movieSearch', (req, res) => {
+    movieKeyword.query = req.body.keyword;
+    
+})
 
 app.get('/api/movieSearch', (req, res) => {
     var naverapi_url = 'https://openapi.naver.com/v1/search/movie';
     var request = require('request');
     var options = {
-        qs: optionForMovie,
+        qs: movieKeyword,
         url: naverapi_url,
         headers: {
             'X-Naver-Client-Id': dbAndApi.naver.clientID, 
@@ -118,6 +143,26 @@ app.get('/api/bookSearch', (req, res) => {
             console.log('error = ' + response.statusCode);
         }
     });
+});
+
+//post
+const multer = require('multer');
+
+app.post('/api/musicAdd', (req, res) => {
+    let sql = "INSERT INTO music VALUES (NULL, ?, ?, ?, 1001, ?, ?);"
+
+    let title = req.body.title;
+    let artist = req.body.artist;
+    let genre = req.body.genre;
+    let categoryID = req.body.categoryID;
+    let transmediaID = req.body.transmediaID;
+    let params = [title, artist, genre, categoryID, transmediaID];
+    dbConnection.query(sql, params, 
+        (err, rows, fields) => {
+            res.send(rows);
+            console.log('query succeed');
+        }
+    );
 });
 
 app.listen(port, () => {

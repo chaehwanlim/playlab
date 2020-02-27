@@ -97,9 +97,7 @@ export default function Search() {
     }*/
 
     const handleValueChange = (e) => {
-        let nextState = {};
-        nextState[e.target.name] = e.target.value;
-        setSearchKeyword(nextState);
+        setSearchKeyword(e.target.value);
     }
 
     const filteredComponents = (data) => {

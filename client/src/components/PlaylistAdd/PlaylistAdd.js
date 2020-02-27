@@ -11,6 +11,7 @@ import Fab from '@material-ui/core/Fab';
 
 import { post } from 'axios';
 import MusicAdd from './MusicAdd';
+import MovieAdd from './MovieAdd';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     //for media buttons
-    gridAlign: {       
+    gridAlign: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
@@ -76,7 +77,7 @@ export default function PlaylistAdd() {
     const handleMovie = (e) => {
         e.preventDefault();
         setTitles({title: "내가 감상한 영화 추가하기", subtitle: "네이버 영화에서 검색하여 추가하세요."});
-        setMediaAdd(<div />)
+        setMediaAdd(<MovieAdd />)
     }
     const handleBook = (e) => {
         e.preventDefault();

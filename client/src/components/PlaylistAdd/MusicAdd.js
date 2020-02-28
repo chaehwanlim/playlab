@@ -96,7 +96,7 @@ export default function MusicAdd() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(form);
-        addMusic();
+        addMusic()
     }  
 
     const addMusic = () => {
@@ -113,6 +113,18 @@ export default function MusicAdd() {
         })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
+
+        initializeForm();
+    }
+    const initializeForm = () => {
+        setForm({
+            title : "",
+            artist: "",
+            genre: "",
+            category: 100,
+            transmedia: 10000,
+        });
+        console.log('cleared');
     }
 
     const InputProps = { style: {fontSize: '2rem'}};

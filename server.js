@@ -83,22 +83,20 @@ app.get('/api/transmediaDB', (req, res) => {
     )
 });
 
-var optionForMovie = {
-    query: "frozen 1",
-    start: 1,
-    display: 10,
-    yearfrom: 1970,
-    yearto: 2020,
+var optionForBook = {
+    query: "마션"
 }
 
 //프론트단에서 보낸 영화 검색 키워드를 받아 변수에 담는다.
 var movieKeyword = {
-    query: ""
+    query: "",
+    start: 1,
+    display: 20,
+    yearfrom: 1970,
+    yearto: 2020,
 };
-
-app.post('/api/movieSearch', (req, res) => {
+app.post('/api/movieSearchKeyword', (req, res) => {
     movieKeyword.query = req.body.keyword;
-    
 })
 
 app.get('/api/movieSearch', (req, res) => {

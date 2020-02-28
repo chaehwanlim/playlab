@@ -3,11 +3,7 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import '../styles/Home.css';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/AddRounded';
-import StarIcon from '@material-ui/icons/StarRounded';
-import SearchIcon from '@material-ui/icons/SearchRounded';
-import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles(theme => ({
     //for MainTitle

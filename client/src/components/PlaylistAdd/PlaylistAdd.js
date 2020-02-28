@@ -9,14 +9,13 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 
-import { post } from 'axios';
 import MusicAdd from './MusicAdd';
 import MovieAdd from './MovieAdd';
 
 const useStyles = makeStyles(theme => ({
     background: {
         transitionDuration : '0.8s',
-        paddingTop: '7rem',
+        paddingTop: '8rem',
         paddingBottom: '3rem',
     },
     header: {
@@ -67,7 +66,7 @@ export default function PlaylistAdd() {
         title: "내가 감상한 영화 추가하기",
         subtitle: "네이버 영화에서 검색하여 추가하세요."
     });
-    var [mediaAdd, setMediaAdd] = useState(<div />);
+    var [mediaAdd, setMediaAdd] = useState(<MovieAdd />);
 
     const handleMusic = (e) => {
         e.preventDefault();

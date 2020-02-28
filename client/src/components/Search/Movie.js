@@ -19,6 +19,8 @@ const useStyles = makeStyles({
         flexWrap: 'wrap',
         boxShadow: '0 8px 38px rgba(133, 133, 133, 0.3), 0 5px 12px rgba(133, 133, 133,0.22)',
         fontSize: '1.7rem',
+        paddingRight: '1rem',
+        paddingBottom: '1.5rem',
         transition: '0.8s',
         '&:hover': {
             transform: 'scale(1.06)',
@@ -92,21 +94,20 @@ export default function Movie() {
                         <div className={classes.movie}>
                             <Grid item xs={4}>
                             <div className={classes.moviePosterAlign}>
-                                <img className={classes.moviePoster} src={movie.imageURL} title={movie.title}/>
+                                <img className={classes.moviePoster} src={movie.imageURL} title={movie.title} alt="영화 포스터 이미지를 불러오는 데 오류가 발생했습니다."/>
                             </div>
                             </Grid>
                             <Grid item xs={8}>
                                 <div className={classes.movieTitle}>
                                     {movie.title}
                                     <span className={classes.movieYear}>{movie.year}</span>
-                                    
-                                    </div>
+                                </div>
                                 <div className={classes.movieSubtitle}>
                                     감독 | {movie.director}<br />
                                     출연 | {movie.actor}<br />
-                                    장르 | {movie.genre}<br />
                                     트랜스미디어 | {movie.transmediaName}<br />
-                                    평점 | {movie.userRating}.0</div>
+                                    평점 | {movie.userRating}
+                                </div>
                                 <div className={classes.movieInfo}>
                                     <b>{movie.userName}</b> 님이 이 영화를<br />
                                     <b>{movie.categoryName}</b> 영화로 선택했습니다.<br />

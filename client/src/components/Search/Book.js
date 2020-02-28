@@ -86,6 +86,11 @@ export default function Book() {
             .catch(err => console.log(err));
     });
 
+    const removeTags = (str) => {
+        str = str.replace(/<b>/g, "");
+        return str.replace(/<\/b>/g, "");
+    }
+
     const classes = useStyles();
 
     return (
@@ -96,12 +101,12 @@ export default function Book() {
                 return (
                     <Grid item sm={12}>
                         <div className={classes.book}>
-                            <Grid item sm={2} xs={4}>
+                            <Grid item xs={4} sm={2}>
                             <div className={classes.bookCoverAlign}>
                                 <img className={classes.bookCover} src={book.imageURL} />
                             </div>
                             </Grid>
-                            <Grid item sm={4} xs={8}>
+                            <Grid item xs={8} sm={4}>
                                 <div className={classes.bookTitle}>
                                     {book.title}
                                     <span className={classes.bookYear}>{book.year}</span>
@@ -116,9 +121,9 @@ export default function Book() {
                                     <b>{book.categoryName}</b> 도서로 선택했습니다.<br />
                                 </div>
                             </Grid>
-                            <Grid item sm={6} xs={12}>
+                            <Grid item xs={12} sm={6}>
                                 <div className={classes.bookDesc}>
-                                    {book.description}
+                                    {removeTags(book.description)}
                                 </div>
                             </Grid>
                         </div>

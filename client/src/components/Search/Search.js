@@ -16,7 +16,7 @@ import { TransitionGroup } from 'react-transition-group';
 const useStyles = makeStyles(theme => ({
     background: {
         transitionDuration : '0.8s',
-        paddingTop: '7rem',
+        paddingTop: '8rem',
         paddingBottom: '3rem',
     },
     header: {

@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/MenuRounded';
+/* import MenuIcon from '@material-ui/icons/MenuRounded'; */
 import AddIcon from '@material-ui/icons/AddRounded';
 import StarIcon from '@material-ui/icons/StarRounded';
 import SearchIcon from '@material-ui/icons/SearchRounded';
@@ -20,14 +20,17 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     background: 'transparent',
+    filter: 'brightness(80%)',
     position: 'fixed',
     boxShadow: 'none',
+    backdropFilter: 'blur(2px)',
   },
   appBarTitle: {
+    flexGrow: 1,
     position: 'flex',
     textAlign: 'flex-start',
+
     fontFamily: 'Roboto',
-    flexGrow: 1,
     fontSize: '1.8rem',
     fontWeight: '700',
     letterSpacing: '0.2rem',
@@ -47,6 +50,9 @@ export default function _AppBar() {
   const classes = useStyles();
   var [color, setColor] = useState((window.location.pathname === "/") ? 'white' : 'black');
 
+  var adaptTitleColor = (window.location.pathname === "/") ? 
+    {color : 'white'} :
+    {color : 'black', textShadow: '-1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6',};
   var adaptColor = (window.location.pathname === "/") ? 'white' : 'black';
 
   console.log('rendered');
@@ -60,7 +66,7 @@ export default function _AppBar() {
         </IconButton> */}
         <Typography variant="h6" className={classes.appBarTitle}>
           <Link to="/" className={classes.link} onClick={() => {setColor('white')}}
-            style={{color: (window.location.pathname === "/") ? 'white' : 'black'}}>
+            style={adaptTitleColor}>
             PLAYLAB
           </Link>
         </Typography>

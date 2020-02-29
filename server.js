@@ -83,10 +83,6 @@ app.get('/api/transmediaDB', (req, res) => {
     )
 });
 
-var optionForBook = {
-    query: "마션"
-}
-
 //프론트단에서 보낸 영화 검색 키워드를 받아 변수에 담는다.
 var movieKeyword = {
     query: "",
@@ -97,6 +93,15 @@ var movieKeyword = {
 };
 app.post('/api/movieSearchKeyword', (req, res) => {
     movieKeyword.query = req.body.keyword;
+})
+
+var bookKeyword = {
+    query: "",
+    start: 1,
+    display: 20,
+}
+app.post('/api/bookSearchKeyword', (req, res) => {
+    bookKeyword.query = req.body.keyword;
 })
 
 app.get('/api/movieSearch', (req, res) => {
@@ -125,7 +130,7 @@ app.get('/api/bookSearch', (req, res) => {
     var naverapi_url = 'https://openapi.naver.com/v1/search/book';
     var request = require('request');
     var options = {
-        qs: optionForBook,
+        qs: bookKeyword,
         url: naverapi_url,
         headers: {
             'X-Naver-Client-Id': dbAndApi.naver.clientID, 
@@ -148,7 +153,6 @@ const multer = require('multer');
 
 app.post('/api/musicAdd', (req, res) => {
     let sql = "INSERT INTO music VALUES (NULL, ?, ?, ?, 1001, ?, ?);"
-
     let title = req.body.title;
     let artist = req.body.artist;
     let genre = req.body.genre;
@@ -158,7 +162,56 @@ app.post('/api/musicAdd', (req, res) => {
     dbConnection.query(sql, params, 
         (err, rows, fields) => {
             res.send(rows);
-            console.log('query succeed');
+            console.log('music add query succeed');
+        }
+    );
+});
+
+app.post('/api/movieAdd', (req, res) => {
+    let sql = "INSERT INTO movie VALUES (NULL, ?, ?, NULL, 1001, ?, ?, ?, ?, ?, ?);"
+    let title = req.body.title;
+    let director = req.body.director;
+    let categoryID = req.body.categoryID;
+    let transmediaID = req.body.transmediaID;
+    let imageURL = req.body.imageURL;
+    let actor = req.body.actor;
+    let userRating = req.body.userRating;
+    let year = req.body.year;
+    let params = [title, director, categoryID, transmediaID, imageURL, actor, userRating, year];
+    dbConnection.query(sql, params,
+        (err, rows, fields) => {
+            res.send(rows);
+            console.log('movie add query succeed');
+        }
+    );
+});
+
+app.post('/api/bookAdd', (req, res) => {
+    let sql = "INSERT INTO book VALUES (NULL, ?, ?, NULL, 1001, ?, ?, ?, ?);"
+    let title = req.body.title;
+    let author = req.body.author;
+    let categoryID = req.body.categoryID;
+    let transmediaID = req.body.transmediaID;
+    let imageURL = req.body.imageURL;
+    let description = req.body.description;
+    let params = [title, author, categoryID, transmediaID, imageURL, description];
+    dbConnection.query(sql, params,
+        (err, rows, fields) => {
+            res.send(rows);
+            console.log('book add query succeed');
+        }
+    );
+});
+
+app.post('/api/createUser', (req, res) => {
+    let sql = 'INSERT INTO users VALUES (NULL, ?, NULL, ?);'
+    let userName = req.body.userName;
+    let userPassword = req.body.userPassword;
+    let params = [userName, userPassword];
+    dbConnection.query(sql, params,
+        (err, rows, fields) => {
+            res.send(rows);
+            console.log('user create query succeed');
         }
     );
 });

@@ -19,8 +19,6 @@ const useStyles = makeStyles(theme => ({
         paddingTop: '8rem',
         paddingBottom: '3rem',
     },
-    header: {
-    },
     title: {
         paddingBottom: '2rem',
         textAlign: 'left',
@@ -54,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     _divider:{
-        marginTop: '3rem',
+        marginTop: '1rem',
     },
 
     //for media buttons
@@ -74,7 +72,9 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             transform: 'scale(1.1)',
             transition: '0.7s',
-        } 
+        },
+        width: '6.5rem',
+        height: '4rem',
     },
 }));
 
@@ -110,7 +110,7 @@ export default function Search() {
 
     return (
         <div className={classes.background}>
-        <Container maxWidth="lg" className={classes.header}>
+        <Container maxWidth="lg">
             <Grid container spacing={1}>
                 <Grid item xs={9}>
                     <span className={classes.title}>검색하기</span>
@@ -129,17 +129,17 @@ export default function Search() {
                 </Grid>
                 <Grid item xs={3}>
                     <div className={classes.gridAlign}>
-                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#018DFF'}}
+                    <Fab variant="extended" className={classes.mediaBtn} style={{backgroundColor: '#018DFF'}}
                     onClick = {() => {setContent(<Music />)}}>
                         음악
                     </Fab>
-                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#FF4444'}}
+                    <Fab variant="extended" className={classes.mediaBtn} style={{backgroundColor: '#FF4444'}}
                     onClick = {() => {setContent(<Movie />)}}>
                         영화
                     </Fab>
-                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#1ABF80'}}
+                    <Fab variant="extended" className={classes.mediaBtn} style={{backgroundColor: '#1ABF80'}}
                     onClick = {() => {setContent(<Book />)}}>
-                        도서
+                        책
                     </Fab>
                     </div>
                 </Grid>

@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   //for movies
-  movie: {
+  book: {
     background: 'white',
     display: 'flex',
     justifyContent: 'space-between',
@@ -75,46 +75,45 @@ const useStyles = makeStyles(theme => ({
     }
   },
 
-  moviePoster: {
+  bookCover: {
     width: '80%',
     height: 'auto',
     maxWidth: '15rem',
     boxShadow: '0 8px 38px rgba(133, 133, 133, 0.3), 0 5px 12px rgba(133, 133, 133,0.22)',
     marginTop: '-1.5rem',       
   },
-  moviePosterAlign: {
+  bookCoverAlign: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
-  movieTitle: {
+  bookTitle: {
     fontSize: '2.2rem',
     fontWeight: '700',
     marginTop: '1rem',
   },
-  movieSubtitle: {
+  bookSubtitle: {
     fontSize: '1.6rem',
     fontWeight: '500',
     color: 'slategray',
     marginTop: '0.7rem',
   },
-  movieInfo: {
-    fontSize: '1.7rem',
+  bookInfo: {
+    fontSize: '1.5rem',
     fontWeight: '400',
     marginTop: '0.7rem',
     marginBottom: '0.7rem',
   },
-  movieYear: {
-    marginLeft: '0.5rem',
-    fontSize: '1.7rem',
-    fontWeight: '500',
-    color: 'grey',
+  bookDesc: {
+    fontSize: '1.5rem',
+    fontWeight: '400',
+    margin: '1rem 1rem 1rem 1rem',
   },
+
   menuItem: {
     fontSize: '1.7rem',
     fontWeight: '500',
   },
-
   guide: {
     fontSize: '1.8rem', 
     textAlign: 'center', 
@@ -124,30 +123,28 @@ const useStyles = makeStyles(theme => ({
   btn: {
     marginTop: '3rem',
     fontSize:'2rem',
-    background: '#FF4444',
+    background: '#1ABF80',
     color: 'white',
     transition: '0.7s',
     '&:hover': {
-        background: '#FF4444',
+        background: '#1ABF80',
         transform: 'scale(1.1)',
         transition: '0.7s',
     }
   },
 }));
 
-export default function MovieAdd() {
+export default function BookAdd() {
   var [search, setSearch] = useState("");
   var [isSearched, setIsSearched] = useState(false);
   var [searchResult, setSearchResult] = useState([]);
   var [form, setForm] = useState({
     title: "",
-    director: "",
+    author: "",
     category: 100,
     transmedia: 10000,
     imageURL: "",
-    actor: "",
-    userRating: "",
-    year: "",
+    description: "",
   });
   var [category, setCategory] = useState([]);
   var [transmedia, setTransmedia] = useState([]);
@@ -174,20 +171,20 @@ export default function MovieAdd() {
     e.preventDefault();
     console.log(search);
     setIsSearched(true);
-    searchMovie();
+    searchBook();
   }
 
-  const searchMovie = () => {
-    Axios.post('/api/movieSearchKeyword', {
+  const searchBook = () => {
+    Axios.post('/api/bookSearchKeyword', {
       keyword : search
     }).then(response => console.log(response))
       .catch(error => console.log(error));
     
-    getMovieSearchResult();
+    getBookSearchResult();
   }
 
-  const getMovieSearchResult = () => {
-    Axios.get('/api/movieSearch')
+  const getBookSearchResult = () => {
+    Axios.get('/api/bookSearch')
     .then(response => setSearchResult(response.data.items))
     .catch(err => console.log(err));
   }
@@ -207,17 +204,15 @@ export default function MovieAdd() {
     });
   }
 
-  const handleMovieSelect = (index) => {
+  const handleBookSelect = (index) => {
     console.log(index);
     if (searchResult) {
       setForm({
         ...form,
         title: removeBTags(searchResult[index].title),
-        director: searchResult[index].director,
+        author: searchResult[index].author,
         imageURL: searchResult[index].image,
-        actor: searchResult[index].actor,
-        userRating: searchResult[index].userRating,
-        year: searchResult[index].pubDate
+        description : removeBTags(searchResult[index].description)
       });
     }
   }
@@ -225,22 +220,20 @@ export default function MovieAdd() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    addMovie();
+    addBook();
   }
 
-  const addMovie = () => {
+  const addBook = () => {
     Axios({
       method: 'post',
-      url: 'api/movieAdd',
+      url: 'api/bookAdd',
       data: {
         title: form.title,
-        director: form.director,
+        author: form.author,
         categoryID: form.category,
         transmediaID: form.transmedia,
-        imageURL: form.imageURL,
-        actor: form.actor,
-        userRating: form.userRating,
-        year: form.year
+        imageURL: form.image,
+        description: form.description,
       }
     })
     .then((res) => console.log(res))
@@ -255,14 +248,14 @@ export default function MovieAdd() {
   return (
     <Card className={classes.card}>
       <div className={classes.title}>
-        영화를 추가합니다.
+        책을 추가합니다.
       </div>
       <Divider />
       <form noValidate autoComplete="off" className={classes.form} onSubmit={handleSearch}>
         <Paper component="form" className={classes.search} variant="outlined">
           <InputBase
           className={classes.input}
-          placeholder="영화 제목을 입력하세요."
+          placeholder="책 제목을 입력하세요."
           inputProps={{ 'aria-label': 'search' }}
           value={search}
           onChange={handleValueChange}
@@ -275,32 +268,37 @@ export default function MovieAdd() {
 
       {isSearched ? 
       <div className={classes.guide}>
-        네이버 영화 검색 결과입니다.<br />
-        영화를 선택하고 하단의 양식을 완성해주세요.</div> 
+        네이버 책 검색 결과입니다.<br />
+        책을 선택하고 하단의 양식을 완성해주세요.</div> 
       : ""}
 
       <Grid container spacing={4}>
         {searchResult ?
-          searchResult.map((movie, index) => {
+          searchResult.map((book, index) => {
             return (
-            <Grid item xs={12} md={6}>
-              <div className={classes.movie} key={index} onClick={() => handleMovieSelect(index)}>
-                <Grid item xs={4}>
-                  <div className={classes.moviePosterAlign}>
-                    <img className={classes.moviePoster} src={movie.image} title={removeBTags(movie.title)}/>
-                  </div>
+            <Grid item xs={12}>
+              <div className={classes.book} key={index} onClick={() => handleBookSelect(index)}>
+                <Grid item xs={4} md={2}>
+                <div className={classes.bookCoverAlign}>
+                    <img className={classes.bookCover} src={book.image} />
+                </div>
                 </Grid>
-                <Grid item xs={8}>
-                  <div className={classes.movieTitle}>
-                    {removeBTags(movie.title)}
-                    <span className={classes.movieYear}>{movie.year}</span>
-                  </div>
-                  <div className={classes.movieSubtitle}>
-                    <b>감독</b> {movie.director}<br />
-                    <b>출연</b> {movie.actor}<br />
-                    <b>평점</b> {movie.userRating}
-                  </div>
+                <Grid item xs={8} md={4}>
+                    <div className={classes.bookTitle}>
+                        {removeBTags(book.title)}
+                        </div>
+                    <div className={classes.bookSubtitle}>
+                        작가 | {book.author}<br />
+                    </div>
+                    <div className={classes.bookInfo}>
+                    </div>
                 </Grid>
+                <Grid item xs={12} md={6}>
+                    <div className={classes.bookDesc}>
+                        {removeBTags(book.description)}
+                    </div>
+                </Grid>
+                
               </div>
             </Grid>
           )}) : <div>error occurred</div>}
@@ -308,7 +306,7 @@ export default function MovieAdd() {
 
       {isSearched ? 
         <form noValidate autoComplete="off" className={classes.form} onSubmit={handleSubmit}>
-          <div><br/><br/>이 영화는 이런 영화입니다.</div>
+          <div><br/><br/>이 책은 이런 책입니다.</div>
           <Select labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={form.category}

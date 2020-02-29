@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import { Grid, Card, TextField} from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
+import Axios from 'axios';
 
 
 const useStyles = makeStyles(theme => ({
@@ -65,22 +66,41 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Login() {
+    var [createUser, setCreateUser] = useState({
+        userName : "",
+        userPassword: "",
+    });
+
     const InputProps = { style: {fontSize: '2rem'}};
     const InputLabelProps = { style: {fontSize: '1.7rem', color: 'primary'} }
     const InputLabelProps2 = { style: {fontSize: '1.7rem', color: 'secondary'} }
 
     const classes = useStyles();
-    const primary = "#2196F3"
+    const primary = "#2196F3";
 
-    const handleFormSubmit = (e) => {
-        e.preventDefault()
-        addUser()
-            .then((res) => {console.log(res.data)})
+    const handleCreateUserInput = (e) => {
+        e.preventDefault();
+        let nextState = createUser;
+        nextState[e.target.name] = e.target.value;
+        setCreateUser(nextState);
+    }
+
+    const handleCreateUserSubmit = (e) => {
+        e.preventDefault();
+        addUser();
     }
 
     const addUser = () => {
-        const url = '/api/users';
-        const formData = new FormData();
+        Axios({
+            method: 'post',
+            url:'/api/createUser',
+            data: {
+                userName : createUser.userName,
+                userPassword : createUser.userPassword
+            }
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
 
     return (
@@ -125,18 +145,21 @@ export default function Login() {
                         </div>
                         <Divider className={classes.loginDivider}/>
                         
-                        <form noValidate autoComplete="off" className={classes.login}
-                        onSubmit={handleFormSubmit}>
-                            <TextField id="outlined-basic" label="이름"
-                            inputProps={InputProps}
-                            InputLabelProps={InputLabelProps2}/><br />
+                        <form noValidate autoComplete="off" className={classes.login} onSubmit={handleCreateUserSubmit}>
+                            <TextField id="outlined-basic" label="이름" name="userName"
+                            InputProps={InputProps}
+                            InputLabelProps={InputLabelProps2}
+                            onChange={handleCreateUserInput}
+                            /><br />
                             <TextField
                                 id="standard-password-input"
                                 label="패스워드"
+                                name="userPassword"
                                 type="password"
                                 autoComplete="current-password"
                                 inputProps={InputProps}
                                 InputLabelProps={InputLabelProps2}
+                                onChange={handleCreateUserInput}
                             />
                             <Fab variant="extended" className={classes.btn} type="submit"
                             style={{background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',

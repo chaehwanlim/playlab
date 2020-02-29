@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     },
     movieSubtitle: {
         fontSize: '1.6rem',
-        fontWeight: '500',
+        fontWeight: '400',
         color: 'slategray',
         marginTop: '0.7rem',
     },
@@ -103,14 +103,14 @@ export default function Movie() {
                                     <span className={classes.movieYear}>{movie.year}</span>
                                 </div>
                                 <div className={classes.movieSubtitle}>
-                                    감독 | {movie.director}<br />
-                                    출연 | {movie.actor}<br />
-                                    트랜스미디어 | {movie.transmediaName}<br />
-                                    평점 | {movie.userRating}
+                                    <b>감독</b>  {movie.director}<br />
+                                    <b>출연</b>  {movie.actor}<br />
+                                    <b>평점</b>  {movie.userRating}<br />
+                                    <b>트랜스미디어</b>  {movie.transmediaName}
                                 </div>
                                 <div className={classes.movieInfo}>
-                                    <b>{movie.userName}</b> 님이 이 영화를<br />
-                                    <b>{movie.categoryName}</b> 영화로 선택했습니다.<br />
+                                    <b>{movie.userName}</b> 님이 이 영화는<br />
+                                    <b>{movie.categoryName}</b> 영화라고 합니다.<br />
                                 </div>
                             </Grid>
                         </div>

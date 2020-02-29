@@ -13,6 +13,9 @@ const useStyles = makeStyles(theme => ({
     card: {
         marginTop: '2rem',
         fontSize: '1.7rem',
+        paddingLeft: '1.5rem',
+        paddingRight: '1.5rem',
+        paddingBottom: '3rem',
     },
     title: {
         fontSize: '2.2rem',
@@ -27,10 +30,14 @@ const useStyles = makeStyles(theme => ({
         marginTop: '1.5rem',
         marginBottom: '3rem',
     },
-    select: {
+    /* select: {
         fontSize: '1.7rem',
         textAlign: 'left',
         color: 'black',
+    }, */
+    menuItem: {
+        fontSize: '1.7rem',
+        fontWeight: '400',
     },
     btn: {
         marginTop: '3rem',
@@ -44,10 +51,7 @@ const useStyles = makeStyles(theme => ({
             transition: '0.7s',
         }
     },
-    menuItem: {
-        fontSize: '1.7rem',
-        textAlign: 'center',
-    }
+    
 }));
 
 export default function MusicAdd() {
@@ -96,7 +100,7 @@ export default function MusicAdd() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(form);
-        addMusic()
+        addMusic();
     }  
 
     const addMusic = () => {
@@ -149,13 +153,12 @@ export default function MusicAdd() {
                     inputProps={InputProps} InputLabelProps={InputLabelProps}
                     onChange={handleInput} /><br />
 
-                <InputLabel id="demo-simple-select-label">느낌</InputLabel>
+                {/* <InputLabel id="demo-simple-select-label">느낌</InputLabel> */}
+                <div style={{fontWeight: "300"}}>이 음악은 이런 음악이예요.</div>
                 <Select labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={form.category}
                     onChange={handleCategory}
-                    classes={classes.select}
-                    inputProps={InputProps}
                     name="category"
                     style={{fontSize: '1.7rem'}}>
                     {category ? category.map(cat => {
@@ -164,16 +167,16 @@ export default function MusicAdd() {
                                 {cat.categoryName}</MenuItem>
                         )
                     }) : "error occured"}
-                </Select>
+                </Select><br />
 
-                <InputLabel id="demo-simple-select-label">트랜스미디어</InputLabel>
+                {/* <InputLabel id="demo-simple-select-label">트랜스미디어</InputLabel> */}
+                <div style={{fontWeight: "300"}}>트랜스미디어</div>
                 <Select labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={form.transmedia}
                     onChange={handleTransmedia}
-                    classes={classes.select}
-                    inputProps={InputProps}
-                    name="transmedia">
+                    name="transmedia"
+                    style={{fontSize: '1.7rem'}}>
                     {transmedia ? transmedia.map(trans => {
                         return (
                             <MenuItem value={trans.transmediaID} className={classes.menuItem}>

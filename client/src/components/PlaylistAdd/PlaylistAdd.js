@@ -11,15 +11,13 @@ import Fab from '@material-ui/core/Fab';
 
 import MusicAdd from './MusicAdd';
 import MovieAdd from './MovieAdd';
+import BookAdd from './BookAdd';
 
 const useStyles = makeStyles(theme => ({
     background: {
         transitionDuration : '0.8s',
         paddingTop: '8rem',
         paddingBottom: '3rem',
-    },
-    header: {
-        textAlign: 'left',
     },
     title: {
 /*         paddingBottom: '2rem', */
@@ -35,8 +33,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     _divider:{
-        
-        marginTop: '2rem',
+        marginTop: '1rem',
     },
 
     //for media buttons
@@ -56,7 +53,9 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             transform: 'scale(1.1)',
             transition: '0.7s',
-        } 
+        },
+        width: '6.5rem',
+        height: '4rem',
     },
 }));
 
@@ -81,14 +80,14 @@ export default function PlaylistAdd() {
     const handleBook = (e) => {
         e.preventDefault();
         setTitles({title: "내가 읽은 책 추가하기", subtitle: "네이버 책에서 검색하여 추가하세요."})
-        setMediaAdd(<div />)
+        setMediaAdd(<BookAdd />)
     }
 
     const classes = useStyles();
 
     return (
         <div className={classes.background}>
-        <Container maxWidth="lg" className={classes.header}>
+        <Container maxWidth="lg">
             <Grid container spacing={1}>
                 <Grid item xs={9}>
                     <header className={classes.title}>{titles.title}</header>
@@ -96,17 +95,17 @@ export default function PlaylistAdd() {
                 </Grid>
                 <Grid item xs={3}>
                     <div className={classes.gridAlign}>
-                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#018DFF'}}
+                    <Fab variant="extended" className={classes.mediaBtn} style={{backgroundColor: '#018DFF'}}
                     onClick = {handleMusic}>
                         음악
                     </Fab>
-                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#FF4444'}}
+                    <Fab variant="extended" className={classes.mediaBtn} style={{backgroundColor: '#FF4444'}}
                     onClick = {handleMovie}>
                         영화
                     </Fab>
-                    <Fab variant="extended" size="medium" className={classes.mediaBtn} style={{backgroundColor: '#1ABF80'}}
+                    <Fab variant="extended" className={classes.mediaBtn} style={{backgroundColor: '#1ABF80'}}
                     onClick = {handleBook}>
-                        도서
+                        책
                     </Fab>
                     </div>
                 </Grid>

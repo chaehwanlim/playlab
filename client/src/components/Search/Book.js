@@ -60,18 +60,6 @@ const useStyles = makeStyles({
         fontWeight: '400',
         margin: '1rem 1rem 1rem 1rem',
     },
-    bookYear: {
-        marginLeft: '0.5rem',
-        fontSize: '1.7rem',
-        fontWeight: '500',
-        color: 'grey',
-    },
-    bookRating: {
-        marginLeft: '8px',
-        fontSize: '1.7rem',
-        fontWeight: '500',
-        color: 'orange',
-    }
 })
 
 
@@ -95,18 +83,18 @@ export default function Book() {
 
     return (
         <div>
-            <div className={classes.title}>도서</div>
+            <div className={classes.title}>책</div>
             <Grid container spacing={8}>
             {bookDB ? bookDB.map(book => {
                 return (
-                    <Grid item sm={12}>
+                    <Grid item xs={12}>
                         <div className={classes.book}>
-                            <Grid item xs={4} sm={2}>
+                            <Grid item xs={4} md={2}>
                             <div className={classes.bookCoverAlign}>
                                 <img className={classes.bookCover} src={book.imageURL} />
                             </div>
                             </Grid>
-                            <Grid item xs={8} sm={4}>
+                            <Grid item xs={8} md={4}>
                                 <div className={classes.bookTitle}>
                                     {book.title}
                                     <span className={classes.bookYear}>{book.year}</span>
@@ -117,11 +105,11 @@ export default function Book() {
                                     트랜스미디어 | {book.transmediaName}<br />
                                 </div>
                                 <div className={classes.bookInfo}>
-                                    <b>{book.userName}</b> 님이 이 도서를<br />
-                                    <b>{book.categoryName}</b> 도서로 선택했습니다.<br />
+                                    <b>{book.userName}</b> 님이 이 책은<br />
+                                    <b>{book.categoryName}</b> 책이라고 합니다.<br />
                                 </div>
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} md={6}>
                                 <div className={classes.bookDesc}>
                                     {removeTags(book.description)}
                                 </div>

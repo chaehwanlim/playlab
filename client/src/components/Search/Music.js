@@ -50,7 +50,7 @@ const useStyles = makeStyles({
 const attributes = [
     { id: 'title&artist', label: '제목 및 아티스트', minWidth: 100 },
     /* { id: 'artist', label: '아티스트', minWidth: 200 }, */
-    { id: 'category', label: '기분', minWidth: 65 },
+    { id: 'category', label: '기분', minWidth: 50 },
     { id: 'transmedia', label: '연관', minWidth: 50 },
     { id: 'genre', label: '장르', minWidth: 50 },
     { id: 'adder', label: '등록', minWidth: 50 },

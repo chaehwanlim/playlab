@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     background: 'transparent',
-    filter: 'brightness(80%)',
+    filter: 'brightness(90%)',
     position: 'fixed',
     boxShadow: 'none',
     backdropFilter: 'blur(2px)',
@@ -81,7 +81,7 @@ export default function _AppBar() {
           <IconButton style={{color: adaptColor}}><AddIcon style={{fontSize: '2.2rem'}}/></IconButton>
         </Link>
         <Link to="/Login" onClick={() => {setColor('black')}}>
-          <IconButton style={{color: adaptColor, marginRight:'0rem'}}><AccountCircle style={{fontSize: '2.2rem'}}/></IconButton>
+          <IconButton style={{color: adaptColor, marginRight:'-1.5rem'}}><AccountCircle style={{fontSize: '2.2rem'}}/></IconButton>
         </Link>
 
       </Toolbar>

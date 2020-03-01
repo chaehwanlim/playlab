@@ -7,7 +7,8 @@ import Fab from '@material-ui/core/Fab';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import Axios, { post } from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -116,6 +117,7 @@ export default function MusicAdd() {
             }
         })
         .then((res) => console.log(res))
+        .then((res) => alert('음악을 정상적으로 추가했습니다!'))
         .catch((err) => console.log(err));
 
         initializeForm();

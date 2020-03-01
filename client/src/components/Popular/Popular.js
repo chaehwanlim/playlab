@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/SearchRounded';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
-
-import MusicAdd from './MusicAdd';
-import MovieAdd from './MovieAdd';
-import BookAdd from './BookAdd';
+import MusicPopular from './MusicPopular';
+import MoviePopular from './MoviePopular';
+import BookPopular from './BookPopular'; 
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -36,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     //for media buttons
-    gridAlign: {
+    gridAlign: {       
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
@@ -58,39 +53,48 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function PlaylistAdd() {
+export default function Popular() {
     var [content, setContent] = useState({
-        title: "내가 감상한 영화 추가하기",
-        component: <MovieAdd />,
-        subtitle: "영화의 제목, 출연 배우, 등록한 유저 이름으로 검색하세요."
+        title: "영화 인기 차트",
+        component: <MoviePopular />
     });
+    var [category, setCategory] = useState([]);
+    var [transmedia, setTransmedia] = useState([]);
+
+    const classes = useStyles();
+
+    useEffect(() => {
+        fetch('/api/categoryDB')
+          .then(res => res.json())
+          .then(res => setCategory(res))
+          .catch(err => console.log(err))
+        fetch('/api/transmediaDB')
+          .then(res => res.json())
+          .then(res => setTransmedia(res))
+          .catch(err => console.log(err))
+    }, []);
 
     const handleMusic = (e) => {
         e.preventDefault();
         setContent({
-            title: "내가 들은 음악 추가하기",
-            component: <MusicAdd />,
-            subtitle: "직접 음악 정보를 입력하여 추가하세요."
+            title: "음악 인기 차트",
+            component: <MusicPopular />
         })
     }
     const handleMovie = (e) => {
         e.preventDefault();
         setContent({
-            title: "내가 감상한 영화 추가하기",
-            component: <MovieAdd />,
-            subtitle: "네이버 영화에서 검색하여 추가하세요."
+            title: "영화 인기 차트",
+            component: <MoviePopular />
         })
     }
     const handleBook = (e) => {
         e.preventDefault();
         setContent({
-            title: "내가 읽은 책 추가하기",
-            component: <BookAdd />,
-            subtitle: "네이버 책에서 검색하여 추가하세요."
+            title: "책 인기 차트",
+            component: <BookPopular />
         })
     }
-
-    const classes = useStyles();
 
     return (
         <div className={classes.background}>
@@ -98,7 +102,7 @@ export default function PlaylistAdd() {
             <Grid container spacing={1}>
                 <Grid item xs={9}>
                     <header className={classes.title}>{content.title}</header>
-                    <p className={classes.subtitle}>{content.subtitle}</p>
+                    <p className={classes.subtitle}>인기 차트를 통해 취향에 맞는 작품을 찾아보세요.</p>
                 </Grid>
                 <Grid item xs={3}>
                     <div className={classes.gridAlign}>
@@ -122,7 +126,6 @@ export default function PlaylistAdd() {
         <Container maxWidth="lg">
             {content.component}
         </Container>
-            
         </div>
     )
 }

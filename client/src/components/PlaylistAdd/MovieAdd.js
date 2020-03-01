@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fab from '@material-ui/core/Fab';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
@@ -50,7 +51,11 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    fontWeight: '300'
+    fontWeight: '300',
+  },
+  form2: {
+    display: 'relative',
+    fontWeight: '300',
   },
 
   //for movies
@@ -123,13 +128,13 @@ const useStyles = makeStyles(theme => ({
   },
   btn: {
     marginTop: '3rem',
-    fontSize:'2rem',
+    fontSize: '2rem',
     background: '#FF4444',
     color: 'white',
     transition: '0.7s',
     '&:hover': {
         background: '#FF4444',
-        transform: 'scale(1.1)',
+        transform: 'scale(1.06)',
         transition: '0.7s',
     }
   },
@@ -244,6 +249,7 @@ export default function MovieAdd() {
       }
     })
     .then((res) => console.log(res))
+    .then((res) => alert("영화를 정상적으로 추가했습니다!"))
     .catch((err) => console.log(err));
   }
 
@@ -303,33 +309,34 @@ export default function MovieAdd() {
                 </Grid>
               </div>
             </Grid>
-          )}) : <div>error occurred</div>}
+          )}) : <CircularProgress color='secondary'/>}
       </Grid>
-
+      
       {isSearched ? 
         <form noValidate autoComplete="off" className={classes.form} onSubmit={handleSubmit}>
-          <div><br/><br/>이 영화는 이런 영화입니다.</div>
-          <Select labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={form.category}
-            onChange={handleCategory}
-            name="category"
-            style={{fontSize: '1.7rem'}}>
-            {category ? category.map(cat => {
-              return (
-                <MenuItem value={cat.categoryID} className={classes.menuItem}>
-                  {cat.categoryName}</MenuItem>
-              )
-            }) : "error occured"}
-          </Select><br />
+          <div className={classes.form2}><br/><br/>이 영화는 &nbsp;
+            <Select labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={form.category}
+              onChange={handleCategory}
+              name="category"
+              style={{fontSize: '1.7rem', fontWeight: '500'}}>
+              {category ? category.map(cat => {
+                return (
+                  <MenuItem value={cat.categoryID} className={classes.menuItem}>
+                    {cat.categoryName}</MenuItem>
+                )
+              }) : "error occured"}
+            </Select>
+          &nbsp;영화입니다.</div><br />
 
-          <div>트랜스미디어</div>
+          <div >트랜스미디어</div>
           <Select labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={form.transmedia}
             onChange={handleTransmedia}
             name="transmedia"
-            style={{fontSize: '1.7rem'}}>
+            style={{fontSize: '1.7rem', fontWeight: '500'}}>
             {transmedia ? transmedia.map(trans => {
               return (
                 <MenuItem value={trans.transmediaID} className={classes.menuItem}>

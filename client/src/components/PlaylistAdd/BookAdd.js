@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fab from '@material-ui/core/Fab';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
@@ -237,6 +238,7 @@ export default function BookAdd() {
       }
     })
     .then((res) => console.log(res))
+    .then((res) => alert('책을 정상적으로 추가했습니다!'))
     .catch((err) => console.log(err));
   }
 

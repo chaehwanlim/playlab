@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 //routing 1 : query의 결과를 musicDB path에 전송
-app.get('/api/musicDB', (req, res) => {
+app.get('/api/musicDB/', (req, res) => {
     dbConnection.query(
         "SELECT title, artist, genre, c.categoryName, u.userName, t.transmediaName \
         FROM music AS m \
@@ -216,6 +216,11 @@ app.post('/api/createUser', (req, res) => {
     );
 });
 
+///////인기 차트
+app.get('/api/musicPopular', (req, res) => {
+    let sql = 'SELECT '
+})
+
 app.listen(port, () => {
-    console.log('listening on port 3000');
+    console.log(`listening on port ${port}`);
 });

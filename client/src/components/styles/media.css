@@ -1,0 +1,7 @@
+@media screen and (max-width: 767px) {
+  #music {display: none;}
+}
+
+@media screen and (min-width: 768px) {
+  #music {display: block;}
+}

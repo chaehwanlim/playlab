@@ -1,15 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/SearchRounded';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
-    title: {
-        transitionDuration: '0.8s',
-        fontSize: '2.5rem',
-        fontWeight: '900',
-        marginTop: '2rem',
-        marginBottom: '4rem',
-        color: '#FF4444',
+    search: {
+        marginTop: '1.5rem',
+        marginBottom: '3rem',
+        paddingLeft: '1rem',
+        position: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        width: 'auto',
+        transition: '0.5s',
+        '&:hover': {
+            transform: 'scale(1.01)',
+            transition: '0.7s',
+        } 
+    },
+    input: {
+        padding: '0.5rem',
+        flex: 1,
+        fontSize: '1.8rem',
+        fontWeight: '700',
+    },
+    iconButton: {
+        padding: 10,
     },
     movie: {
         background: 'white',
@@ -74,6 +93,7 @@ const useStyles = makeStyles({
 
 export default function Movie() {
     var [movieDB, setMovieDB] = useState([]);
+    var [searchKeyword, setSearchKeyword] = useState("");
 
     useEffect(() => {
         fetch('/api/movieDB')
@@ -82,40 +102,71 @@ export default function Movie() {
             .catch(err => console.log(err))
     }, []);
 
+    const handleValueChange = (e) => {
+        setSearchKeyword(e.target.value);
+    }
+
+    const handleClick = event => {
+        event.preventDefault();
+    }
+
+    const filterData = (data) => {
+        data = data.filter((datum) => {
+            return (
+                (datum.title.indexOf(searchKeyword) > -1) ||
+                (datum.actor.indexOf(searchKeyword) > -1) ||
+                (datum.userName.indexOf(searchKeyword) > -1)
+            );
+        });
+        return data.map(datum => {
+            return (
+                <Grid item xs={12} md={6}>
+                    <div className={classes.movie}>
+                        <Grid item xs={4}>
+                        <div className={classes.moviePosterAlign}>
+                            <img className={classes.moviePoster} src={datum.imageURL} title={datum.title} alt="영화 포스터 이미지를 불러오는 데 오류가 발생했습니다."/>
+                        </div>
+                        </Grid>
+                        <Grid item xs={8}>
+                            <div className={classes.movieTitle}>
+                                {datum.title}
+                                <span className={classes.movieYear}>{datum.year}</span>
+                            </div>
+                            <div className={classes.movieSubtitle}>
+                                <b>감독</b>  {datum.director}<br />
+                                <b>출연</b>  {datum.actor}<br />
+                                <b>평점</b>  {datum.userRating}<br />
+                                <b>트랜스미디어</b>  {datum.transmediaName}
+                            </div>
+                            <div className={classes.movieInfo}>
+                                <b>{datum.userName}</b> 님의<br />
+                                <b>{datum.categoryName}</b> 영화입니다.<br />
+                            </div>
+                        </Grid>
+                    </div>
+                </Grid>
+            );
+        });
+    }
+
     const classes = useStyles();
 
     return (
         <div>
-            <div className={classes.title}>영화</div>
+            <Paper component="form" className={classes.search} onSubmit={handleClick}>
+                <InputBase
+                    className={classes.input}
+                    placeholder="검색할 내용을 입력하세요"
+                    inputProps={{ 'aria-label': 'searchKeyword' }}
+                    value={searchKeyword}
+                    onChange={handleValueChange}
+                />
+                <IconButton type="submit" className={classes.iconButton} aria-label="searchKeyword">
+                    <SearchIcon />
+                </IconButton>
+            </Paper>
             <Grid container spacing={4}>
-            {movieDB ? movieDB.map(movie => {
-                return (
-                    <Grid item xs={12} md={6}>
-                        <div className={classes.movie}>
-                            <Grid item xs={4}>
-                            <div className={classes.moviePosterAlign}>
-                                <img className={classes.moviePoster} src={movie.imageURL} title={movie.title} alt="영화 포스터 이미지를 불러오는 데 오류가 발생했습니다."/>
-                            </div>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <div className={classes.movieTitle}>
-                                    {movie.title}
-                                    <span className={classes.movieYear}>{movie.year}</span>
-                                </div>
-                                <div className={classes.movieSubtitle}>
-                                    <b>감독</b>  {movie.director}<br />
-                                    <b>출연</b>  {movie.actor}<br />
-                                    <b>평점</b>  {movie.userRating}<br />
-                                    <b>트랜스미디어</b>  {movie.transmediaName}
-                                </div>
-                                <div className={classes.movieInfo}>
-                                    <b>{movie.userName}</b> 님이 이 영화는<br />
-                                    <b>{movie.categoryName}</b> 영화라고 합니다.<br />
-                                </div>
-                            </Grid>
-                        </div>
-                    </Grid>
-            )}) : <span>error occured</span>}
+            {movieDB ? filterData(movieDB) : <span>error occured</span>}
             </Grid>
         </div>
     )

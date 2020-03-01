@@ -6,7 +6,7 @@ import AddIcon from '@material-ui/icons/AddRounded';
 import StarIcon from '@material-ui/icons/StarRounded';
 import SearchIcon from '@material-ui/icons/SearchRounded';
 import Grid from '@material-ui/core/Grid';
-import '../styles/Home.css';
+import './styles/Home.css';
 
 
 const useStyles = makeStyles(theme => ({

@@ -73,7 +73,7 @@ export default function Login() {
 
     const InputProps = { style: {fontSize: '2rem'}};
     const InputLabelProps = { style: {fontSize: '1.7rem', color: 'primary'} }
-    const InputLabelProps2 = { style: {fontSize: '1.7rem', color: 'secondary'} }
+    const InputLabelProps2 = { style: {fontSize: '1.7rem', color: "secondary"} }
 
     const classes = useStyles();
     const primary = "#2196F3";
@@ -100,6 +100,7 @@ export default function Login() {
             }
         })
         .then((res) => console.log(res))
+        .then((res) => alert('회원가입을 축하드립니다!'))
         .catch((err) => console.log(err));
     }
 

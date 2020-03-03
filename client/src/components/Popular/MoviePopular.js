@@ -89,10 +89,6 @@ const useStyles = makeStyles({
     fontWeight: '500',
     color: 'grey',
   },
-  menuItem: {
-    fontSize: '1.7rem',
-    fontWeight: '500',
-  },
 
 });
 

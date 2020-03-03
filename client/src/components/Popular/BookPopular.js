@@ -88,11 +88,6 @@ const useStyles = makeStyles({
     fontWeight: '400',
     margin: '1rem 1rem 1rem 1rem',
   },
-
-  menuItem: {
-    fontSize: '1.7rem',
-    fontWeight: '500',
-  },
 });
 
 export default function BookPopular() {

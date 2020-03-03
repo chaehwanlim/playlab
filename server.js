@@ -19,20 +19,24 @@ const dbConnection = mysql.createConnection({
 });
 dbConnection.connect();
 
+/* //Gzip압축 사용
+app.use(express.compress()); */
 //request.body에 오는 데이터를 json 형식으로 변환
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 //request.body에 대한 url encoding을 확장할 수 있도록 true option 설정
 app.use(bodyParser.urlencoded({extended: true}));
 
+//////////Router
 
 //routing 1 : query의 결과를 musicDB path에 전송
-app.get('/api/musicDB/', (req, res) => {
+app.get('/api/musicDB', (req, res) => {
     dbConnection.query(
         "SELECT title, artist, genre, c.categoryName, u.userName, t.transmediaName \
         FROM music AS m \
         LEFT OUTER JOIN category AS c ON (c.categoryID = m.categoryID) \
         LEFT OUTER JOIN users AS u ON (u.userID = m.adderID) \
-        LEFT OUTER JOIN transmedia AS t ON (t.transmediaID = m.transmediaID);",
+        LEFT OUTER JOIN transmedia AS t ON (t.transmediaID = m.transmediaID) \
+        WHERE m.isDeleted = 0;",
         (err, rows, fields) => {
             res.send(rows);
         }
@@ -41,11 +45,12 @@ app.get('/api/musicDB/', (req, res) => {
 
 app.get('/api/movieDB', (req, res) => {
     dbConnection.query(
-        "SELECT title, director, genre, c.categoryName, u.userName, t.transmediaName, m.imageURL, m.actor, m.year, m.userRating\
+        "SELECT title, director, genre, c.categoryName, u.userName, t.transmediaName, m.imageURL, m.actor, m.year, m.userRating \
         FROM movie AS m \
         LEFT OUTER JOIN category AS c ON (c.categoryID = m.categoryID) \
         LEFT OUTER JOIN users AS u ON (u.userID = m.adderID) \
-        LEFT OUTER JOIN transmedia AS t ON (t.transmediaID = m.transmediaID);",
+        LEFT OUTER JOIN transmedia AS t ON (t.transmediaID = m.transmediaID) \
+        WHERE m.isDeleted = 0;",
         (err, rows, fields) => {
             res.send(rows);
         }
@@ -58,7 +63,8 @@ app.get('/api/bookDB', (req, res) => {
         FROM book AS b \
         LEFT OUTER JOIN category AS c ON (c.categoryID = b.categoryID) \
         LEFT OUTER JOIN users AS u ON (u.userID = b.adderID) \
-        LEFT OUTER JOIN transmedia AS t ON (t.transmediaID = b.transmediaID);",
+        LEFT OUTER JOIN transmedia AS t ON (t.transmediaID = b.transmediaID) \
+        WHERE b.isDeleted = 0;",
         (err, rows, fields) => {
             res.send(rows);
         }
@@ -148,11 +154,10 @@ app.get('/api/bookSearch', (req, res) => {
     });
 });
 
-//post
-const multer = require('multer');
+//post: 읽어서 sql 보내기
 
 app.post('/api/musicAdd', (req, res) => {
-    let sql = "INSERT INTO music VALUES (NULL, ?, ?, ?, 1001, ?, ?);"
+    let sql = "INSERT INTO music VALUES (NULL, ?, ?, ?, 1001, ?, ?, 0);"
     let title = req.body.title;
     let artist = req.body.artist;
     let genre = req.body.genre;
@@ -168,7 +173,7 @@ app.post('/api/musicAdd', (req, res) => {
 });
 
 app.post('/api/movieAdd', (req, res) => {
-    let sql = "INSERT INTO movie VALUES (NULL, ?, ?, NULL, 1001, ?, ?, ?, ?, ?, ?);"
+    let sql = "INSERT INTO movie VALUES (NULL, ?, ?, NULL, 1001, ?, ?, ?, ?, ?, ?, 0);"
     let title = req.body.title;
     let director = req.body.director;
     let categoryID = req.body.categoryID;
@@ -187,7 +192,7 @@ app.post('/api/movieAdd', (req, res) => {
 });
 
 app.post('/api/bookAdd', (req, res) => {
-    let sql = "INSERT INTO book VALUES (NULL, ?, ?, NULL, 1001, ?, ?, ?, ?);"
+    let sql = "INSERT INTO book VALUES (NULL, ?, ?, NULL, 1001, ?, ?, ?, ?, 0);"
     let title = req.body.title;
     let author = req.body.author;
     let categoryID = req.body.categoryID;
@@ -203,7 +208,13 @@ app.post('/api/bookAdd', (req, res) => {
     );
 });
 
-app.post('/api/createUser', (req, res) => {
+///////인기 차트
+app.get('/api/musicPopular', (req, res) => {
+    let sql = 'SELECT ';
+})
+
+/////회원가입
+app.post('/api/register', (req, res) => {
     let sql = 'INSERT INTO users VALUES (NULL, ?, NULL, ?);'
     let userName = req.body.userName;
     let userPassword = req.body.userPassword;
@@ -216,9 +227,108 @@ app.post('/api/createUser', (req, res) => {
     );
 });
 
-///////인기 차트
-app.get('/api/musicPopular', (req, res) => {
-    let sql = 'SELECT '
+///////세션 구현
+const session = require('express-session'); //세션 미들웨어 설치
+const dbStore = require('express-mysql-session')(session);  //세션 저장소로 mysql 사용
+app.use(session({
+    secret: '83n4h312j40231sd0a1',
+    resave: false,
+    saveUninitialized: true,
+    store: new dbStore({
+        host: dbAndApi.mysql.host,
+        user: dbAndApi.mysql.user,
+        password: dbAndApi.mysql.password,
+        port: dbAndApi.mysql.port,
+        database: dbAndApi.mysql.database
+    })
+}));
+
+app.post('/api/login_process', (req, res) => {
+    let sql = 'SELECT * FROM users WHERE userName = ?';
+    let userName = req.body.userName;
+    let userPassword = req.body.userPassword;
+    /* console.log(req.body.userName); */
+    dbConnection.query(sql, [userName], 
+        (err, results, fields) => {
+            if (err) {
+                res.send({"code" : 400, "failed": "로그인에 실패했습니다. 새로고침 해주세요."});
+            } else {
+                if(results.length > 0) {
+                    if(results[0].userPassword === userPassword) {
+                        req.session.is_logined = true;
+                        req.session.userName = userName;
+                        req.session.save(() => {
+                            res.send({"code" : 200, "success": "로그인을 성공했습니다!"});
+                            
+                        });
+                    } else {
+                        res.send({"code": 204, "success" : "비밀번호가 올바르지 않습니다."});
+                    }
+                } else {
+                    res.send({"code": 204, "success" : "존재하지 않는 아이디입니다."});
+                }
+            }
+        }
+    )
+})
+
+
+
+
+//프로필
+app.post('/api/myPage/', (req, res) => {
+    let sql = 'SELECT * FROM users WHERE userName = ?';
+    let userName = req.body.userName;
+    dbConnection.query(sql, [userName],
+        (err, results, fields) => {
+            if (err)
+                console.log(err)
+            else {
+                res.send(results);
+            }
+        }
+    );
+})
+
+app.post('/api/myPage/music', (req, res) => {
+    let sql = "SELECT musicID, title, artist, c.categoryName, u.userName \
+    FROM music AS m \
+    LEFT OUTER JOIN category AS c ON (c.categoryID = m.categoryID) \
+    LEFT OUTER JOIN users AS u ON (u.userID = m.adderID) \
+    LEFT OUTER JOIN transmedia AS t ON (t.transmediaID = m.transmediaID) \
+    WHERE (u.userName = ?) AND (m.isDeleted = 0);"
+    let userName = req.body.userName;
+    dbConnection.query(sql, [userName],
+        (err, results, fields) => {
+            if (err)
+                console.log(err)
+            else {
+                res.send(results);
+            }
+        }
+    );
+})
+
+app.delete('/api/myPage/music/delete/:id', (req, res) => {
+    let sql = 'UPDATE music SET isDeleted = 1 WHERE id = ?';
+    let params = [req.params.id];
+    dbConnection.query(sql, params, 
+        (err, results, fields) => {
+            if (err)
+                console.log(err)
+            else {
+                res.send(results);
+            }
+        }
+    );
+})
+
+app.get('/api/logout', (req, res) => {
+    delete req.session.is_logined;
+    delete req.session.userName;
+    req.session.save(() => {
+        res.clearCookie();
+    })
 })
 
 app.listen(port, () => {

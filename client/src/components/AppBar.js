@@ -80,7 +80,7 @@ export default function _AppBar() {
         <Link to="/PlaylistAdd" onClick={() => {setColor('black')}}>
           <IconButton style={{color: adaptColor}}><AddIcon style={{fontSize: '2.2rem'}}/></IconButton>
         </Link>
-        <Link to="/Login" onClick={() => {setColor('black')}}>
+        <Link to="/MyPage" onClick={() => {setColor('black')}}>
           <IconButton style={{color: adaptColor, marginRight:'-1.5rem'}}><AccountCircle style={{fontSize: '2.2rem'}}/></IconButton>
         </Link>
 

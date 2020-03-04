@@ -7,6 +7,7 @@ import Fab from '@material-ui/core/Fab';
 import Music from './Music';
 import Movie from './Movie';
 import Book from './Book';
+import Footer from '../footer';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -117,6 +118,7 @@ export default function Search() {
         <Container maxWidth="lg">
             {content.component}
         </Container>
+        <Footer />
         </div>
     )
 }

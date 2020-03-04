@@ -12,6 +12,7 @@ import Axios from 'axios';
 import MyMusic from './MyMusic';
 import MyMovie from './MyMovie';
 import MyBook from './MyBook';
+import Footer from '../footer';
 
 const useStyles = makeStyles(theme => ({
   background: {
@@ -206,8 +207,8 @@ export default function MyPage() {
   return (
     <div>
       {(user === '') ? <Login /> : myPage()}
+      <Footer />
     </div>
-    
     
   )
 }

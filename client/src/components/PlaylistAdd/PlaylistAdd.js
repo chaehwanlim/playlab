@@ -8,6 +8,7 @@ import Fab from '@material-ui/core/Fab';
 import MusicAdd from './MusicAdd';
 import MovieAdd from './MovieAdd';
 import BookAdd from './BookAdd';
+import Footer from '../footer';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -118,7 +119,7 @@ export default function PlaylistAdd() {
         <Container maxWidth="lg">
             {content.component}
         </Container>
-            
+            <Footer />
         </div>
     )
 }

@@ -7,6 +7,7 @@ import Fab from '@material-ui/core/Fab';
 import MusicPopular from './MusicPopular';
 import MoviePopular from './MoviePopular';
 import BookPopular from './BookPopular'; 
+import Footer from '../footer';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -113,6 +114,7 @@ export default function Popular() {
         <Container maxWidth="lg">
             {content.component}
         </Container>
+        <Footer />
         </div>
     )
 }

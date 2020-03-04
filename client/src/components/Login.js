@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import { Grid, Card, TextField } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import Axios from 'axios';
-import store from '../store';
+import store from './store';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -74,14 +74,12 @@ export default function Login() {
         userName: "",
         userPassword: "",
     });
-    var [isLogined, setIsLogined] = useState(false);
 
     const InputProps = { style: { fontSize: '2rem' } };
     const InputLabelProps = { style: { fontSize: '1.7rem', color: 'primary' } }
     const InputLabelProps2 = { style: { fontSize: '1.7rem', color: "secondary" } }
 
     const classes = useStyles();
-    const primary = "#2196F3";
 
     const handleLoginInput = (e) => {
         e.preventDefault();
@@ -104,13 +102,14 @@ export default function Login() {
         })
         .then((res) => {
             alert(res.data.success);
-            if (res.data.code == 200) {
+            if (res.data.code === 200) {
+                console.log(res.data)
                 store.dispatch({ type: 'LOGINED', userName: login.userName });
                 sessionStorage.setItem('userName', login.userName);
+                sessionStorage.setItem('userID', res.data.userID);
             }
             window.location.assign('/MyPage');
         })
-        .then(() => setIsLogined(true))
         .catch((err) => console.log(err));
     }
 
@@ -137,7 +136,6 @@ export default function Login() {
             }
         })
         .then((res) => alert('회원가입을 축하드립니다!'))
-        .then(() => setIsLogined(true))
         .catch((err) => console.log(err));
     }
 

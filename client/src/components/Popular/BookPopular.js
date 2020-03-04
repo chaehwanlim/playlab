@@ -4,6 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import ThumbUp from '@material-ui/icons/ThumbUp';
+import Axios from 'axios';
 
 const useStyles = makeStyles({
   orderFilter: {
@@ -70,6 +73,8 @@ const useStyles = makeStyles({
     fontSize: '2.2rem',
     fontWeight: '700',
     marginTop: '1rem',
+    display: 'flex',
+    alignItems:'center',
   },
   bookSubtitle: {
     fontSize: '1.6rem',
@@ -88,6 +93,15 @@ const useStyles = makeStyles({
     fontWeight: '400',
     margin: '1rem 1rem 1rem 1rem',
   },
+  likes: {
+    fontSize: '1.4rem',
+    color: 'white',
+    paddingTop: '0rem',
+    paddingBottom: '0rem',
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
+
+  }
 });
 
 export default function BookPopular() {
@@ -96,7 +110,7 @@ export default function BookPopular() {
   var [selectedCat, setSelectedCat] = useState("");
 
   useEffect(() => {
-    fetch('/api/bookDB')
+    fetch('/api/bookPopular')
       .then(res => res.json())
       .then(res => setBookDB(res))
       .catch(err => console.log(err))
@@ -105,6 +119,24 @@ export default function BookPopular() {
       .then(res => setCategory(res))
       .catch(err => console.log(err))
   }, []);
+
+  const handleLikes = (id) => {
+    const urlWithID = '/api/popular/like/increment/' + id
+    Axios({
+      method: 'put',
+      url: urlWithID,
+    })
+    .then(res => {
+      if(res.status === 200){
+        alert('성공적으로 추천했습니다!');
+        fetch('/api/bookPopular')
+          .then(res => res.json())
+          .then(res => setBookDB(res))
+          .catch(err => console.log(err))
+      }
+    })
+    .catch(err => console.log(err));
+  }
 
   const removeBTags = (str) => {
     str = str.replace(/<b>/g, "");
@@ -123,13 +155,17 @@ export default function BookPopular() {
           <div className={classes.book}>
             <Grid item xs={4} md={2}>
             <div className={classes.bookCoverAlign}>
-                <img className={classes.bookCover} src={datum.imageURL} />
+                <img className={classes.bookCover} src={datum.imageURL} alt={datum.title}/>
             </div>
             </Grid>
             <Grid item xs={8} md={4}>
                 <div className={classes.bookTitle}>
-                    {removeBTags(datum.title)}
-                    </div>
+                    <span style={{color: 'orange'}}>{index + 1}&nbsp;&nbsp;</span>
+                    {removeBTags(datum.title)}&nbsp;&nbsp;
+                    <Button variant="contained" color='primary' className={classes.likes}
+                    onClick={() => {handleLikes(datum.bookID)}}
+                    ><ThumbUp />&nbsp;{datum.likes}</Button>
+                </div>
                 <div className={classes.bookSubtitle}>
                     작가 | {datum.author}<br />
                 </div>

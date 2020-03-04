@@ -52,8 +52,8 @@ export default function _AppBar() {
 
   var adaptTitleColor = (window.location.pathname === "/") ? 
     {color : 'white'} :
-    {color : 'black', textShadow: '-1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6',};
-  var adaptColor = (window.location.pathname === "/") ? 'white' : 'black';
+    {color : 'black', textShadow: '-1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6'};
+/*   var adaptColor = (window.location.pathname === "/") ? 'white' : 'black'; */
 
   console.log('rendered');
   return (
@@ -61,27 +61,24 @@ export default function _AppBar() {
     <AppBar position="static" className={classes.appBar} >
     <Container maxWidth="lg">
       <Toolbar style={{padding: '0rem',}}>
-        {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-          <MenuIcon />
-        </IconButton> */}
         <Typography variant="h6" className={classes.appBarTitle}>
           <Link to="/" className={classes.link} onClick={() => {setColor('white')}}
             style={adaptTitleColor}>
             PLAYLAB
           </Link>
         </Typography>
-
+        
         <Link to="/Search" onClick={() => {setColor('black')}}>
-          <IconButton style={{color: adaptColor}}><SearchIcon style={{fontSize: '2.2rem'}}/></IconButton>
+          <IconButton style={{color: color}}><SearchIcon style={{fontSize: '2.2rem'}}/></IconButton>
         </Link>
         <Link to="/Popular" onClick={() => {setColor('black')}}>
-          <IconButton style={{color: adaptColor}}><StarIcon style={{fontSize: '2.2rem'}}/></IconButton>
+          <IconButton style={{color: color}}><StarIcon style={{fontSize: '2.2rem'}}/></IconButton>
         </Link>
         <Link to="/PlaylistAdd" onClick={() => {setColor('black')}}>
-          <IconButton style={{color: adaptColor}}><AddIcon style={{fontSize: '2.2rem'}}/></IconButton>
+          <IconButton style={{color: color}}><AddIcon style={{fontSize: '2.2rem'}}/></IconButton>
         </Link>
         <Link to="/MyPage" onClick={() => {setColor('black')}}>
-          <IconButton style={{color: adaptColor, marginRight:'-1.5rem'}}><AccountCircle style={{fontSize: '2.2rem'}}/></IconButton>
+          <IconButton style={{color: color, marginRight:'-1.5rem'}}><AccountCircle style={{fontSize: '2.2rem'}}/></IconButton>
         </Link>
 
       </Toolbar>

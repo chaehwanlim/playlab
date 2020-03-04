@@ -5,9 +5,7 @@ import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
@@ -112,6 +110,7 @@ export default function MusicAdd() {
                 title : form.title,
                 artist: form.artist,
                 genre : form.genre,
+                adderID : sessionStorage.getItem('userID'),
                 categoryID : form.category,
                 trnasmediaID : form.transmediaID
             }

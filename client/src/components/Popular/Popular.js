@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
@@ -58,21 +58,8 @@ export default function Popular() {
         title: "영화 인기 차트",
         component: <MoviePopular />
     });
-    var [category, setCategory] = useState([]);
-    var [transmedia, setTransmedia] = useState([]);
 
     const classes = useStyles();
-
-    useEffect(() => {
-        fetch('/api/categoryDB')
-          .then(res => res.json())
-          .then(res => setCategory(res))
-          .catch(err => console.log(err))
-        fetch('/api/transmediaDB')
-          .then(res => res.json())
-          .then(res => setTransmedia(res))
-          .catch(err => console.log(err))
-    }, []);
 
     const handleMusic = (e) => {
         e.preventDefault();

@@ -6,9 +6,9 @@ import Home from "./components/Home";
 import Search from "./components/Search/Search";
 import Popular from "./components/Popular/Popular";
 import PlaylistAdd from "./components/PlaylistAdd/PlaylistAdd";
-import MyPage from "./components/MyPage";
+import MyPage from "./components/MyPage/MyPage";
 import Login from "./components/Login";
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+/* import { TransitionGroup, CSSTransition } from 'react-transition-group'; */
 
 export default function App() {
   return (

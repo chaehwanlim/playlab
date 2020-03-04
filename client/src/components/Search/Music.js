@@ -8,10 +8,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { useMediaQuery } from '@material-ui/core';
 import '../styles/media.css';
 
 
@@ -45,11 +42,11 @@ const useStyles = makeStyles({
         fontWeight: '900',
     },
     tableData: {
-        fontSize: '1.7em',
+        fontSize: '1.7rem',
         fontWeight: '400',
     },
     tableData2: {
-        fontSize: '1.7em',
+        fontSize: '1.7rem',
         fontWeight: '400',
         maxWidth: '10rem',
     },
@@ -73,14 +70,6 @@ const useStyles = makeStyles({
         display: 'none',
     }
 });
-
-const attributes = [
-    { id: 'title&artist', label: '제목 및 아티스트', minWidth: 100 },
-    { id: 'category', label: '기분', minWidth: 50 },
-    { id: 'transmedia', label: '연관', minWidth: 50 },
-    { id: 'genre', label: '장르', minWidth: 50 },
-    { id: 'adder', label: '등록', minWidth: 50 },
-];
 
 export default function MusicTable() {
     var [musicDB, setMusicDB] = useState([]);

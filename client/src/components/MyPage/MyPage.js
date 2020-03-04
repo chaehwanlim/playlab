@@ -4,14 +4,14 @@ import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
-import Card from '@material-ui/core/Card';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Login from './Login';
+import Login from '../Login';
 import Axios from 'axios';
-import store from '../store';
+import MyMusic from './MyMusic';
+import MyMovie from './MyMovie';
+import MyBook from './MyBook';
 
 const useStyles = makeStyles(theme => ({
   background: {
@@ -36,11 +36,10 @@ const useStyles = makeStyles(theme => ({
   },
 
   card: {
-    marginTop: '2rem',
     fontSize: '1.7rem',
     marginTop: '10rem',
-    paddingLeft: '1.5rem',
-    paddingRight: '1.5rem',
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
     paddingBottom: '3rem',
   },
   accountIconAlign: {
@@ -83,35 +82,47 @@ const useStyles = makeStyles(theme => ({
     fontSize: '1.8rem',
     fontWeight: '300',
   },
-  subtitle: {
+  subtitle2: {
     fontSize: '2.2rem',
     fontWeight: '700',
     margin: '1.5rem',
-},
+  },
   myPlaylist : {
+    display: 'flex',
+    alignItems: 'center',
     margin: '1rem',
     fontSize: '1.7rem',
     fontWeight: '400',
+  },
+  btnAlign: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  deletion : {
+    fontSize: '1.7rem',
+    fontWeight: '400',
+  },
+  btnGroup: {
+    padding: '1.5rem',
+    fontSize: '2.2rem',
+    fontWeight: '700',
   }
 }));
 
 export default function MyPage() {
-  var [user, setUser] = useState(store.getState().userName);
-  var [user2, setUser2] = useState('');
+  const classes = useStyles();
+
+  var [user, setUser] = useState('');
   var [userInfo, setUserInfo] = useState({});
-  var [myPlaylist, setMyPlaylist] = useState({
-    music : [],
-    movie : [],
-    book : []
-  })
+  var [content, setContent] = useState({
+    component: <MyMovie />,
+    subtitle: <div className={classes.subtitle2} style={{color: '#FF4444'}}>내가 추가한 영화 관리하기</div>
+  });
 
   useEffect(() => {
-    store.subscribe(() => {
-      setUser(store.getState().userName);
-    })
-
     if(sessionStorage.userName){
-      setUser2(sessionStorage.userName);
+      setUser(sessionStorage.userName);
     }
 
     Axios({
@@ -123,25 +134,12 @@ export default function MyPage() {
     })
     .then(res => setUserInfo(res.data[0]))
     .catch(err => console.log(err));
-    
-    Axios({
-      method: 'post',
-      url: '/api/myPage/music',
-      data: {
-        userName: sessionStorage.userName
-      }
-    })
-    .then(res => setMyPlaylist({
-      ...myPlaylist,
-      music : res.data
-    }))
-    .catch(err => console.log(err));
-
   }, []);
 
   const handleLogout = () => {
     sessionStorage.removeItem('userName');
-    setUser2('');
+    sessionStorage.removeItem('userID');
+    setUser('');
     Axios({
       method:'get',
       url: '/api/logout',
@@ -149,22 +147,8 @@ export default function MyPage() {
     })
     .then(alert('로그아웃 했습니다. 다시 로그인 해주세요.'))
     .catch(err => console.log(err));
-    /* window.location.assign('/MyPage'); */
   }
-
-  const classes = useStyles();
-
-  const deletion = (id) => {
-    console.log(id);
-    const urlWithID = '/api/myPage/music/delete/' + id;
-    Axios({
-      method: 'delete',
-      url: urlWithID,
-    })
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-  }
-
+  
   const myPage = () => {
     return (
       <div className={classes.background}>
@@ -193,18 +177,27 @@ export default function MyPage() {
             <p className={classes.userDescription}>
               {userInfo.description}
             </p>
+
+            <Button className={classes.btnGroup} onClick={() => {setContent({
+              component: <MyMusic />, 
+              subtitle: <div className={classes.subtitle2} style={{color: '#018DFF'}}>내가 추가한 음악 관리하기</div>
+              })}}>
+              음악</Button>
+            <Button className={classes.btnGroup} onClick={() => {setContent({
+              component: <MyMovie />, 
+              subtitle: <div className={classes.subtitle2} style={{color: '#FF4444'}}>내가 추가한 영화 관리하기</div>
+              })}}>
+              영화</Button>
+            <Button className={classes.btnGroup} onClick={() => {setContent({
+              component: <MyBook />, 
+              subtitle: <div className={classes.subtitle2} style={{color: '#1ABF80'}}>내가 추가한 책 관리하기</div>
+              })}}>
+              책</Button>
+            
             <Divider />
-            <div className={classes.subtitle}>내가 추가한 음악 관리</div>
-            {myPlaylist ? myPlaylist.music.map((datum, index) => {
-              return (
-                <Card className={classes.myPlaylist}>
-                  <b>{datum.title}</b>&nbsp;{datum.artist}&nbsp;
-                  <Button className={classes.myPlaylist} color="secondary" onClick={deletion(datum.musicID)}>
-                  삭제</Button>
-                </Card>
-              )
-            }) : <div>error</div>}
-          </Paper>
+            {content.subtitle}
+            {content.component}
+            </Paper>
         </Container>
       </div>
     )
@@ -212,7 +205,7 @@ export default function MyPage() {
 
   return (
     <div>
-      {(user2 === '') ? <Login /> : myPage()}
+      {(user === '') ? <Login /> : myPage()}
     </div>
     
     

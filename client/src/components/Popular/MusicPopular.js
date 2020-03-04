@@ -2,18 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
-import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/SearchRounded';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import Fab from '@material-ui/core/Fab';
+import Button from '@material-ui/core/Button';
+import ThumbUp from '@material-ui/icons/ThumbUp';
+import Axios from 'axios';
 
 const useStyles = makeStyles({
   tableData: {
@@ -77,16 +75,15 @@ const useStyles = makeStyles({
     fontWeight: '300',
     color: '#018DFF',
   },
+  likes: {
+    fontSize: '1.4rem',
+    color: 'white',
+    paddingTop: '0rem',
+    paddingBottom: '0rem',
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
+  }
 });
-
-const attributes = [
-  { id: 'ranking', label: '순위', minWidth: 5 },
-  { id: 'title&artist', label: '제목 및 아티스트', minWidth: 100 },
-  { id: 'category', label: '기분', minWidth: 50 },
-  { id: 'transmedia', label: '연관', minWidth: 50 },
-  { id: 'genre', label: '장르', minWidth: 50 },
-  { id: 'adder', label: '등록', minWidth: 50 },
-];
 
 export default function MusicPopular() {
   var [musicDB, setMusicDB] = useState([]);
@@ -94,7 +91,7 @@ export default function MusicPopular() {
   var [selectedCat, setSelectedCat] = useState("");
 
   useEffect(() => {
-    fetch('/api/musicDB')
+    fetch('/api/musicPopular')
       .then(res => res.json())
       .then(res => setMusicDB(res))
       .catch(err => console.log(err))
@@ -113,12 +110,17 @@ export default function MusicPopular() {
     return data.map((datum, index) => {
       return (
         <TableRow className={classes.rowEffect}>
-          <TableCell className={classes.tableData} component="th" scope="row" style={{textAlign: 'center'}}>{index+1}</TableCell>
+          <TableCell className={classes.tableData} component="th" scope="row" style={{textAlign: 'center'}}>{index + 1}</TableCell>
           <TableCell className={classes.tableData}>
               <span className={classes.musicTitle}>{datum.title}</span><br></br>{datum.artist}
           </TableCell>
           <TableCell className={classes.tableData}>
               {datum.userName} 님의 {datum.categoryName} 음악입니다.
+          </TableCell>
+          <TableCell className={classes.tableData}>
+            <Button variant="contained" color='primary' className={classes.likes}
+            onClick={() => {handleLikes(datum.musicID)}}
+            ><ThumbUp />&nbsp;{datum.likes}</Button>
           </TableCell>
           <TableCell className={classes.tableData2}>{datum.genre}</TableCell>
           <TableCell className={classes.tableData2}>{datum.transmediaName}</TableCell>
@@ -131,6 +133,24 @@ export default function MusicPopular() {
     e.preventDefault();
     console.log(e.target.value);
     setSelectedCat(e.target.value);
+  }
+
+  const handleLikes = (id) => {
+    const urlWithID = '/api/popular/like/increment/' + id
+    Axios({
+      method: 'put',
+      url: urlWithID,
+    })
+    .then(res => {
+      if(res.status === 200){
+        alert('성공적으로 추천했습니다!');
+        fetch('/api/musicPopular')
+          .then(res => res.json())
+          .then(res => setMusicDB(res))
+          .catch(err => console.log(err))
+      }
+    })
+    .catch(err => console.log(err));
   }
 
   const classes = useStyles();

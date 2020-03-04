@@ -10,7 +10,6 @@ import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fab from '@material-ui/core/Fab';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
@@ -52,6 +51,10 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     fontWeight: '300'
+  },
+  form2: {
+    display: 'relative',
+    fontWeight: '300',
   },
 
   //for movies
@@ -139,6 +142,10 @@ export default function BookAdd() {
   var [search, setSearch] = useState("");
   var [isSearched, setIsSearched] = useState(false);
   var [searchResult, setSearchResult] = useState([]);
+  var [selectedBook, setSelectedBook] = useState({
+    index: -1,
+    title: ''
+  });
   var [form, setForm] = useState({
     title: "",
     author: "",
@@ -205,8 +212,9 @@ export default function BookAdd() {
     });
   }
 
-  const handleBookSelect = (index) => {
+  const handleBookSelect = (index, title) => {
     console.log(index);
+    setSelectedBook({index: index, title: title});
     if (searchResult) {
       setForm({
         ...form,
@@ -231,6 +239,7 @@ export default function BookAdd() {
       data: {
         title: form.title,
         author: form.author,
+        adderID : sessionStorage.getItem('userID'),
         categoryID: form.category,
         transmediaID: form.transmedia,
         imageURL: form.image,
@@ -279,14 +288,15 @@ export default function BookAdd() {
           searchResult.map((book, index) => {
             return (
             <Grid item xs={12}>
-              <div className={classes.book} key={index} onClick={() => handleBookSelect(index)}>
+              <div className={classes.book} key={index} onClick={() => handleBookSelect(index, removeBTags(book.title))}>
                 <Grid item xs={4} md={2}>
                 <div className={classes.bookCoverAlign}>
-                    <img className={classes.bookCover} src={book.image} />
+                    <img className={classes.bookCover} src={book.image} alt={book.title}/>
                 </div>
                 </Grid>
                 <Grid item xs={8} md={4}>
                     <div className={classes.bookTitle}>
+                        <span style={{color: 'grey'}}>{index + 1}&nbsp;&nbsp;</span>
                         {removeBTags(book.title)}
                         </div>
                     <div className={classes.bookSubtitle}>
@@ -308,7 +318,10 @@ export default function BookAdd() {
 
       {isSearched ? 
         <form noValidate autoComplete="off" className={classes.form} onSubmit={handleSubmit}>
-          <div><br/><br/>이 책은 이런 책입니다.</div>
+          <div className={classes.form2}><br/><br/>
+            선택한 책 : &nbsp;{selectedBook.index + 1}번 &nbsp;{selectedBook.title}
+          </div>
+          <div className={classes.form2}><br/>이 책은 &nbsp;
           <Select labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={form.category}
@@ -321,7 +334,8 @@ export default function BookAdd() {
                   {cat.categoryName}</MenuItem>
               )
             }) : "error occured"}
-          </Select><br />
+          </Select>
+          &nbsp;책입니다.</div><br />
 
           <div>트랜스미디어</div>
           <Select labelId="demo-simple-select-label"

@@ -114,7 +114,7 @@ export default function Book() {
                         <div className={classes.book}>
                             <Grid item xs={4} md={2}>
                             <div className={classes.bookCoverAlign}>
-                                <img className={classes.bookCover} src={datum.imageURL} />
+                                <img className={classes.bookCover} src={datum.imageURL} alt={datum.title}/>
                             </div>
                             </Grid>
                             <Grid item xs={8} md={4}>

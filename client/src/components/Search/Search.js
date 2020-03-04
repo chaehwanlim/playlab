@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
@@ -59,12 +59,6 @@ export default function Search() {
         component: <Movie />,
         subtitle: "영화의 제목, 출연 배우, 등록한 유저 이름으로 검색하세요."
     });
-    var [searchKeyword, setSearchKeyword] = useState("");
-
-    const handleValueChange = (e) => {
-        setSearchKeyword(e.target.value);
-        console.log(searchKeyword);
-    }
 
     const handleMusic = (e) => {
         e.preventDefault();
@@ -91,20 +85,6 @@ export default function Search() {
         })
     }
 
-    const titleColor = () => {
-        switch(content.title) {
-            case '음악 검색하기':
-                return '#018DFF';
-                break;
-            case '영화 검색하기':
-                return '#FF4444';
-                break;
-            case '책 검색하기':
-                return '#1ABF80';
-                break;
-        }
-    }
-
     const classes = useStyles();
 
     return (
@@ -112,7 +92,7 @@ export default function Search() {
         <Container maxWidth="lg">
             <Grid container spacing={1}>
                 <Grid item xs={9}>
-                    <div className={classes.title} style={{color: {titleColor}}}>{content.title}</div>
+                    <div className={classes.title}>{content.title}</div>
                     <p className={classes.subtitle}>{content.subtitle}</p>
                 </Grid>
                 <Grid item xs={3}>
@@ -138,6 +118,5 @@ export default function Search() {
             {content.component}
         </Container>
         </div>
-
     )
 }

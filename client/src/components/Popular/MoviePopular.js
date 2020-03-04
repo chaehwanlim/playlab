@@ -3,7 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
+import ThumbUp from '@material-ui/icons/ThumbUp';
+import Axios from 'axios';
 
 const useStyles = makeStyles({
   orderFilter: {
@@ -70,6 +73,8 @@ const useStyles = makeStyles({
     fontSize: '2.2rem',
     fontWeight: '700',
     marginTop: '1rem',
+    display: 'flex',
+    alignItems:'center',
   },
   movieSubtitle: {
     fontSize: '1.6rem',
@@ -89,6 +94,15 @@ const useStyles = makeStyles({
     fontWeight: '500',
     color: 'grey',
   },
+  likes: {
+    fontSize: '1.4rem',
+    color: 'white',
+    paddingTop: '0rem',
+    paddingBottom: '0rem',
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
+
+  }
 
 });
 
@@ -98,7 +112,7 @@ export default function MoviePopular() {
   var [selectedCat, setSelectedCat] = useState("");
 
   useEffect(() => {
-    fetch('/api/movieDB')
+    fetch('/api/moviePopular')
       .then(res => res.json())
       .then(res => setMovieDB(res))
       .catch(err => console.log(err))
@@ -127,7 +141,10 @@ export default function MoviePopular() {
                     <div className={classes.movieTitle}>
                       <span style={{color: 'orange'}}>{index + 1}&nbsp;&nbsp;</span>
                       {datum.title}
-                      <span className={classes.movieYear}>{datum.year}</span>
+                      <span className={classes.movieYear}>{datum.year}</span>&nbsp;&nbsp;
+                      <Button variant="contained" color='primary' className={classes.likes}
+                      onClick={() => {handleLikes(datum.movieID)}}
+                      ><ThumbUp />&nbsp;{datum.likes}</Button>
                     </div>
                     <div className={classes.movieSubtitle}>
                         <b>감독</b>  {datum.director}<br />
@@ -150,6 +167,24 @@ export default function MoviePopular() {
     e.preventDefault();
     console.log(e.target.value);
     setSelectedCat(e.target.value);
+  }
+
+  const handleLikes = (id) => {
+    const urlWithID = '/api/popular/like/increment/' + id
+    Axios({
+      method: 'put',
+      url: urlWithID,
+    })
+    .then(res => {
+      if(res.status === 200){
+        alert('성공적으로 추천했습니다!');
+        fetch('/api/moviePopular')
+          .then(res => res.json())
+          .then(res => setMovieDB(res))
+          .catch(err => console.log(err))
+      }
+    })
+    .catch(err => console.log(err));
   }
 
   const classes = useStyles();

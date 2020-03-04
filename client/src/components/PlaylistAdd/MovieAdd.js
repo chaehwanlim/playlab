@@ -10,7 +10,6 @@ import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fab from '@material-ui/core/Fab';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
@@ -144,6 +143,10 @@ export default function MovieAdd() {
   var [search, setSearch] = useState("");
   var [isSearched, setIsSearched] = useState(false);
   var [searchResult, setSearchResult] = useState([]);
+  var [selectedMovie, setSelectedMovie] = useState({
+    index: -1,
+    title: ''
+  });
   var [form, setForm] = useState({
     title: "",
     director: "",
@@ -185,8 +188,9 @@ export default function MovieAdd() {
   const searchMovie = () => {
     Axios.post('/api/movieSearchKeyword', {
       keyword : search
-    }).then(response => console.log(response))
-      .catch(error => console.log(error));
+    })
+    .then(response => console.log(response))
+    .catch(error => console.log(error));
     
     getMovieSearchResult();
   }
@@ -212,7 +216,8 @@ export default function MovieAdd() {
     });
   }
 
-  const handleMovieSelect = (index) => {
+  const handleMovieSelect = (index, title) => {
+    setSelectedMovie({index: index, title: title});
     console.log(index);
     if (searchResult) {
       setForm({
@@ -240,6 +245,7 @@ export default function MovieAdd() {
       data: {
         title: form.title,
         director: form.director,
+        adderID : sessionStorage.getItem('userID'),
         categoryID: form.category,
         transmediaID: form.transmedia,
         imageURL: form.imageURL,
@@ -290,14 +296,15 @@ export default function MovieAdd() {
           searchResult.map((movie, index) => {
             return (
             <Grid item xs={12} md={6}>
-              <div className={classes.movie} key={index} onClick={() => handleMovieSelect(index)}>
+              <div className={classes.movie} key={index} onClick={() => handleMovieSelect(index, removeBTags(movie.title))}>
                 <Grid item xs={4}>
                   <div className={classes.moviePosterAlign}>
-                    <img className={classes.moviePoster} src={movie.image} title={removeBTags(movie.title)}/>
+                    <img className={classes.moviePoster} src={movie.image} title={removeBTags(movie.title)} alt="영화 포스터 이미지를 불러오는 데 오류가 발생했습니다."/>
                   </div>
                 </Grid>
                 <Grid item xs={8}>
                   <div className={classes.movieTitle}>
+                    <span style={{color: 'grey'}}>{index + 1}&nbsp;&nbsp;</span>
                     {removeBTags(movie.title)}
                     <span className={classes.movieYear}>{movie.year}</span>
                   </div>
@@ -309,12 +316,15 @@ export default function MovieAdd() {
                 </Grid>
               </div>
             </Grid>
-          )}) : <CircularProgress color='secondary'/>}
+          )}) : ""}
       </Grid>
       
       {isSearched ? 
         <form noValidate autoComplete="off" className={classes.form} onSubmit={handleSubmit}>
-          <div className={classes.form2}><br/><br/>이 영화는 &nbsp;
+          <div className={classes.form2}><br/><br/>
+            선택한 영화 : &nbsp;{selectedMovie.index + 1}번 &nbsp;{selectedMovie.title}
+          </div>
+          <div className={classes.form2}><br/>이 영화는 &nbsp;
             <Select labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={form.category}

@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import AddIcon from '@material-ui/icons/AddRounded';
-import StarIcon from '@material-ui/icons/StarRounded';
-import SearchIcon from '@material-ui/icons/SearchRounded';
 import Grid from '@material-ui/core/Grid';
 import './styles/Home.css';
 
@@ -28,12 +25,12 @@ const useStyles = makeStyles(theme => ({
         fontWeight: '500',
     },
 
-    //for Description
+/*     //for Description
     description: {
         background: 'whitesmoke',
         color: 'black',
         padding: '5rem',
-    },
+    }, */
 
     // for Buttons
     btn_root: {
@@ -79,12 +76,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function Home() {
     const classes = useStyles();
-    var [searchClicked, setSearchClicked] = useState(false);
-
-    useEffect(() => {
-        if(searchClicked === true)
-            document.title = searchClicked;
-    });
 
     return (
         <div>

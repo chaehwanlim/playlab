@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
     card: {
         marginTop: '2rem',
         fontSize: '1.7rem',
+        padding: '0rem',
     },
     login: {
         display: 'flex',
@@ -146,7 +147,7 @@ export default function Login() {
             </Container>
             <Divider className={classes._divider} />
             <Container maxWidth="lg">
-                <Grid container spacing={10}>
+                <Grid container spacing={3}>
                     <Grid item xs={12} md={6}>
                         <Card className={classes.card}>
                             <div className={classes.subtitle}>

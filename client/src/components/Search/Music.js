@@ -66,9 +66,6 @@ const useStyles = makeStyles({
             backgroundColor: 'aliceblue',
         } 
     },
-    musicInfo: {
-        display: 'none',
-    }
 });
 
 export default function MusicTable() {
@@ -104,11 +101,11 @@ export default function MusicTable() {
                     <TableCell className={classes.tableData}>
                         <span className={classes.musicTitle}>{datum.title}</span><br></br>{datum.artist}
                     </TableCell>
-                    <TableCell className={classes.tableData}>
-                        {datum.userName} 님의 {datum.categoryName} 음악입니다.
+                    <TableCell className={classes.tableData} style={{minWidth:"12rem"}}>
+                        {datum.userName} 님의 <br />{datum.categoryName} 음악
                     </TableCell>
-                    <TableCell className={classes.tableData2} id="music">{datum.genre}</TableCell>
-                    <TableCell className={classes.tableData2} id="music">{datum.transmediaName}</TableCell>
+                    <TableCell className={classes.tableData2}>{datum.genre}</TableCell>
+                    <TableCell className={classes.tableData2}>{datum.transmediaName}</TableCell>
                 </TableRow>
             )
         });

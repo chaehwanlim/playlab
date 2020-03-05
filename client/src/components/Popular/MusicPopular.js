@@ -110,12 +110,12 @@ export default function MusicPopular() {
     return data.map((datum, index) => {
       return (
         <TableRow className={classes.rowEffect}>
-          <TableCell className={classes.tableData} component="th" scope="row" style={{textAlign: 'center'}}>{index + 1}</TableCell>
-          <TableCell className={classes.tableData}>
+          <TableCell className={classes.tableData} component="th" scope="row" style={{textAlign: 'center', paddingLeft: '1rem', paddingRight: '0rem'}}>{index + 1}</TableCell>
+          <TableCell className={classes.tableData} style={{paddingLeft: '1rem'}}>
               <span className={classes.musicTitle}>{datum.title}</span><br></br>{datum.artist}
           </TableCell>
-          <TableCell className={classes.tableData}>
-              {datum.userName} 님의 {datum.categoryName} 음악입니다.
+          <TableCell className={classes.tableData} style={{minWidth:"12rem"}}>
+              {datum.userName} 님의<br />{datum.categoryName} 음악
           </TableCell>
           <TableCell className={classes.tableData}>
             <Button variant="contained" color='primary' className={classes.likes}

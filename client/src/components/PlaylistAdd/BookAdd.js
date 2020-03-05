@@ -305,7 +305,7 @@ export default function BookAdd() {
                         {removeBTags(book.title)}
                         </div>
                     <div className={classes.bookSubtitle}>
-                        작가 | {book.author}<br />
+                        <b>작가</b> {book.author}<br />
                     </div>
                     <div className={classes.bookInfo}>
                     </div>
@@ -324,7 +324,7 @@ export default function BookAdd() {
       {isSearched ? 
         <form noValidate autoComplete="off" className={classes.form} onSubmit={handleSubmit}>
           <div className={classes.form2}><br/><br/>
-            선택한 책 : &nbsp;{selectedBook.index + 1}번 &nbsp;{selectedBook.title}
+            선택한 책 : &nbsp;{selectedBook.index + 1}번 &nbsp;<b>{selectedBook.title}</b>
           </div>
           <div className={classes.form2}><br/>이 책은 &nbsp;
           <Select labelId="demo-simple-select-label"

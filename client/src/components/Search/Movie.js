@@ -129,8 +129,7 @@ export default function Movie() {
                         </Grid>
                         <Grid item xs={8}>
                             <div className={classes.movieTitle}>
-                                {datum.title}
-                                <span className={classes.movieYear}>{datum.year}</span>
+                                <span>{datum.title}<span className={classes.movieYear}>{datum.year}</span></span>
                             </div>
                             <div className={classes.movieSubtitle}>
                                 <b>감독</b>  {datum.director}<br />

@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-import './styles/Home.css';
+import './styles/style.css';
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,39 +22,6 @@ const useStyles = makeStyles(theme => ({
         fontSize: '1.8rem',
         fontWeight: '500',
     },
-
-/*     //for Description
-    description: {
-        background: 'whitesmoke',
-        color: 'black',
-        padding: '5rem',
-    }, */
-
-    // for Buttons
-    /* btn_root: {
-        position: 'relative',
-        marginTop: '15%',
-        textAlign: 'center',
-        '& > *': {
-            margin: theme.spacing(4), 
-        },
-    },
-    btn: {
-        background: 'white',
-        color: 'black',
-        fontSize: '2rem',
-        fontWeight: '900',  
-        letterSpacing: '5px',
-        transition: '0.5s',
-        '&:hover': {
-            background: 'white',
-            transform: 'scale(1.1)',
-            transition: '0.5s',
-        } 
-    },
-    _icon: {
-        marginRight: '6px',
-    }, */
 
     paper: {
         position: 'relative',
@@ -86,13 +53,12 @@ export default function Home() {
     const classes = useStyles();
 
     return (
-
         <div className="Background">
             <Container maxWidth="lg">
-                <div className= {classes.title}>
+                <div className={classes.title}>
                     PlayLab
                 </div>
-                <div className= {classes.subTitle}>
+                <div className={classes.subTitle}>
                     나만의 재생목록을 모두와 함께.
                 </div>
             </Container>

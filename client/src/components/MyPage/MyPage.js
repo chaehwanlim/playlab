@@ -146,7 +146,8 @@ export default function MyPage() {
       url: '/api/logout',
       data: {'logout' : true}
     })
-    .then(alert('로그아웃 했습니다. 다시 로그인 해주세요.'))
+    .then(alert('로그아웃 했습니다.'))
+    .then(setUser(''))
     .catch(err => console.log(err));
   }
   

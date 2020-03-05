@@ -178,7 +178,7 @@ app.post('/api/musicAdd', (req, res) => {
 });
 
 app.post('/api/movieAdd', (req, res) => {
-    let sql = "INSERT INTO movie VALUES (NULL, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?, 0, 0);"
+    let sql = "INSERT INTO movie VALUES (NULL, ?, ?, NULL, ?, ?, ?, ?, ?, ?, 0, ?, 0);"
     let title = req.body.title;
     let director = req.body.director;
     let adderID = req.body.adderID;
@@ -187,7 +187,7 @@ app.post('/api/movieAdd', (req, res) => {
     let imageURL = req.body.imageURL;
     let actor = req.body.actor;
     let userRating = req.body.userRating;
-    let year = req.body.year;
+    let year = parseInt(req.body.year);
     let params = [title, director, adderID, categoryID, transmediaID, imageURL, actor, userRating, year];
     dbConnection.query(sql, params,
         (err, results, fields) => {

@@ -99,7 +99,13 @@ export default function MusicAdd() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(form);
-        addMusic();
+        if(sessionStorage.userName) {
+            addMusic();
+        } else if (sessionStorage.userName === undefined) {
+            alert('로그인이 필요합니다!');
+            window.location.assign('/MyPage');
+        }
+        
     }  
 
     const addMusic = () => {

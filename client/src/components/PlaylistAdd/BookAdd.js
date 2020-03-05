@@ -229,7 +229,12 @@ export default function BookAdd() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    addBook();
+    if(sessionStorage.userName) {
+      addBook();
+    } else if (sessionStorage.userName === undefined) {
+      alert('로그인이 필요합니다!');
+      window.location.assign('/MyPage');
+    }
   }
 
   const addBook = () => {

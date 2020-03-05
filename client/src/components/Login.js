@@ -102,7 +102,7 @@ export default function Login() {
             }
         })
         .then((res) => {
-            alert(res.data.success);
+            alert('로그인을 성공했습니다!');
             if (res.data.code === 200) {
                 console.log(res.data)
                 store.dispatch({ type: 'LOGINED', userName: login.userName });

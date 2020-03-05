@@ -235,7 +235,12 @@ export default function MovieAdd() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    addMovie();
+    if(sessionStorage.userName) {
+      addMovie();
+    } else if (sessionStorage.userName === undefined) {
+      alert('로그인이 필요합니다!');
+      window.location.assign('/MyPage');
+    }
   }
 
   const addMovie = () => {

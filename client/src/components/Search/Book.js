@@ -87,10 +87,10 @@ export default function Book() {
 
     useEffect(function fetchBookDB() {
         fetch('/api/bookDB')
-            .then(res => res.json())
-            .then(res => setBookDB(res))
-            .catch(err => console.log(err));
-    });
+        .then(res => res.json())
+        .then(res => setBookDB(res))
+        .catch(err => console.log(err));
+    }, []);
 
     const handleValueChange = (e) => {
         setSearchKeyword(e.target.value);

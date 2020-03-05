@@ -6,7 +6,7 @@
         "server": "nodemon server.js",
         "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
         "build": "webpack --mode production",
-        "start": "pm2 start ./server.js",
+        "start": "pm2 start ./server.js"
     },
     "dependencies": {
         "body-parser": "^1.19.0",

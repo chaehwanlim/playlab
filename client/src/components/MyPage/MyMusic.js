@@ -101,7 +101,7 @@ export default function MyMusic(props) {
             <TableCell className={classes.tableData}>
                 <span className={classes.musicTitle}>{datum.title}</span><br></br>{datum.artist}
             </TableCell>
-            <TableCell className={classes.tableData}>
+            <TableCell className={classes.tableData} style={{minWidth:"12rem"}}>
               {datum.categoryName} 음악
             </TableCell>
             <TableCell className={classes.tableData} style={{maxWidth:"5rem"}}>

@@ -101,7 +101,7 @@ export default function Mybook(props) {
             <TableCell className={classes.tableData}>
                 <span className={classes.bookTitle}>{datum.title}</span><br></br>{datum.author}
             </TableCell>
-            <TableCell className={classes.tableData}>
+            <TableCell className={classes.tableData} style={{minWidth:"12rem"}}>
               {datum.categoryName} 책
             </TableCell>
             <TableCell className={classes.tableData} style={{maxWidth:"5rem"}}>

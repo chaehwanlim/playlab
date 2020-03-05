@@ -310,8 +310,7 @@ export default function MovieAdd() {
                 <Grid item xs={8}>
                   <div className={classes.movieTitle}>
                     <span style={{color: 'grey'}}>{index + 1}&nbsp;&nbsp;</span>
-                    {removeBTags(movie.title)}
-                    <span className={classes.movieYear}>{movie.year}</span>
+                    <span>{removeBTags(movie.title)}<span className={classes.movieYear}>{movie.year}</span></span>
                   </div>
                   <div className={classes.movieSubtitle}>
                     <b>감독</b> {movie.director}<br />
@@ -327,7 +326,7 @@ export default function MovieAdd() {
       {isSearched ? 
         <form noValidate autoComplete="off" className={classes.form} onSubmit={handleSubmit}>
           <div className={classes.form2}><br/><br/>
-            선택한 영화 : &nbsp;{selectedMovie.index + 1}번 &nbsp;{selectedMovie.title}
+            선택한 영화 : &nbsp;{selectedMovie.index + 1}번 &nbsp;<b>{selectedMovie.title}</b>
           </div>
           <div className={classes.form2}><br/>이 영화는 &nbsp;
             <Select labelId="demo-simple-select-label"

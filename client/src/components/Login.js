@@ -32,7 +32,8 @@ const useStyles = makeStyles(theme => ({
     card: {
         marginTop: '2rem',
         fontSize: '1.7rem',
-        padding: '0rem',
+        paddingLeft: '1.5rem',
+        paddingRight: '1.5rem',
     },
     login: {
         display: 'flex',
@@ -151,7 +152,7 @@ export default function Login() {
                     <Grid item xs={12} md={6}>
                         <Card className={classes.card}>
                             <div className={classes.subtitle}>
-                                이미 가입한 계정이 있으신가요?
+                                가입한 계정이 있으신가요?
                         </div>
                             <Divider className={classes.loginDivider} />
                             <form noValidate autoComplete="off" className={classes.login} onSubmit={handleLoginSubmit}>

@@ -29,11 +29,6 @@ const useStyles = makeStyles(theme => ({
         marginTop: '1.5rem',
         marginBottom: '3rem',
     },
-    /* select: {
-        fontSize: '1.7rem',
-        textAlign: 'left',
-        color: 'black',
-    }, */
     menuItem: {
         fontSize: '1.7rem',
         fontWeight: '400',
@@ -161,7 +156,7 @@ export default function MusicAdd() {
                     onChange={handleInput} /><br />
 
                 {/* <InputLabel id="demo-simple-select-label">느낌</InputLabel> */}
-                <div style={{fontWeight: "300"}}>이 음악은 이런 음악이예요.</div>
+                <div style={{fontWeight: "300"}}><br />이 음악은 &nbsp;
                 <Select labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={form.category}
@@ -174,7 +169,8 @@ export default function MusicAdd() {
                                 {cat.categoryName}</MenuItem>
                         )
                     }) : "error occured"}
-                </Select><br />
+                </Select>
+                &nbsp;음악입니다.</div><br />
 
                 {/* <InputLabel id="demo-simple-select-label">트랜스미디어</InputLabel> */}
                 <div style={{fontWeight: "300"}}>트랜스미디어</div>

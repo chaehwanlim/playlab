@@ -102,7 +102,7 @@ export default function MyMovie(props) {
                 <span className={classes.movieTitle}>{datum.title}</span><br></br>{datum.director}
                 <br></br>{datum.actor}
             </TableCell>
-            <TableCell className={classes.tableData}>
+            <TableCell className={classes.tableData} style={{minWidth:"12rem"}}>
               {datum.categoryName} 영화
             </TableCell>
             <TableCell className={classes.tableData} style={{maxWidth:"5rem"}}>

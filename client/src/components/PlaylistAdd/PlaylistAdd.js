@@ -59,7 +59,7 @@ export default function PlaylistAdd() {
     var [content, setContent] = useState({
         title: "내가 감상한 영화 추가하기",
         component: <MovieAdd />,
-        subtitle: "영화의 제목, 출연 배우, 등록한 유저 이름으로 검색하세요."
+        subtitle: "네이버 영화에서 검색하여 추가하세요."
     });
 
     const handleMusic = (e) => {

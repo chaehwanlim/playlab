@@ -101,7 +101,7 @@ const useStyles = makeStyles({
     paddingBottom: '0rem',
     paddingLeft: '1rem',
     paddingRight: '1rem',
-
+    marginTop: '1.2rem',
   }
 
 });
@@ -135,16 +135,15 @@ export default function MoviePopular() {
                 <Grid item xs={4}>
                 <div className={classes.moviePosterAlign}>
                     <img className={classes.moviePoster} src={datum.imageURL} title={datum.title} alt="영화 포스터 이미지를 불러오는 데 오류가 발생했습니다."/>
+                    <Button variant="contained" color='primary' className={classes.likes}
+                      onClick={() => {handleLikes(datum.movieID)}}
+                      ><ThumbUp />&nbsp;{datum.likes}</Button>
                 </div>
                 </Grid>
                 <Grid item xs={8}>
                     <div className={classes.movieTitle}>
                       <span style={{color: 'orange'}}>{index + 1}&nbsp;&nbsp;</span>
-                      {datum.title}
-                      <span className={classes.movieYear}>{datum.year}</span>&nbsp;&nbsp;
-                      <Button variant="contained" color='primary' className={classes.likes}
-                      onClick={() => {handleLikes(datum.movieID)}}
-                      ><ThumbUp />&nbsp;{datum.likes}</Button>
+                      <span>{datum.title}<span className={classes.movieYear}>{datum.year}</span></span>
                     </div>
                     <div className={classes.movieSubtitle}>
                         <b>감독</b>  {datum.director}<br />

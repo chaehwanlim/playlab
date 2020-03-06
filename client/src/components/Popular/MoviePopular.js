@@ -134,7 +134,7 @@ export default function MoviePopular() {
             <div className={classes.movie}>
                 <Grid item xs={4}>
                 <div className={classes.moviePosterAlign}>
-                    <img className={classes.moviePoster} src={datum.imageURL} title={datum.title} alt="영화 포스터 이미지를 불러오는 데 오류가 발생했습니다."/>
+                    <img className={classes.moviePoster} src={datum.imageURL} title={datum.title} alt={datum.title}/>
                     <Button variant="contained" color='primary' className={classes.likes}
                       onClick={() => {handleLikes(datum.movieID)}}
                       ><ThumbUp />&nbsp;{datum.likes}</Button>

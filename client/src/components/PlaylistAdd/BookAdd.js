@@ -183,17 +183,11 @@ export default function BookAdd() {
   }
 
   const searchBook = () => {
-    Axios.post('/api/bookSearchKeyword', {
-      keyword : search
-    }).then(response => console.log(response))
-      .catch(error => console.log(error));
-    
-    getBookSearchResult();
-  }
-
-  const getBookSearchResult = () => {
-    Axios.get('/api/bookSearch')
-    .then(response => setSearchResult(response.data.items))
+    Axios({
+      method: 'get',
+      url: '/api/bookSearch/' + search,
+    })
+    .then(res => setSearchResult(res.data.items))
     .catch(err => console.log(err));
   }
 

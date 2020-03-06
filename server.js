@@ -90,30 +90,18 @@ app.get('/api/transmediaDB', (req, res) => {
 });
 
 //프론트단에서 보낸 영화 검색 키워드를 받아 변수에 담는다.
-var movieKeyword = {
-    query: "",
-    start: 1,
-    display: 20,
-    yearfrom: 1970,
-    yearto: 2020,
-};
-app.post('/api/movieSearchKeyword', (req, res) => {
-    movieKeyword.query = req.body.keyword;
-})
-
-var bookKeyword = {
-    query: "",
-    start: 1,
-    display: 20,
-}
-app.post('/api/bookSearchKeyword', (req, res) => {
-    bookKeyword.query = req.body.keyword;
-})
-
-app.get('/api/movieSearch', (req, res) => {
-    var naverapi_url = 'https://openapi.naver.com/v1/search/movie';
-    var request = require('request');
-    var options = {
+app.get('/api/movieSearch/:search', (req, res) => {
+    let movieKeyword = {
+        query: req.params.search,
+        start: 1,
+        display: 30,
+        yearfrom: 1970,
+        yearto: 2020,
+    };
+    console.log(req.params.search);
+    let naverapi_url = 'https://openapi.naver.com/v1/search/movie';
+    let request = require('request');
+    let options = {
         qs: movieKeyword,
         url: naverapi_url,
         headers: {
@@ -123,8 +111,7 @@ app.get('/api/movieSearch', (req, res) => {
     };
     request.get(options, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
-            res.end(body);
+            res.send(body);
         } else {
             res.status(response.statusCode).end();
             console.log('error = ' + response.statusCode);
@@ -132,10 +119,15 @@ app.get('/api/movieSearch', (req, res) => {
     });
 });
 
-app.get('/api/bookSearch', (req, res) => {
-    var naverapi_url = 'https://openapi.naver.com/v1/search/book';
-    var request = require('request');
-    var options = {
+app.get('/api/bookSearch/:search', (req, res) => {
+    let bookKeyword = {
+        query: req.params.search,
+        start: 1,
+        display: 20,
+    };
+    let naverapi_url = 'https://openapi.naver.com/v1/search/book';
+    let request = require('request');
+    let options = {
         qs: bookKeyword,
         url: naverapi_url,
         headers: {
@@ -145,8 +137,7 @@ app.get('/api/bookSearch', (req, res) => {
     };
     request.get(options, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
-            res.end(body);
+            res.send(body);
         } else {
             res.status(response.statusCode).end();
             console.log('error = ' + response.statusCode);

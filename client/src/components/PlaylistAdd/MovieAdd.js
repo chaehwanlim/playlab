@@ -186,18 +186,11 @@ export default function MovieAdd() {
   }
 
   const searchMovie = () => {
-    Axios.post('/api/movieSearchKeyword', {
-      keyword : search
+    Axios({
+      method: 'get',
+      url: '/api/movieSearch/' + search,
     })
-    .then(response => console.log(response))
-    .catch(error => console.log(error));
-    
-    getMovieSearchResult();
-  }
-
-  const getMovieSearchResult = () => {
-    Axios.get('/api/movieSearch')
-    .then(response => setSearchResult(response.data.items))
+    .then(res => setSearchResult(res.data.items))
     .catch(err => console.log(err));
   }
 

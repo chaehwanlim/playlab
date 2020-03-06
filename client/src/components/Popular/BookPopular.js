@@ -100,7 +100,7 @@ const useStyles = makeStyles({
     paddingBottom: '0rem',
     paddingLeft: '1rem',
     paddingRight: '1rem',
-
+    marginTop: '1.2rem',
   }
 });
 
@@ -156,15 +156,16 @@ export default function BookPopular() {
             <Grid item xs={4} md={2}>
             <div className={classes.bookCoverAlign}>
                 <img className={classes.bookCover} src={datum.imageURL} alt={datum.title}/>
+                <Button variant="contained" color='primary' className={classes.likes}
+                  onClick={() => {handleLikes(datum.bookID)}}
+                  ><ThumbUp />&nbsp;{datum.likes}</Button>
             </div>
             </Grid>
             <Grid item xs={8} md={4}>
                 <div className={classes.bookTitle}>
                     <span style={{color: 'orange'}}>{index + 1}&nbsp;&nbsp;</span>
                     {removeBTags(datum.title)}&nbsp;&nbsp;
-                    <Button variant="contained" color='primary' className={classes.likes}
-                    onClick={() => {handleLikes(datum.bookID)}}
-                    ><ThumbUp />&nbsp;{datum.likes}</Button>
+                    
                 </div>
                 <div className={classes.bookSubtitle}>
                     작가 | {datum.author}<br />

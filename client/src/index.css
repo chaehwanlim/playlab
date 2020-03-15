@@ -1,5 +1,5 @@
 @font-face {
-    font-family: Product Sans;
+    font-family: Samsung;
     src: url('./fonts/samsungsharpsans-bold.otf');
 }
 
@@ -18,5 +18,3 @@ html {
 body {
     margin: 0;
 }
-
-@media all and (device-width: )

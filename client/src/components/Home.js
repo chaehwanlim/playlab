@@ -1,45 +1,9 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
-import './styles/style.css';
+import './styles/Home.scss';
 
 
-const useStyles = makeStyles(theme => ({
-    //for MainTitle
-    title: {
-        color: 'white',
-        textAlign: 'center', 
-        position: 'relative',
-        top: '30rem',
-        fontSize: '8rem',
-        fontFamily: 'Product Sans',
-    }, 
-    subTitle: {
-        color: 'white',
-        textAlign: 'center', 
-        position: 'relative',
-        top:'35rem',
-        fontSize: '1.8rem',
-        fontWeight: '500',
-    },
-
-    paper: {
-        position: 'relative',
-        fontSize: '1.8rem',
-        paddingTop: '10rem',
-        paddingLeft: '10rem',
-        paddingRight: '10rem',
-        paddingBottom: '6rem',
-    },
-    description: {
-        textAlign: 'center',
-        fontSize: '1.8rem',
-        marginBottom: '4rem',
-    }
-
-}));
-
-function footer() {
+const footer = () => {
     return (
         <footer style={{backgroundColor: 'whitesmoke', color: 'grey', fontSize: '1.4rem', fontWeight: '500', textAlign: 'center', position: 'absolute', top: '100%'}}>
             <p>Copyright © 2020 PlayLab</p>
@@ -50,16 +14,14 @@ function footer() {
 }
 
 export default function Home() {
-    const classes = useStyles();
-
     return (
-        <div className="Background">
+        <div className="background">
             <Container maxWidth="lg">
-                <div className={classes.title}>
+                <div className="title">
                     PlayLab
                 </div>
-                <div className={classes.subTitle}>
-                    나만의 재생목록을 모두와 함께.
+                <div className="subtitle">
+                    감동적인 작품을 모두와 함께
                 </div>
             </Container>
             {footer()}

@@ -253,7 +253,7 @@ export default function MovieAdd() {
       }
     })
     .then((res) => console.log(res))
-    .then((res) => alert("영화를 정상적으로 추가했습니다!"))
+    .then(alert("영화를 정상적으로 추가했습니다!"))
     .catch((err) => console.log(err));
   }
 

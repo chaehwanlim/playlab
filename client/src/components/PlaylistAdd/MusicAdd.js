@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
@@ -7,46 +6,8 @@ import Fab from '@material-ui/core/Fab';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Axios from 'axios';
+import '../styles/Add.scss';
 
-const useStyles = makeStyles(theme => ({
-    card: {
-        marginTop: '2rem',
-        fontSize: '1.7rem',
-        paddingLeft: '1.5rem',
-        paddingRight: '1.5rem',
-        paddingBottom: '3rem',
-    },
-    title: {
-        fontSize: '2.2rem',
-        fontWeight: '700',
-        margin: '1.5rem',
-        textAlign: 'center',
-    },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        marginTop: '1.5rem',
-        marginBottom: '3rem',
-    },
-    menuItem: {
-        fontSize: '1.7rem',
-        fontWeight: '400',
-    },
-    btn: {
-        marginTop: '3rem',
-        fontSize:'2rem',
-        background: '#018DFF',
-        color: 'white',
-        transition: '0.7s',
-        '&:hover': {
-            background: '#018DFF',
-            transform: 'scale(1.1)',
-            transition: '0.7s',
-        }
-    },
-    
-}));
 
 export default function MusicAdd() {
     var [category, setCategory] = useState([]);
@@ -136,18 +97,16 @@ export default function MusicAdd() {
     const InputProps = { style: {fontSize: '2rem'}};
     const InputLabelProps = { style: {fontSize: '1.7rem', color: 'primary'} }
 
-    const classes = useStyles();
-
     return (
-        <Card className={classes.card}>
-            <div className={classes.title}>
+        <Card className="card">
+            <div className="formTitle">
                 음악을 추가합니다.
             </div>
             <Divider/>
-            <form noValidate autoComplete="off" className={classes.form} onSubmit={handleSubmit}>
+            <form noValidate autoComplete="off" className="form" onSubmit={handleSubmit}>
                 <TextField id="standard-basic" label="제목" name="title"
                     inputProps={InputProps} InputLabelProps={InputLabelProps}
-                    required="true" onChange={handleInput} /><br />
+                    required="true" onChange={handleInput} /><br></br>
                 <TextField id="standard-basic" label="아티스트" name="artist"
                     inputProps={InputProps} InputLabelProps={InputLabelProps}
                     required="true" onChange={handleInput} /><br />
@@ -156,7 +115,7 @@ export default function MusicAdd() {
                     onChange={handleInput} /><br />
 
                 {/* <InputLabel id="demo-simple-select-label">느낌</InputLabel> */}
-                <div style={{fontWeight: "300"}}><br />이 음악은 &nbsp;
+                <div className="guide"><br />이 음악은 &nbsp;
                 <Select labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={form.category}
@@ -165,7 +124,7 @@ export default function MusicAdd() {
                     style={{fontSize: '1.7rem'}}>
                     {category ? category.map(cat => {
                         return (
-                            <MenuItem value={cat.categoryID} className={classes.menuItem}>
+                            <MenuItem value={cat.categoryID} className="menuItem">
                                 {cat.categoryName}</MenuItem>
                         )
                     }) : "error occured"}
@@ -173,7 +132,7 @@ export default function MusicAdd() {
                 &nbsp;음악입니다.</div><br />
 
                 {/* <InputLabel id="demo-simple-select-label">트랜스미디어</InputLabel> */}
-                <div style={{fontWeight: "300"}}>트랜스미디어</div>
+                <div className="guide">트랜스미디어</div>
                 <Select labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={form.transmedia}
@@ -182,13 +141,13 @@ export default function MusicAdd() {
                     style={{fontSize: '1.7rem'}}>
                     {transmedia ? transmedia.map(trans => {
                         return (
-                            <MenuItem value={trans.transmediaID} className={classes.menuItem}>
+                            <MenuItem value={trans.transmediaID} className="menuItem">
                                 {trans.transmediaName}</MenuItem>
                         )
                     }) : "error occured"}
                 </Select>
 
-                <Fab variant="extended" className={classes.btn} type="submit">추가하기</Fab>
+                <Fab variant="extended" className="submitBtn" id="music" type="submit">추가하기</Fab>
             </form>
         </Card>
     )

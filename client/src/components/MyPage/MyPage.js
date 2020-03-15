@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
@@ -13,29 +13,9 @@ import MyMusic from './MyMusic';
 import MyMovie from './MyMovie';
 import MyBook from './MyBook';
 import Footer from '../footer';
+import '../styles/Content.scss';
 
 const useStyles = makeStyles(theme => ({
-  background: {
-    transitionDuration : '0.8s',
-    paddingTop: '8rem',
-    paddingBottom: '3rem',
-  },
-  title: {
-    textAlign: 'left',
-    fontSize: '2.5rem',
-    fontWeight: '900',
-  },
-  subtitle: {
-    textAlign: 'left',
-    fontSize: '1.7rem',
-    fontWeight: '700',
-    color: 'slategray',
-  },
-
-  _divider:{
-    marginTop: '1rem',
-  },
-
   card: {
     fontSize: '1.7rem',
     marginTop: '10rem',
@@ -69,8 +49,8 @@ const useStyles = makeStyles(theme => ({
     background: 'white',
     '&:hover': {
       background: 'white',
-        transform: 'scale(1.1)',
-        transition: '0.7s',
+      transform: 'scale(1.1)',
+      transition: '0.7s',
     },
   },
   userName: {
@@ -153,14 +133,14 @@ export default function MyPage() {
   
   const myPage = () => {
     return (
-      <div className={classes.background}>
+      <div className="header">
         <Container maxWidth="lg">
           <Grid container spacing={1}>
             <Grid item xs={6}>
-              <div className={classes.title}>마이 페이지</div>
+              <div className="title">마이 페이지</div>
             </Grid>
             <Grid item xs={6}>
-              <div className={classes.gridAlign}>
+              <div className="btnAlign">
                 <Fab variant="extended" className={classes.logoutBtn}
                 onClick = {handleLogout}>
                   로그아웃

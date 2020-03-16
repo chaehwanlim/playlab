@@ -49,8 +49,8 @@ export default function MusicTable() {
                     <TableCell className="tableData" id="category">
                         {datum.userName} 님의 <br />{datum.categoryName} 음악
                     </TableCell>
-                    <TableCell className="tableData2">{datum.genre}</TableCell>
-                    <TableCell className="tableData2">{datum.transmediaName}</TableCell>
+                    <TableCell className="tableData2" id="musicForMobile">{datum.genre}</TableCell>
+                    <TableCell className="tableData2" id="musicForMobile">{datum.transmediaName}</TableCell>
                 </TableRow>
             )
         });

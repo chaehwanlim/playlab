@@ -76,8 +76,8 @@ export default function MusicPopular() {
             onClick={() => {handleLikes(datum.musicID)}}
             ><ThumbUp />&nbsp;{datum.likes}</Button>
           </TableCell>
-          <TableCell className="tableData2">{datum.genre}</TableCell>
-          <TableCell className="tableData2">{datum.transmediaName}</TableCell>
+          <TableCell className="tableData2" id="musicForMobile">{datum.genre}</TableCell>
+          <TableCell className="tableData2" id="musicForMobile">{datum.transmediaName}</TableCell>
         </TableRow>
       )
     });

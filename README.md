@@ -17,10 +17,10 @@
 
 <h2> 개발 </h2>
 
-* Front-end : React.js(SPA), Material-UI framework, React-router-dom
+* Front-end : HTML, SCSS, JS(ES6), React.js(SPA), Material-UI framework, React-router-dom
 * Back-end : Node.js(Express), RestAPI
 * DB : MySQL(AWS RDS)
-* Infra : AWS EC2, nginx, Git
+* Infra : AWS EC2, nginx, pm2, Git
 
 <h2> 상태 </h2>
 

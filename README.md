@@ -3,7 +3,7 @@
 > 영화나 음악, 책을 접하고 느낀 내 감정을 다른 사람과 공유할 수 있는 웹 서비스입니다. <br/>
 > 2019년 2학년 2학기 데이터베이스설계 수업의 팀 프로젝트 아이디어를 실제로 구현했습니다.
 <img src="https://user-images.githubusercontent.com/60354103/76748712-976a6180-67be-11ea-8a33-6e1f732a3876.jpg" alt="preview1">
-<img src="https://user-images.githubusercontent.com/60354103/75991281-9cffb600-5f39-11ea-9161-56b3e801c0fc.png" alt="preview2">
+<img src="https://user-images.githubusercontent.com/60354103/76748770-af41e580-67be-11ea-861d-46fc2a03c5d1.jpg" alt="preview2">
 
 <h2> 기능 </h2>
 

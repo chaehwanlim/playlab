@@ -2,8 +2,8 @@
 
 > 영화나 음악, 책을 접하고 느낀 내 감정을 다른 사람과 공유할 수 있는 웹 서비스입니다. <br/>
 > 2019년 2학년 2학기 데이터베이스설계 수업의 팀 프로젝트 아이디어를 실제로 구현했습니다.
-<img src="https://user-images.githubusercontent.com/60354103/75991254-8fe2c700-5f39-11ea-9013-bd4058d8df54.png" alt="preview1">
-<img src="https://user-images.githubusercontent.com/60354103/75991281-9cffb600-5f39-11ea-9161-56b3e801c0fc.png" alt="preview2">
+<img src="https://user-images.githubusercontent.com/60354103/76748712-976a6180-67be-11ea-8a33-6e1f732a3876.jpg" alt="preview1">
+<img src="https://user-images.githubusercontent.com/60354103/76748770-af41e580-67be-11ea-861d-46fc2a03c5d1.jpg" alt="preview2">
 
 <h2> 기능 </h2>
 
@@ -17,13 +17,17 @@
 
 <h2> 개발 </h2>
 
-* Front-end : React.js(SPA), Material-UI framework, React-router-dom
+* Front-end : HTML, SCSS, JS(ES6), React.js(SPA), Material-UI framework, React-router-dom
 * Back-end : Node.js(Express), RestAPI
 * DB : MySQL(AWS RDS)
-* Infra : AWS EC2, nginx, Git
+* Infra : AWS EC2, nginx, pm2, Git
 
 <h2> 상태 </h2>
 
 * 기능 테스트 완료(정상 작동)
-* 리팩토링 작업 중
-* 추후 작품에 대한 리뷰나 리뷰에 대한 댓글 기능을 추가할 계획
+* 추후 작품에 대한 리뷰나 댓글 기능을 추가할 계획
+
+<h2> 공개 테스트 계정 </h2>
+
+* 아이디 | michael
+* 패스워드 | qwer1234

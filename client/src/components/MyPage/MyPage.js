@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
@@ -14,92 +13,26 @@ import MyMovie from './MyMovie';
 import MyBook from './MyBook';
 import Footer from '../footer';
 import '../styles/Content.scss';
+import '../styles/MyPage.scss';
 
-const useStyles = makeStyles(theme => ({
-  card: {
-    fontSize: '1.7rem',
-    marginTop: '10rem',
-    paddingLeft: '1rem',
-    paddingRight: '1rem',
-    paddingBottom: '3rem',
-  },
-  accountIconAlign: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  accountIcon:  {
-    marginTop: '-8rem',
-    width: '16rem',
-    height: '16rem',
-  },
-
-  gridAlign: {       
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-  },
-  logoutBtn: {
-    transitionDuration : '0.8s',
-    textAlign: 'right',
-    fontSize: '1.7rem',
-    fontWeight: '700',
-    marginBottom: '1rem',
-    transition: '0.5s',
-    background: 'white',
-    '&:hover': {
-      background: 'white',
-      transform: 'scale(1.1)',
-      transition: '0.7s',
-    },
-  },
-  userName: {
-    textAlign: 'center',
-    fontSize: '2.1rem',
-    fontWeight: '900',
-  },
-  userDescription: {
-    textAlign: 'center',
-    fontSize: '1.8rem',
-    fontWeight: '300',
-  },
-  subtitle2: {
-    fontSize: '2.2rem',
-    fontWeight: '700',
-    margin: '1.5rem',
-  },
-  myPlaylist : {
-    display: 'flex',
-    alignItems: 'center',
-    margin: '1rem',
-    fontSize: '1.7rem',
-    fontWeight: '400',
-  },
-  btnAlign: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  deletion : {
-    fontSize: '1.7rem',
-    fontWeight: '400',
-  },
-  btnGroup: {
-    padding: '1.5rem',
-    fontSize: '2.2rem',
-    fontWeight: '700',
-  }
-}));
 
 export default function MyPage() {
-  const classes = useStyles();
+  const musicContent = {
+    component: <MyMusic />, 
+    subtitle: <div className="myPageSubtitle" id="myPageMusicSub">내가 추가한 음악 관리하기</div>
+  };
+  const movieContent = {
+    component: <MyMovie />,
+    subtitle: <div className="myPageSubtitle" id="myPageMovieSub">내가 추가한 영화 관리하기</div>
+  };
+  const bookContent = {
+    component: <MyBook />, 
+    subtitle: <div className="myPageSubtitle" id="myPageBookSub">내가 추가한 책 관리하기</div>
+  };
 
   var [user, setUser] = useState('');
   var [userInfo, setUserInfo] = useState({});
-  var [content, setContent] = useState({
-    component: <MyMovie />,
-    subtitle: <div className={classes.subtitle2} style={{color: '#FF4444'}}>내가 추가한 영화 관리하기</div>
-  });
+  var [content, setContent] = useState(movieContent);
 
   useEffect(() => {
     if(sessionStorage.userName){
@@ -141,7 +74,7 @@ export default function MyPage() {
             </Grid>
             <Grid item xs={6}>
               <div className="btnAlign">
-                <Fab variant="extended" className={classes.logoutBtn}
+                <Fab variant="extended" className="logoutBtn"
                 onClick = {handleLogout}>
                   로그아웃
                 </Fab>
@@ -149,31 +82,22 @@ export default function MyPage() {
             </Grid>
           </Grid>
 
-          <Paper className={classes.card} elevation={5}>
-            <div className={classes.accountIconAlign}>
-              <AccountCircleRoundedIcon className={classes.accountIcon} color='primary'/>
+          <Paper className="myPage" elevation={5}>
+            <div className="accountIconAlign">
+              <AccountCircleRoundedIcon className="accountIcon"/>
             </div>
-            <div className={classes.userName}>
+            <div className="userName">
               {userInfo.userName}
             </div>
-            <p className={classes.userDescription}>
+            <p className="userDescription">
               {userInfo.description}
             </p>
 
-            <Button className={classes.btnGroup} onClick={() => {setContent({
-              component: <MyMusic />, 
-              subtitle: <div className={classes.subtitle2} style={{color: '#018DFF'}}>내가 추가한 음악 관리하기</div>
-              })}}>
+            <Button className="btnGroup" onClick={() => {setContent(musicContent)}}>
               음악</Button>
-            <Button className={classes.btnGroup} onClick={() => {setContent({
-              component: <MyMovie />, 
-              subtitle: <div className={classes.subtitle2} style={{color: '#FF4444'}}>내가 추가한 영화 관리하기</div>
-              })}}>
+            <Button className="btnGroup" onClick={() => {setContent(movieContent)}}>
               영화</Button>
-            <Button className={classes.btnGroup} onClick={() => {setContent({
-              component: <MyBook />, 
-              subtitle: <div className={classes.subtitle2} style={{color: '#1ABF80'}}>내가 추가한 책 관리하기</div>
-              })}}>
+            <Button className="btnGroup" onClick={() => {setContent(bookContent)}}>
               책</Button>
             
             <Divider />
@@ -190,6 +114,5 @@ export default function MyPage() {
       {(user === '') ? <Login /> : myPage()}
       <Footer />
     </div>
-    
   )
 }

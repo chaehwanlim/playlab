@@ -124,7 +124,7 @@ export default function MusicAdd() {
                     style={{fontSize: '1.7rem'}}>
                     {category ? category.map(cat => {
                         return (
-                            <MenuItem value={cat.categoryID} className="menuItem">
+                            <MenuItem value={cat.categoryID} style={{fontSize: '1.7rem', fontWeight: '500'}}>
                                 {cat.categoryName}</MenuItem>
                         )
                     }) : "error occured"}
@@ -141,7 +141,7 @@ export default function MusicAdd() {
                     style={{fontSize: '1.7rem'}}>
                     {transmedia ? transmedia.map(trans => {
                         return (
-                            <MenuItem value={trans.transmediaID} className="menuItem">
+                            <MenuItem value={trans.transmediaID} style={{fontSize: '1.7rem', fontWeight: '500'}}>
                                 {trans.transmediaName}</MenuItem>
                         )
                     }) : "error occured"}

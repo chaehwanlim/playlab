@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Select from '@material-ui/core/Select';
@@ -7,104 +6,9 @@ import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import Axios from 'axios';
+import '../styles/Content.scss';
+import '../styles/Movie.scss';
 
-const useStyles = makeStyles({
-  orderFilter: {
-    marginTop: '2rem',
-    marginBottom: '3rem',
-    padding: '1.5rem',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    fontSize: '1.7rem',
-    fontWeight: '400',
-  },
-  menuItem: {
-    fontSize: '1.7rem',
-    fontWeight: '500',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    fontWeight: '300',
-  },
-  form2: {
-    display: 'relative',
-    fontWeight: '300',
-    color: '#FF4444',
-  },
-
-  //for movies
-  movie: {
-    background: 'white',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    flexWrap: 'wrap',
-    boxShadow: '0 8px 38px rgba(133, 133, 133, 0.3), 0 5px 12px rgba(133, 133, 133,0.22)',
-    fontSize: '1.7rem',
-    paddingRight: '1rem',
-    paddingBottom: '1.5rem',
-    transition: '0.8s',
-    '&:hover': {
-        transform: 'scale(1.04)',
-        transition: '0.7s',
-    },
-    '&:visited': {
-      transform:'scale(1.06)',
-      color: 'red',
-    }
-  },
-
-  moviePoster: {
-    width: '80%',
-    height: 'auto',
-    maxWidth: '15rem',
-    boxShadow: '0 8px 38px rgba(133, 133, 133, 0.3), 0 5px 12px rgba(133, 133, 133,0.22)',
-    marginTop: '-1.5rem',       
-  },
-  moviePosterAlign: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  movieTitle: {
-    fontSize: '2.2rem',
-    fontWeight: '700',
-    marginTop: '1rem',
-    display: 'flex',
-    alignItems:'center',
-  },
-  movieSubtitle: {
-    fontSize: '1.6rem',
-    fontWeight: '500',
-    color: 'slategray',
-    marginTop: '0.7rem',
-  },
-  movieInfo: {
-    fontSize: '1.7rem',
-    fontWeight: '400',
-    marginTop: '0.7rem',
-    marginBottom: '0.7rem',
-  },
-  movieYear: {
-    marginLeft: '0.5rem',
-    fontSize: '1.7rem',
-    fontWeight: '500',
-    color: 'grey',
-  },
-  likes: {
-    fontSize: '1.4rem',
-    color: 'white',
-    paddingTop: '0rem',
-    paddingBottom: '0rem',
-    paddingLeft: '1rem',
-    paddingRight: '1rem',
-    marginTop: '1.2rem',
-  }
-
-});
 
 export default function MoviePopular() {
   var [movieDB, setMovieDB] = useState([]);
@@ -131,27 +35,29 @@ export default function MoviePopular() {
     return data.map((datum, index) => {
       return (
         <Grid item xs={12} md={6}>
-            <div className={classes.movie}>
+            <div className="movie">
                 <Grid item xs={4}>
-                <div className={classes.moviePosterAlign}>
-                    <img className={classes.moviePoster} src={datum.imageURL} title={datum.title} alt={datum.title}/>
-                    <Button variant="contained" color='primary' className={classes.likes}
+                <div className="moviePosterAlign">
+                    <img className="moviePoster" src={datum.imageURL} title={datum.title} alt={datum.title}/>
+                    <Button variant="contained" className="movieLikes"
                       onClick={() => {handleLikes(datum.movieID)}}
                       ><ThumbUp />&nbsp;{datum.likes}</Button>
                 </div>
                 </Grid>
                 <Grid item xs={8}>
-                    <div className={classes.movieTitle}>
+                    <div className="movieTitle">
                       <span style={{color: 'orange'}}>{index + 1}&nbsp;&nbsp;</span>
-                      <span>{datum.title}<span className={classes.movieYear}>{datum.year}</span></span>
+                      <span>{datum.title}
+                      <span className="movieYear">{datum.year}</span>
+                      </span>
                     </div>
-                    <div className={classes.movieSubtitle}>
+                    <div className="movieInfo">
                         <b>감독</b>  {datum.director}<br />
                         <b>출연</b>  {datum.actor}<br />
                         <b>평점</b>  {datum.userRating}<br />
                         <b>트랜스미디어</b>  {datum.transmediaName}
                     </div>
-                    <div className={classes.movieInfo}>
+                    <div className="movieCategory">
                         <b>{datum.userName}</b> 님의<br />
                         <b>{datum.categoryName}</b> 영화입니다.<br />
                     </div>
@@ -186,26 +92,26 @@ export default function MoviePopular() {
     .catch(err => console.log(err));
   }
 
-  const classes = useStyles();
-
   return (
     <div>
-      <Card className={classes.orderFilter}>
-        <div className={classes.form2}>
-        <Select labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={selectedCat}
-              onChange={handleCategory}
-              name="category"
-              style={{fontSize: '1.7rem', fontWeight: '500', color: '#FF4444'}}>
-              {category ? category.map(cat => {
-                return (
-                  <MenuItem value={cat.categoryName} className={classes.menuItem}>
-                    {cat.categoryName}</MenuItem>
-                )
-              }) : "error occured"}
-        </Select>
-      &nbsp; 영화의 인기 차트</div></Card>
+      <Card className="filter">
+        <div className="category" id="movie">
+          <Select labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={selectedCat}
+            onChange={handleCategory}
+            name="category"
+            style={{fontSize: '1.7rem', fontWeight: '500', color: '#FF4444'}}>
+            {category ? category.map(cat => {
+              return (
+                <MenuItem value={cat.categoryName} style={{fontSize: '1.7rem', fontWeight: '500'}}>
+                  {cat.categoryName}</MenuItem>
+              )
+            }) : "error occured"}
+          </Select>
+      &nbsp; 영화의 인기 차트</div>
+      </Card>
+      <br />
       <Grid container spacing={4}>
         {movieDB ? filterData(movieDB) : <div>error ocurred</div>}
       </Grid>

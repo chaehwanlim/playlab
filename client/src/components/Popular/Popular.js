@@ -11,31 +11,32 @@ import '../styles/Content.scss';
 
 
 export default function Popular() {
-    var [content, setContent] = useState({
+    const musicContent = {
+        title: "음악 인기 차트",
+        component: <MusicPopular />
+    };
+    const movieContent = {
         title: "영화 인기 차트",
         component: <MoviePopular />
-    });
+    };
+    const bookContent = {
+        title: "책 인기 차트",
+        component: <BookPopular />
+    };
+
+    var [content, setContent] = useState(movieContent);
 
     const handleMusic = (e) => {
         e.preventDefault();
-        setContent({
-            title: "음악 인기 차트",
-            component: <MusicPopular />
-        })
+        setContent(musicContent);
     }
     const handleMovie = (e) => {
         e.preventDefault();
-        setContent({
-            title: "영화 인기 차트",
-            component: <MoviePopular />
-        })
+        setContent(movieContent);
     }
     const handleBook = (e) => {
         e.preventDefault();
-        setContent({
-            title: "책 인기 차트",
-            component: <BookPopular />
-        })
+        setContent(bookContent);
     }
 
     return (

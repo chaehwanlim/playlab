@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Card from '@material-ui/core/Card';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
@@ -59,18 +58,20 @@ export default function MusicTable() {
 
     return (
         <div>
-            <Card component="form" className="searchBar" onSubmit={handleClick}>
-                <InputBase
-                    className="input"
-                    placeholder="검색할 내용을 입력하세요"
-                    inputProps={{ 'aria-label': 'searchKeyword' }}
-                    value={searchKeyword}
-                    onChange={handleValueChange}
-                />
-                <IconButton type="submit" className="iconButton" aria-label="searchKeyword">
-                    <SearchIcon />
-                </IconButton>
-            </Card>
+            <form noValidate autoComplete="off" className="form" onSubmit={handleClick}>
+                <Paper component="form" className="searchBar" variant="outlined">
+                    <InputBase
+                        className="input"
+                        placeholder="검색할 내용을 입력하세요"
+                        inputProps={{ 'aria-label': 'searchKeyword' }}
+                        value={searchKeyword}
+                        onChange={handleValueChange}
+                    />
+                    <IconButton type="submit" className="iconButton" aria-label="searchKeyword">
+                        <SearchIcon />
+                    </IconButton>
+                </Paper>
+            </form>
             <Paper className="table">
             <TableContainer className="tableContainer">
                 <Table stickyHeader aria-label="sticky table">

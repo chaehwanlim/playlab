@@ -11,35 +11,35 @@ import '../styles/Content.scss';
 
 
 export default function Search() {
-    var [content, setContent] = useState({
+    const musicContent = {
+        title: "음악 검색하기",
+        component: <Music />,
+        subtitle: "음악의 제목, 아티스트, 등록한 유저 이름으로 검색하세요."
+    };
+    const movieContent = {
         title: "영화 검색하기",
         component: <Movie />,
         subtitle: "영화의 제목, 출연 배우, 등록한 유저 이름으로 검색하세요."
-    });
+    };
+    const bookContent = {
+        title: "책 검색하기",
+        component: <Book />,
+        subtitle: "책의 제목, 작가, 등록한 유저 이름으로 검색하세요."
+    };
+
+    var [content, setContent] = useState(movieContent);
 
     const handleMusic = (e) => {
         e.preventDefault();
-        setContent({
-            title: "음악 검색하기",
-            component: <Music />,
-            subtitle: "음악의 제목, 아티스트, 등록한 유저 이름으로 검색하세요."
-        })
+        setContent(musicContent)
     }
     const handleMovie = (e) => {
         e.preventDefault();
-        setContent({
-            title: "영화 검색하기",
-            component: <Movie />,
-            subtitle: "영화의 제목, 출연 배우, 등록한 유저 이름으로 검색하세요."
-        })
+        setContent(movieContent)
     }
     const handleBook = (e) => {
         e.preventDefault();
-        setContent({
-            title: "책 검색하기",
-            component: <Book />,
-            subtitle: "책의 제목, 작가, 등록한 유저 이름으로 검색하세요."
-        })
+        setContent(bookContent)
     }
 
     return (

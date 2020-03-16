@@ -11,35 +11,35 @@ import '../styles/Content.scss';
 
 
 export default function PlaylistAdd() {
-    var [content, setContent] = useState({
+    const musicContent = {
+        title: "내가 들은 음악 추가하기",
+        component: <MusicAdd />,
+        subtitle: "직접 음악 정보를 입력하여 추가하세요."
+    };
+    const movieContent = {
         title: "내가 감상한 영화 추가하기",
         component: <MovieAdd />,
         subtitle: "네이버 영화에서 검색하여 추가하세요."
-    });
+    };
+    const bookContent = {
+        title: "내가 읽은 책 추가하기",
+        component: <BookAdd />,
+        subtitle: "네이버 책에서 검색하여 추가하세요."
+    };
+
+    var [content, setContent] = useState(movieContent);
 
     const handleMusic = (e) => {
         e.preventDefault();
-        setContent({
-            title: "내가 들은 음악 추가하기",
-            component: <MusicAdd />,
-            subtitle: "직접 음악 정보를 입력하여 추가하세요."
-        })
+        setContent(musicContent);
     }
     const handleMovie = (e) => {
         e.preventDefault();
-        setContent({
-            title: "내가 감상한 영화 추가하기",
-            component: <MovieAdd />,
-            subtitle: "네이버 영화에서 검색하여 추가하세요."
-        })
+        setContent(movieContent);
     }
     const handleBook = (e) => {
         e.preventDefault();
-        setContent({
-            title: "내가 읽은 책 추가하기",
-            component: <BookAdd />,
-            subtitle: "네이버 책에서 검색하여 추가하세요."
-        })
+        setContent(bookContent);
     }
 
     return (

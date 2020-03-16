@@ -72,7 +72,7 @@ export default function MusicPopular() {
               {datum.userName} 님의<br />{datum.categoryName} 음악
           </TableCell>
           <TableCell className="tableData">
-            <Button variant="contained" className="likes"
+            <Button variant="contained" className="musicLikes"
             onClick={() => {handleLikes(datum.musicID)}}
             ><ThumbUp />&nbsp;{datum.likes}</Button>
           </TableCell>
@@ -95,7 +95,7 @@ export default function MusicPopular() {
               style={{fontSize: '1.7rem', fontWeight: '500', color: '#018DFF'}}>
               {category ? category.map(cat => {
                 return (
-                  <MenuItem value={cat.categoryName} className="menuItem">
+                  <MenuItem value={cat.categoryName} style={{fontSize: '1.7rem', fontWeight: '500'}}>
                     {cat.categoryName}</MenuItem>
                 )
               }) : "error occured"}

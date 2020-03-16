@@ -45,6 +45,19 @@
       background-color: $bookGreen;
     }
 
+    .logoutBtn {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background-color: white;
+      transition: 0.5s;
+      &:hover {
+        background-color: white;
+        transform: scale(1.06);
+        transition: 0.5;
+      }
+    }
+
   }
 
   .divider {
@@ -52,27 +65,29 @@
   }
 }
 
-.searchBar {
-  margin: 1.5rem 0rem 1.5rem 0rem;
-  padding-left: 1rem;
-  position: center;
-  display: flex;
-  align-items: center;
-  width: auto;
-  transition: 0.5s;
-  &:hover {
-    transform: scale(1.01);
+.form {
+  .searchBar {
+    margin: 1.5rem 0rem 1.5rem 0rem;
+    padding-left: 1rem;
+    position: center;
+    display: flex;
+    align-items: center;
+    width: auto;
     transition: 0.5s;
-  }
-  
-  .input {
-    flex: 1;
-    padding: 0.5rem;
-    font-size: 1.7rem;
-    font-weight: 500;
-  }
-  .iconButton {
-    padding: 1rem;
+    &:hover {
+      transform: scale(1.01);
+      transition: 0.5s;
+    }
+    
+    .input {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1.7rem;
+      font-weight: 500;
+    }
+    .iconButton {
+      padding: 1rem;
+    }
   }
 }
 
@@ -88,6 +103,7 @@
   .category {
     display: relative;
     font-weight: 300;
+  
     .menuItem {
       font-size: 1.7rem;
       font-weight: 500;

@@ -27,7 +27,7 @@ export default function Search() {
         subtitle: "책의 제목, 작가, 등록한 유저 이름으로 검색하세요."
     };
 
-    var [content, setContent] = useState(movieContent);
+    const [content, setContent] = useState(movieContent);
 
     const handleMusic = (e) => {
         e.preventDefault();

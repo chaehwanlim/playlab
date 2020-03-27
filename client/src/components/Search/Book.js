@@ -8,8 +8,8 @@ import '../styles/Book.scss';
 
 
 export default function Book() {
-    var [bookDB, setBookDB] = useState([]);
-    var [searchKeyword, setSearchKeyword] = useState("");
+    const [bookDB, setBookDB] = useState([]);
+    const [searchKeyword, setSearchKeyword] = useState("");
 
     useEffect(function fetchBookDB() {
         fetch('/api/bookDB')
@@ -22,8 +22,8 @@ export default function Book() {
         setSearchKeyword(e.target.value);
     }
 
-    const handleClick = event => {
-        event.preventDefault();
+    const handleClick = (e) => {
+        e.preventDefault();
     }
 
     const filterData = (data) => {

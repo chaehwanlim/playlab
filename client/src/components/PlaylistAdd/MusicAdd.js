@@ -10,8 +10,8 @@ import '../styles/Add.scss';
 
 
 export default function MusicAdd() {
-    var [category, setCategory] = useState([]);
-    var [transmedia, setTransmedia] = useState([]);
+    const [category, setCategory] = useState([]);
+    const [transmedia, setTransmedia] = useState([]);
 
     useEffect(() => {
         fetch('/api/categoryDB')
@@ -24,7 +24,7 @@ export default function MusicAdd() {
             .catch(err => console.log(err))
     }, []);
 
-    var [form, setForm] = useState({
+    const [form, setForm] = useState({
         title : "",
         artist: "",
         genre: "",
@@ -83,6 +83,7 @@ export default function MusicAdd() {
 
         initializeForm();
     }
+    
     const initializeForm = () => {
         setForm({
             title : "",

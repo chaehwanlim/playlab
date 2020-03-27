@@ -11,9 +11,9 @@ import '../styles/Movie.scss';
 
 
 export default function MoviePopular() {
-  var [movieDB, setMovieDB] = useState([]);
-  var [category, setCategory] = useState([]);
-  var [selectedCat, setSelectedCat] = useState("");
+  const [movieDB, setMovieDB] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [selectedCat, setSelectedCat] = useState("");
 
   useEffect(() => {
     fetch('/api/moviePopular')
@@ -75,7 +75,7 @@ export default function MoviePopular() {
   }
 
   const handleLikes = (id) => {
-    const urlWithID = '/api/popular/like/increment/' + id
+    const urlWithID = `/api/popular/like/increment/${id}`;
     Axios({
       method: 'put',
       url: urlWithID,
@@ -109,7 +109,8 @@ export default function MoviePopular() {
               )
             }) : "error occured"}
           </Select>
-      &nbsp; 영화의 인기 차트</div>
+          &nbsp; 영화의 인기 차트
+        </div>
       </Card>
       <br />
       <Grid container spacing={4}>

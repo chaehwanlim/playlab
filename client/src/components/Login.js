@@ -10,11 +10,11 @@ import './styles/Login.scss';
 
 
 export default function Login() {
-    var [login, setLogin] = useState({
+    const [login, setLogin] = useState({
         userName: "",
         userPassword: "",
     })
-    var [register, setRegister] = useState({
+    const [register, setRegister] = useState({
         userName: "",
         userPassword: "",
     });

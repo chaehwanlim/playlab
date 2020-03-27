@@ -30,9 +30,9 @@ export default function MyPage() {
     subtitle: <div className="myPageSubtitle" id="myPageBookSub">내가 추가한 책 관리하기</div>
   };
 
-  var [user, setUser] = useState('');
-  var [userInfo, setUserInfo] = useState({});
-  var [content, setContent] = useState(movieContent);
+  const [user, setUser] = useState('');
+  const [userInfo, setUserInfo] = useState({});
+  const [content, setContent] = useState(movieContent);
 
   useEffect(() => {
     if(sessionStorage.userName){

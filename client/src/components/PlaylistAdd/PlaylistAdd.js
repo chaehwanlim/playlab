@@ -27,7 +27,7 @@ export default function PlaylistAdd() {
         subtitle: "네이버 책에서 검색하여 추가하세요."
     };
 
-    var [content, setContent] = useState(movieContent);
+    const [content, setContent] = useState(movieContent);
 
     const handleMusic = (e) => {
         e.preventDefault();

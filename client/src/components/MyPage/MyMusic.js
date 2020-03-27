@@ -11,7 +11,7 @@ import '../styles/Table.scss';
 
 
 export default function MyMusic(props) {
-  var [myMusic, setMyMusic] = useState([]);
+  const [myMusic, setMyMusic] = useState([]);
 
   const getDB = () => {
     Axios({
@@ -31,7 +31,7 @@ export default function MyMusic(props) {
 
   const handleDeletion = (id) => {
     console.log(id);
-    const urlWithID = '/api/myPage/delete/' + id;
+    const urlWithID = `/api/myPage/delete/${id}`;
     Axios({
       method: 'DELETE',
       url: urlWithID,

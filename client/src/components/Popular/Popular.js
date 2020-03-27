@@ -24,7 +24,7 @@ export default function Popular() {
         component: <BookPopular />
     };
 
-    var [content, setContent] = useState(movieContent);
+    const [content, setContent] = useState(movieContent);
 
     const handleMusic = (e) => {
         e.preventDefault();

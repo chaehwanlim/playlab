@@ -15,14 +15,14 @@ import '../styles/Book.scss';
 
 
 export default function BookAdd() {
-  var [search, setSearch] = useState("");
-  var [isSearched, setIsSearched] = useState(false);
-  var [searchResult, setSearchResult] = useState([]);
-  var [selectedBook, setSelectedBook] = useState({
+  const [search, setSearch] = useState("");
+  const [isSearched, setIsSearched] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
+  const [selectedBook, setSelectedBook] = useState({
     index: -1,
     title: ''
   });
-  var [form, setForm] = useState({
+  const [form, setForm] = useState({
     title: "",
     author: "",
     category: 100,
@@ -30,8 +30,8 @@ export default function BookAdd() {
     imageURL: "",
     description: "",
   });
-  var [category, setCategory] = useState([]);
-  var [transmedia, setTransmedia] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [transmedia, setTransmedia] = useState([]);
 
   useEffect(() => {
     fetch('/api/categoryDB')
@@ -59,7 +59,7 @@ export default function BookAdd() {
   const searchBook = () => {
     Axios({
       method: 'get',
-      url: '/api/bookSearch/' + search,
+      url: `/api/bookSearch/${search}`,
     })
     .then(res => setSearchResult(res.data.items))
     .catch(err => console.log(err));

@@ -26,9 +26,7 @@ app.use(bodyParser.json());
 //request.body에 대한 url encoding을 확장할 수 있도록 true option 설정
 app.use(bodyParser.urlencoded({extended: true}));
 
-//////////Router
-
-//routing 1 : query의 결과를 musicDB path에 전송
+//query의 결과를 musicDB path에 전송
 app.get('/api/musicDB', (req, res) => {
     dbConnection.query(
         "SELECT title, artist, genre, c.categoryName, u.userName, t.transmediaName \
@@ -114,7 +112,7 @@ app.get('/api/movieSearch/:search', (req, res) => {
             res.send(body);
         } else {
             res.status(response.statusCode).end();
-            console.log('error = ' + response.statusCode);
+            console.log(`error = ${response.statusCode}`);
         }
     });
 });
@@ -140,13 +138,13 @@ app.get('/api/bookSearch/:search', (req, res) => {
             res.send(body);
         } else {
             res.status(response.statusCode).end();
-            console.log('error = ' + response.statusCode);
+            console.log(`error = ${response.statusCode}`);
         }
     });
 });
 
-//post: 읽어서 sql 보내기
 
+//post: 읽어서 sql 보내기
 app.post('/api/musicAdd', (req, res) => {
     let sql = "INSERT INTO music VALUES (NULL, ?, ?, ?, ?, ?, ?, 0, 0);"
     let title = req.body.title;

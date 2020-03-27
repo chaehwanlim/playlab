@@ -11,9 +11,9 @@ import '../styles/Book.scss';
 
 
 export default function BookPopular() {
-  var [bookDB, setBookDB] = useState([]);
-  var [category, setCategory] = useState([]);
-  var [selectedCat, setSelectedCat] = useState("");
+  const [bookDB, setBookDB] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [selectedCat, setSelectedCat] = useState("");
 
   useEffect(() => {
     fetch('/api/bookPopular')
@@ -25,24 +25,6 @@ export default function BookPopular() {
       .then(res => setCategory(res))
       .catch(err => console.log(err))
   }, []);
-
-  const handleLikes = (id) => {
-    const urlWithID = '/api/popular/like/increment/' + id
-    Axios({
-      method: 'put',
-      url: urlWithID,
-    })
-    .then(res => {
-      if(res.status === 200){
-        alert('성공적으로 추천했습니다!');
-        fetch('/api/bookPopular')
-          .then(res => res.json())
-          .then(res => setBookDB(res))
-          .catch(err => console.log(err))
-      }
-    })
-    .catch(err => console.log(err));
-  }
 
   const removeBTags = (str) => {
     str = str.replace(/<b>/g, "");
@@ -97,6 +79,24 @@ export default function BookPopular() {
     e.preventDefault();
     console.log(e.target.value);
     setSelectedCat(e.target.value);
+  }
+
+  const handleLikes = (id) => {
+    const urlWithID = `/api/popular/like/increment/${id}`;
+    Axios({
+      method: 'put',
+      url: urlWithID,
+    })
+    .then(res => {
+      if(res.status === 200){
+        alert('성공적으로 추천했습니다!');
+        fetch('/api/bookPopular')
+          .then(res => res.json())
+          .then(res => setBookDB(res))
+          .catch(err => console.log(err))
+      }
+    })
+    .catch(err => console.log(err));
   }
 
   return (

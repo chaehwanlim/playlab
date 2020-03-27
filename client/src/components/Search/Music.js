@@ -14,8 +14,8 @@ import '../styles/Table.scss';
 
 
 export default function MusicTable() {
-    var [musicDB, setMusicDB] = useState([]);
-    var [searchKeyword, setSearchKeyword] = useState("");
+    const [musicDB, setMusicDB] = useState([]);
+    const [searchKeyword, setSearchKeyword] = useState("");
 
     useEffect(() => {
         fetch('/api/musicDB')

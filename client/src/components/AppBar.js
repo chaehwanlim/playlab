@@ -15,7 +15,7 @@ import './styles/AppBar.scss';
 export default function _AppBar() {
   const HomeColor = {color : 'white'};
   const ContentColor = {color : 'black', textShadow: '-1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6'};
-  var [color, setColor] = useState((window.location.pathname === "/") ? HomeColor : ContentColor);
+  const [color, setColor] = useState((window.location.pathname === "/") ? HomeColor : ContentColor);
 
   console.log('appBar rendered');
   return (

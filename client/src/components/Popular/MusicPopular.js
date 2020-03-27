@@ -16,9 +16,9 @@ import '../styles/Table.scss';
 
 
 export default function MusicPopular() {
-  var [musicDB, setMusicDB] = useState([]);
-  var [category, setCategory] = useState([]);
-  var [selectedCat, setSelectedCat] = useState("");
+  const [musicDB, setMusicDB] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [selectedCat, setSelectedCat] = useState("");
 
   useEffect(() => {
     fetch('/api/musicPopular')
@@ -38,7 +38,7 @@ export default function MusicPopular() {
   }
 
   const handleLikes = (id) => {
-    const urlWithID = '/api/popular/like/increment/' + id
+    const urlWithID = `/api/popular/like/increment/${id}`;
     Axios({
       method: 'put',
       url: urlWithID,

@@ -15,14 +15,14 @@ import '../styles/Movie.scss';
 
 
 export default function MovieAdd() {
-  var [search, setSearch] = useState("");
-  var [isSearched, setIsSearched] = useState(false);
-  var [searchResult, setSearchResult] = useState([]);
-  var [selectedMovie, setSelectedMovie] = useState({
+  const [search, setSearch] = useState("");
+  const [isSearched, setIsSearched] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState({
     index: -1,
     title: ''
   });
-  var [form, setForm] = useState({
+  const [form, setForm] = useState({
     title: "",
     director: "",
     category: 100,
@@ -32,8 +32,8 @@ export default function MovieAdd() {
     userRating: "",
     year: "",
   });
-  var [category, setCategory] = useState([]);
-  var [transmedia, setTransmedia] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [transmedia, setTransmedia] = useState([]);
 
   useEffect(() => {
     fetch('/api/categoryDB')
@@ -61,7 +61,7 @@ export default function MovieAdd() {
   const searchMovie = () => {
     Axios({
       method: 'get',
-      url: '/api/movieSearch/' + search,
+      url: `/api/movieSearch/${search}`,
     })
     .then(res => setSearchResult(res.data.items))
     .catch(err => console.log(err));

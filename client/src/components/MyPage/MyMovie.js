@@ -11,7 +11,7 @@ import '../styles/Table.scss';
 
 
 export default function MyMovie(props) {
-  var [myMovie, setMyMovie] = useState([]);
+  const [myMovie, setMyMovie] = useState([]);
 
   const getDB = () => {
     Axios({
@@ -31,7 +31,7 @@ export default function MyMovie(props) {
 
   const handleDeletion = (id) => {
     console.log(id);
-    const urlWithID = '/api/myPage/delete/' + id;
+    const urlWithID = `/api/myPage/delete/${id}`;
     Axios({
       method: 'DELETE',
       url: urlWithID,

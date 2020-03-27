@@ -11,7 +11,7 @@ import '../styles/Table.scss';
 
 
 export default function Mybook(props) {
-  var [myBook, setMyBook] = useState([]);
+  const [myBook, setMyBook] = useState([]);
 
   const getDB = () => {
     Axios({
@@ -31,7 +31,7 @@ export default function Mybook(props) {
 
   const handleDeletion = (id) => {
     console.log(id);
-    const urlWithID = '/api/myPage/delete/' + id;
+    const urlWithID = `/api/myPage/delete/${id}`;
     Axios({
       method: 'DELETE',
       url: urlWithID,

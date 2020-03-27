@@ -9,8 +9,8 @@ import '../styles/Movie.scss';
 
 
 export default function Movie() {
-    var [movieDB, setMovieDB] = useState([]);
-    var [searchKeyword, setSearchKeyword] = useState("");
+    const [movieDB, setMovieDB] = useState([]);
+    const [searchKeyword, setSearchKeyword] = useState("");
 
     useEffect(() => {
         fetch('/api/movieDB')
@@ -23,8 +23,8 @@ export default function Movie() {
         setSearchKeyword(e.target.value);
     }
 
-    const handleClick = event => {
-        event.preventDefault();
+    const handleClick = (e) => {
+        e.preventDefault();
     }
 
     const filterData = (data) => {

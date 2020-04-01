@@ -53,7 +53,6 @@ export default function MovieAdd() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(search);
     setIsSearched(true);
     searchMovie();
   }
@@ -84,7 +83,6 @@ export default function MovieAdd() {
 
   const handleMovieSelect = (index, title) => {
     setSelectedMovie({index: index, title: title});
-    console.log(index);
     if (searchResult) {
       setForm({
         ...form,
@@ -100,7 +98,6 @@ export default function MovieAdd() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
     if(sessionStorage.userName) {
       addMovie();
     } else if (sessionStorage.userName === undefined) {
@@ -125,7 +122,6 @@ export default function MovieAdd() {
         year: form.year
       }
     })
-    .then((res) => console.log(res))
     .then(alert("영화를 정상적으로 추가했습니다!"))
     .catch((err) => console.log(err));
   }

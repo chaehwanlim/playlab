@@ -51,7 +51,6 @@ export default function BookAdd() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(search);
     setIsSearched(true);
     searchBook();
   }
@@ -81,7 +80,6 @@ export default function BookAdd() {
   }
 
   const handleBookSelect = (index, title) => {
-    console.log(index);
     setSelectedBook({index: index, title: title});
     if (searchResult) {
       setForm({
@@ -96,7 +94,6 @@ export default function BookAdd() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
     if(sessionStorage.userName) {
       addBook();
     } else if (sessionStorage.userName === undefined) {
@@ -119,7 +116,6 @@ export default function BookAdd() {
         description: form.description,
       }
     })
-    .then((res) => console.log(res))
     .then((res) => alert('책을 정상적으로 추가했습니다!'))
     .catch((err) => console.log(err));
   }

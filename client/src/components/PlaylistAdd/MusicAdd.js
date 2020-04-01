@@ -54,7 +54,6 @@ export default function MusicAdd() {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(form);
         if(sessionStorage.userName) {
             addMusic();
         } else if (sessionStorage.userName === undefined) {
@@ -77,7 +76,6 @@ export default function MusicAdd() {
                 trnasmediaID : form.transmediaID
             }
         })
-        .then((res) => console.log(res))
         .then((res) => alert('음악을 정상적으로 추가했습니다!'))
         .catch((err) => console.log(err));
 

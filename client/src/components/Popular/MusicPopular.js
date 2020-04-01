@@ -33,7 +33,6 @@ export default function MusicPopular() {
 
   const handleCategory = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
     setSelectedCat(e.target.value);
   }
 

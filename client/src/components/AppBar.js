@@ -46,6 +46,6 @@ export default function _AppBar() {
           </Toolbar>
         </Container>
       </AppBar>
-    </div>
+    </div> 
   );
 }

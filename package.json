@@ -16,7 +16,7 @@
         "express-session": "^1.17.0",
         "http-proxy-middleware": "^1.0.0",
         "mysql": "^2.18.1",
-        "node-fetch": "^2.6.0",
+        "node-fetch": "^2.6.1",
         "request": "^2.88.2",
         "concurrently": "^5.1.0"
     },
